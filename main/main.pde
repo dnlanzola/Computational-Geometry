@@ -1,31 +1,46 @@
 
 import java.util.*;
 
+// KEEPS TRACK OF ALL THE POINTS
 ArrayList<Point>    points     = new ArrayList<Point>();
-ArrayList<Point>    object1     = new ArrayList<Point>();
-ArrayList<Point>    object2     = new ArrayList<Point>();
+ArrayList<Point>    allPoints  = new ArrayList<Point>();
 
-ArrayList<Line>  lines1 = new ArrayList<Line>();
-ArrayList<Line>  lines2 = new ArrayList<Line>();
+// LISTS FOR OBJECTS
+ArrayList<Point>    pointObjects     = new ArrayList<Point>();
+ArrayList<Line>     lineObjects      = new ArrayList<Line>();
+ArrayList<Segment>  segmentObjects   = new ArrayList<Segment>();
+ArrayList<Circle>   circleObjects    = new ArrayList<Circle>();
+ArrayList<Ellipse>  ellipseObjects   = new ArrayList<Ellipse>();
+ArrayList<Triangle> triangleObjects  = new ArrayList<Triangle>();
+ArrayList<Polygon>  polygonObjects   = new ArrayList<Polygon>();
 
-ArrayList<Circle>  circle1 = new ArrayList<Circle>();
-ArrayList<Circle>  circle2 = new ArrayList<Circle>();
+
+int numberObjects = 2;
+int selectedObject = 0;
+String[] objMode = new String[100];
+String[] objStatus = new String[100];
+
+
+
+Boolean active = false;
+Boolean stopPoint = false;
 
 
 String selectedMode = "";
-String obj1Mode = "";
-String obj2Mode = "";
+
 
 
 
 boolean saveImage = false;
-boolean showPotentialDiagonals = true;
-boolean showDiagonals = true;
+
 
 
 void setup(){
-  size(1200,800,P3D);
+  size(1400,800,P3D);
   frameRate(30);
+  for (int i = 0; i < objStatus.length; i++)
+  objStatus[i] = "";
+  
 }
 
 
@@ -43,28 +58,38 @@ void draw(){
   
   // PRINT OBJECTS
   
-  for( Point p : object1 ){
+  for( Point p : allPoints ){
     p.draw();
   }  
-  for( Point p : object2 ){
+  
+  for( Point p : pointObjects ){
     p.draw();
-  }   
-  fill(0);
-    stroke(100);
-  for( Line l : lines1 ){
-  l.draw();
-  }
-  for( Line l : lines2 ){
-  l.draw();
   }  
-  noFill();
-  for( Circle c : circle1 ){
-    c.draw();
-  }
-  for( Circle c : circle2 ){
-    c.draw();
+  
+  for( Segment s : segmentObjects ){
+    stroke(1);
+    s.draw();
   }    
   
+   for( Triangle t : triangleObjects ){
+    stroke(1);
+    t.draw();
+  }    
+
+   for( Circle c : circleObjects ){
+    stroke(1);
+    c.draw();
+  }  
+  
+   for( Ellipse e : ellipseObjects ){
+    stroke(1);
+    e.draw();
+  }  
+  
+     for( Polygon po : polygonObjects ){
+    stroke(1);
+    po.draw();
+  }  
   
   noFill();
   stroke(100);
@@ -95,12 +120,31 @@ void draw(){
   textRHC( "7: Polygon", 10, height-160 );
   textRHC( "8: Circle", 10, height-180 ); 
   textRHC( "c: Clear", 10, height-220 );   
-  textRHC( "Selected Mode: " + selectedMode, width - 220, height - 20 );  
+  textRHC( "Selected Mode: " + selectedMode, width - 240, height - 20 ); 
+  textRHC( "+/- Number of Objects: " + numberObjects, width - 240, height - 40 ); 
+  
 
   
-  textRHC( "Object 1: " + obj1Mode, width - 220, height - 40 );  
-  textRHC( "Object 2: " + obj2Mode, width - 220, height - 60 );  
   
+  for (int i = 1; i < numberObjects+1; i++)
+  {
+    textRHC( "Object " + i + ": " + objMode[i-1], width - 190, height - 50-(i*20) ); 
+    
+    
+    if (objStatus[i-1] == "")
+      fill(255,0,0);
+
+    if (objStatus[i-1] == "Filled")
+      fill(0,255,0);
+ 
+    if (objStatus[i-1] == "Active")
+      fill(255,128,0);
+
+    
+    noStroke();
+    ellipse( width - 200, (height+5) - 50-(i*20), 10,10);
+    fill(0);
+  }
   
   
   for( int i = 0; i < points.size(); i++ ){
@@ -123,17 +167,30 @@ void keyPressed(){
   if( key == '7' ) selectedMode = "Polygon";
   if( key == '8' ) selectedMode = "Circle";
   
+  if( key == ' ')  stopPoint = true;
+  
+  if( key == '+' ) numberObjects++;
+  if( key == '-' ) if (numberObjects > 2) numberObjects--;
+  
+  
   if( key == 'c' )
   {
-     object1.clear();
-     object2.clear();
+
     selectedMode = "";
-    obj1Mode = "";
-    obj2Mode = ""; 
-    lines1.clear();
-    lines2.clear();
-    circle1.clear();
-    circle2.clear();
+    
+    allPoints.clear();
+
+    setEmpty(objMode);
+    setEmpty(objStatus);
+    selectedObject = 0;
+    
+    pointObjects.clear();
+    segmentObjects.clear();
+    lineObjects.clear();
+    circleObjects.clear();
+    triangleObjects.clear();
+    ellipseObjects.clear();
+
     
   }
   
@@ -141,7 +198,7 @@ void keyPressed(){
 
 
 void textRHC( int s, float x, float y ){
-  textRHC( Integer.toString(s), x, y );
+  //textRHC( Integer.toString(s), x, y );
 }
 
 
@@ -157,233 +214,14 @@ Point sel = null;
 
 void mousePressed(){
 
-  
-  if (selectedMode == "Point")
-  {
-            if (object1.size() == 0)
-            {
-                println("True");
-                int mouseXRHC = mouseX;
-                int mouseYRHC = height-mouseY;
-                
-                float dT = 6;
-                
-                for( Point p : points ){
-                  float d = dist( p.p.x, p.p.y, mouseXRHC, mouseYRHC );
-                  if( d < dT ){
-                    dT = d;
-                    sel = p;
-                  }
-                }
-                
-                if( sel == null ){
-                  sel = new Point(mouseXRHC,mouseYRHC);
-                  obj1Mode = selectedMode;
-                  object1.add( sel );            
-                 } 
-            }
-            
-            if (object2.size() == 0 )
-            {
-                println("True2");
-                int mouseXRHC = mouseX;
-                int mouseYRHC = height-mouseY;
-                
-                float dT = 6;
-                
-                for( Point p : points ){
-                  float d = dist( p.p.x, p.p.y, mouseXRHC, mouseYRHC );
-                  if( d < dT ){
-                    dT = d;
-                    sel = p;
-                  }
-                }
-                
-                if( sel == null ){
-                  sel = new Point(mouseXRHC,mouseYRHC);
-                  obj2Mode = selectedMode;
-                  object2.add( sel );            
-                 } 
-            }
-  }
-  
-   if (selectedMode == "Line")
-  {
-            if (object1.size() < 2)
-            {
-                int mouseXRHC = mouseX;
-                int mouseYRHC = height-mouseY;
-                
-                float dT = 6;
-                
-                for( Point p : points ){
-                  float d = dist( p.p.x, p.p.y, mouseXRHC, mouseYRHC );
-                  if( d < dT ){
-                    dT = d;
-                    sel = p;
-                  }
-                }
-                
-                if( sel == null ){
-                  sel = new Point(mouseXRHC,mouseYRHC);
-                  obj1Mode = selectedMode;
-                  object1.add( sel );            
-                 } 
-            }
-           if (object1.size() == 2 && lines1.size() < 1)
-              lines1.add(new Line (object1.get(0), object1.get(1)));
-              
-            println(lines1);
-            
-            if (object2.size() < 2 )
-            {
-                int mouseXRHC = mouseX;
-                int mouseYRHC = height-mouseY;
-                
-                float dT = 6;
-                
-                for( Point p : points ){
-                  float d = dist( p.p.x, p.p.y, mouseXRHC, mouseYRHC );
-                  if( d < dT ){
-                    dT = d;
-                    sel = p;
-                  }
-                }
-                
-                if( sel == null ){
-                  sel = new Point(mouseXRHC,mouseYRHC);
-                  obj2Mode = selectedMode;
-                  object2.add( sel );            
-                 } 
-            }
-           if (object2.size() == 2 && lines2.size() < 1)
-              lines2.add(new Line (object2.get(0), object2.get(1)));
-              
-           println(lines2);
-  }
-  
-  
-  if (selectedMode == "Triangle")
-  {
-            if (object1.size() < 3)
-            {
-                println("True");
-                int mouseXRHC = mouseX;
-                int mouseYRHC = height-mouseY;
-                
-                float dT = 6;
-                
-                for( Point p : points ){
-                  float d = dist( p.p.x, p.p.y, mouseXRHC, mouseYRHC );
-                  if( d < dT ){
-                    dT = d;
-                    sel = p;
-                  }
-                }
-                
-                if( sel == null ){
-                  sel = new Point(mouseXRHC,mouseYRHC);
-                  obj1Mode = selectedMode;
-                  object1.add( sel );            
-                 } 
-            }
-
-            if (object1.size() == 3 && lines1.size() == 0)
-            {
-              lines1.add(new Line (object1.get(0), object1.get(1)));
-              lines1.add(new Line (object1.get(0), object1.get(2)));
-              lines1.add(new Line (object1.get(1), object1.get(2)));
-            }
-            
-            
-            if (object2.size() < 3)
-            {
-                println("True2");
-                int mouseXRHC = mouseX;
-                int mouseYRHC = height-mouseY;
-                
-                float dT = 6;
-                
-                for( Point p : points ){
-                  float d = dist( p.p.x, p.p.y, mouseXRHC, mouseYRHC );
-                  if( d < dT ){
-                    dT = d;
-                    sel = p;
-                  }
-                }
-                
-                if( sel == null ){
-                  sel = new Point(mouseXRHC,mouseYRHC);
-                  obj2Mode = selectedMode;
-                  object2.add( sel );            
-                 } 
-            }
-            
-            if (object2.size() == 3 && lines2.size() == 0)
-            {
-              lines2.add(new Line (object2.get(0), object2.get(1)));
-              lines2.add(new Line (object2.get(0), object2.get(2)));
-              lines2.add(new Line (object2.get(1), object2.get(2)));
-            }            
-  }
-
-
-   if (selectedMode == "Circle")
-  {
-            if (object1.size() < 2)
-            {
-                int mouseXRHC = mouseX;
-                int mouseYRHC = height-mouseY;
-                
-                float dT = 6;
-                
-                for( Point p : points ){
-                  float d = dist( p.p.x, p.p.y, mouseXRHC, mouseYRHC );
-                  if( d < dT ){
-                    dT = d;
-                    sel = p;
-                  }
-                }
-                
-                if( sel == null ){
-                  sel = new Point(mouseXRHC,mouseYRHC);
-                  obj1Mode = selectedMode;
-                  object1.add( sel );            
-                 } 
-            }
-           if (object1.size() == 2 && circle1.size() < 1)
-              circle1.add(new Circle (object1.get(0), object1.get(1)));
-              
-            println(circle1);
-            
-            if (object2.size() < 2 )
-            {
-                int mouseXRHC = mouseX;
-                int mouseYRHC = height-mouseY;
-                
-                float dT = 6;
-                
-                for( Point p : points ){
-                  float d = dist( p.p.x, p.p.y, mouseXRHC, mouseYRHC );
-                  if( d < dT ){
-                    dT = d;
-                    sel = p;
-                  }
-                }
-                
-                if( sel == null ){
-                  sel = new Point(mouseXRHC,mouseYRHC);
-                  obj2Mode = selectedMode;
-                  object2.add( sel );            
-                 } 
-            }
-           if (object2.size() == 2 && circle2.size() < 1)
-              circle2.add(new Circle (object2.get(0), object2.get(1)));
-              
-           println(circle2);
-  }
-
-
+    if (selectedObject < numberObjects)
+    {
+        int mouseXRHC = mouseX;
+        int mouseYRHC = height-mouseY;
+        
+        points.add(new Point(mouseXRHC,mouseYRHC));
+        allPoints.add(new Point(mouseXRHC,mouseYRHC));
+    }
 
 }
 
@@ -397,7 +235,171 @@ void mouseDragged(){
 }
 
 void mouseReleased(){
-  sel = null;
+    if (selectedObject < numberObjects)
+    {
+      if (selectedMode == "Point")
+      {
+        
+        println("Selected Mode: " + selectedMode);
+        println("Selected object: " + (selectedObject+1));
+
+        pointObjects.add(points.get(0));
+        objMode[selectedObject] = "Point";
+        objStatus[selectedObject] = "Filled";
+
+        selectedObject++;
+        objStatus[selectedObject] = "Active";
+        points.clear();
+  
+      }
+
+      if (selectedMode == "Line")
+      {
+        
+        println("Selected Mode: " + selectedMode);
+        println("Selected object: " + (selectedObject+1));
+        objMode[selectedObject] = "Line";
+        if (points.size() == 2)
+        {
+          println(points.get(0));
+          println(points.get(1));
+          
+          lineObjects.add(new Line (points.get(0),points.get(1)));
+          objStatus[selectedObject] = "Filled";
+          points.clear(); 
+          selectedObject++;
+          objStatus[selectedObject] = "Active";
+        }
+
+      }   
+  
+  
+  
+  
+  
+      if (selectedMode == "Segment")
+      {
+        
+        println("Selected Mode: " + selectedMode);
+        println("Selected object: " + (selectedObject+1));
+        objMode[selectedObject] = "Segment";
+        if (points.size() == 2)
+        {
+          println(points.get(0));
+          println(points.get(1));
+          
+          segmentObjects.add(new Segment (points.get(0),points.get(1)));
+          objStatus[selectedObject] = "Filled";
+          points.clear(); 
+          selectedObject++;
+          objStatus[selectedObject] = "Active";
+        }
+
+      }  
+
+  
+      if (selectedMode == "Curve")
+      {
+        
+
+
+      }    
+  
+  
+      if (selectedMode == "Ellipse")
+      {
+        println("Selected Mode: " + selectedMode);
+        println("Selected object: " + (selectedObject+1));
+        objMode[selectedObject] = "Ellipse";
+        if (points.size() == 3)
+        {
+          println(points.get(0));
+          println(points.get(1));
+          println(points.get(2));
+          
+          ellipseObjects.add(new Ellipse (points.get(0),points.get(1),points.get(2)));
+          objStatus[selectedObject] = "Filled";
+          points.clear(); 
+          selectedObject++;
+          objStatus[selectedObject] = "Active";
+        }         
+
+
+      }    
+  
+
+      if (selectedMode == "Triangle")
+      {
+        println("Selected Mode: " + selectedMode);
+        println("Selected object: " + (selectedObject+1));
+        objMode[selectedObject] = "Triangle";
+        if (points.size() == 3)
+        {
+          println(points.get(0));
+          println(points.get(1));
+          println(points.get(2));
+          
+          triangleObjects.add(new Triangle (points.get(0),points.get(1),points.get(2)));
+          objStatus[selectedObject] = "Filled";
+          points.clear(); 
+          selectedObject++;
+          objStatus[selectedObject] = "Active";
+        }        
+
+
+      }  
+  
+      if (selectedMode == "Polygon")
+      {
+        println("Selected Mode: " + selectedMode);
+        println("Selected object: " + (selectedObject+1));
+        objMode[selectedObject] = "Polygon";
+        if (stopPoint == true)
+        {
+          println("main points: ", points.size());
+          polygonObjects.add(new Polygon (points));
+          println("polygonObjects size: ", polygonObjects.size());
+          println(polygonObjects.get(0));
+          objStatus[selectedObject] = "Filled";
+          points.clear(); 
+          selectedObject++;
+          objStatus[selectedObject] = "Active";
+          stopPoint = false;
+        }          
+
+
+      }    
+  
+      if (selectedMode == "Circle")
+      {
+        println("Selected Mode: " + selectedMode);
+        println("Selected object: " + (selectedObject+1));
+        objMode[selectedObject] = "Circle";
+        if (points.size() == 2)
+        {
+          println(points.get(0));
+          println(points.get(1));
+          
+          circleObjects.add(new Circle (points.get(0),points.get(1)));
+          objStatus[selectedObject] = "Filled";
+          points.clear(); 
+          selectedObject++;
+          objStatus[selectedObject] = "Active";
+        }        
+
+
+      }  
+  
+
+
+
+}
+  
+  
+  
+  
+  
+  
 }
 
 
