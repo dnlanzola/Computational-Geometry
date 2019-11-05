@@ -6,7 +6,7 @@ public void setEmpty(String[] s)
 }
 
 
-   // check if a triangle is oriented counterclockwise
+// check if a triangle is oriented counterclockwise
 public boolean ccw(float x1, float y1, float x2, float y2, float x3, float y3){
      // TODO: Fill in this function
      
@@ -25,7 +25,7 @@ public boolean ccw(float x1, float y1, float x2, float y2, float x3, float y3){
      return false;
    }
    
-   // check if a triangle is oriented clockwise
+// check if a triangle is oriented clockwise
 public boolean cw(float x1, float y1, float x2, float y2, float x3, float y3){
      // TODO: Fill in this function
      
