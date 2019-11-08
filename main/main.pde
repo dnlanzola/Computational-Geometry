@@ -177,6 +177,8 @@ void draw(){
           instances++;
       textRHC( "X: " + pointObjects.get(instances-1).p.x, width - 240, height - 100 );
       textRHC( "Y: " + pointObjects.get(instances-1).p.y, width - 240, height - 120 );
+      
+      textRHC("SELECTED", pointObjects.get(instances-1).p.x, (pointObjects.get(instances-1).p.y)-20);
     }
     
     
@@ -186,6 +188,8 @@ void draw(){
         if (objMode2.get(i) == "Line")
           instances++;
       textRHC( "Slope: "  , width - 240, height - 180 );
+      
+      textRHC("SELECTED", lineObjects.get(instances-1).p0.p.x, (lineObjects.get(instances-1).p0.p.y)-20);
       
     }
     
@@ -200,6 +204,9 @@ void draw(){
       textRHC( "Y2: " + segmentObjects.get(instances-1).p1.p.y, width - 240, height - 160 );
       textRHC( "Distance: " + dist(segmentObjects.get(instances-1).p0.p.x,segmentObjects.get(instances-1).p0.p.y,segmentObjects.get(instances-1).p1.p.x,segmentObjects.get(instances-1).p1.p.y)  , width - 240, height - 180 );
       
+      textRHC("SELECTED", segmentObjects.get(instances-1).p0.p.x, (segmentObjects.get(instances-1).p0.p.y)-20);
+      
+      
     }
   
   
@@ -209,6 +216,8 @@ void draw(){
         if (objMode2.get(i) == "Curve")
           instances++;
       textRHC( "Slope: "  , width - 240, height - 180 );
+      
+      textRHC("SELECTED", curveObjects.get(instances-1).p.get(0).p.x, (curveObjects.get(instances-1).p.get(0).p.y)-20);  
       
     }
   
@@ -222,7 +231,8 @@ void draw(){
       textRHC( "X"  , width - 240, height - 180 );
       textRHC( "Y"  , width - 240, height - 180 );
       
-
+      textRHC("SELECTED", ellipseObjects.get(instances-1).p0.p.x, (ellipseObjects.get(instances-1).p0.p.y)-20);
+      }
       
       if (objMode2.get(focusObject-1) == "Triangle"){
       instances = 0;
@@ -232,12 +242,34 @@ void draw(){
       textRHC( "Area: "  , width - 240, height - 180 );
       textRHC( "Orientation: "  , width - 240, height - 180 );
   
-      
+      textRHC("SELECTED", triangleObjects.get(instances-1).p0.p.x, (triangleObjects.get(instances-1).p0.p.y)-20);
       
     }  
   
+      if (objMode2.get(focusObject-1) == "Circle"){
+      instances = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Circle")
+          instances++;
+      textRHC( "Area: "  , width - 240, height - 180 );
+
   
-  }
+      textRHC("SELECTED", circleObjects.get(instances-1).p0.p.x, (circleObjects.get(instances-1).p0.p.y)-20);
+ 
+      }
+      if (objMode2.get(focusObject-1) == "Polygon"){
+      instances = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Polygon")
+          instances++;
+      textRHC( "Area: "  , width - 240, height - 180 );
+
+  
+      textRHC("SELECTED", polygonObjects.get(instances-1).p.get(0).p.x, (polygonObjects.get(instances-1).p.get(0).p.y)-20);      
+      
+      
+    }   
+  
   
   
   //for (int i = 1; i < numberObjects+1; i++)
@@ -261,6 +293,13 @@ void draw(){
   //}
   
   
+  
+  
+  
+  
+  
+  
+  
   for( int i = 0; i < points.size(); i++ ){
     textRHC( i+1, points.get(i).p.x+5, points.get(i).p.y+15 );
   }
@@ -269,8 +308,8 @@ void draw(){
   saveImage = false;
   
 }
-
 }
+
 void keyPressed(){
   if( key == '1' ) selectedMode = "Point";
   if( key == '2' ) selectedMode = "Line";
