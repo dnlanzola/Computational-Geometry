@@ -325,7 +325,7 @@ void keyPressed(){
   if( key == '+' ) if (focusObject < numberObjects) focusObject++;
   if( key == '-' ) if (focusObject > 1) focusObject--;
   
-  
+  if (key == 'p') printResults();
   if( key == 'c' )
   {
 
@@ -343,6 +343,8 @@ void keyPressed(){
     circleObjects.clear();
     triangleObjects.clear();
     ellipseObjects.clear();
+    polygonObjects.clear();
+    curveObjects.clear();
     
     poly = new Polygon();
     
