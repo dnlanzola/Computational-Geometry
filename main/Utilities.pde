@@ -1,8 +1,7 @@
 public void setEmpty(String[] s)
 {
     for (int i = 0; i < s.length; i++)
-        s[i] = "";
-  
+        s[i] = "";  
 }
 
 
@@ -221,8 +220,7 @@ public void printResults()
          json.setFloat("x3", triangleObjects.get(ins-1).p2.p.x);
          json.setFloat("y3", triangleObjects.get(ins-1).p2.p.y);
 
-         
-         
+                 
          jsonArr.append(json);
    
        }     
