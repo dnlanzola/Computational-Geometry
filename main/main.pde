@@ -320,8 +320,8 @@ void keyPressed(){
   if( key == '7' ) selectedMode = "Polygon";
   if( key == '8' ) selectedMode = "Circle";
   
-  if( key == ' ')  stopPoint = true;
-  
+  if( key == ' '){  stopPoint = true; mouseReleased();
+  }
   if( key == '+' ) if (focusObject < numberObjects) focusObject++;
   if( key == '-' ) if (focusObject > 1) focusObject--;
   
