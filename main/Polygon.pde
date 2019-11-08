@@ -25,14 +25,7 @@ class Polygon {
    }
    
    
-   ArrayList<Segment> getDiagonals(){
-     // TODO: Determine which of the potential diagonals are actually diagonals
-     ArrayList<Segment> bdry = getBoundary();
-     ArrayList<Segment> diag = getPotentialDiagonals();
-     ArrayList<Segment> ret  = new ArrayList<Segment>();
 
-     return ret;
-   }
    
    
    boolean ccw(){

@@ -2,37 +2,46 @@
 
 class Curve {
   
-   ArrayList<Point> p       = new ArrayList<Point>();
-   //ArrayList<Segment> s     = new ArrayList<Segment>();
+   ArrayList<Point> p     = new ArrayList<Point>();
+   ArrayList<Segment>  bdry = new ArrayList<Segment>();
      
-   Curve(ArrayList<Point> _p ){  
-     p = _p;
+   Curve( ){  }
+   
+   
+
+   
+   void draw(){
+     println( bdry.size() );
+     for( Segment e : bdry ){
+       e.draw();
+     }
    }
-   
-   
 
-   
-   public void draw(){
 
-     //println("PolyClass size: ", polygonObjects.size());
-
-//   ArrayList<Segment> s     = new ArrayList<Segment>();
-//     for(int i = 0; i < polygonObjects.size(); i++)
-//     {
-//           ArrayList<Point> pts       = polygonObjects.get(i);
-//           for(int j = 0; j < pts.size()-1; j++)
-//           {
-//             s.add(new Segment(pts.get(j),pts.get(j+1)));
-             
-//           }
-       
-
-//      s.add(new Segment(pts.get(pts.size()-1),pts.get(0)));
-//   }
-
-//        for( Segment e : s ){
-//       e.draw();
-  
-//        }
+   void addPoint( Point _p ){ 
+     p.add( _p );
+     if( p.size() == 2 ){
+       bdry.add( new Segment( p.get(0), p.get(1) ) );
+       bdry.add( new Segment( p.get(1), p.get(0) ) );
+     }
+     if( p.size() > 2 ){
+       //bdry.set( bdry.size()-1, new Segment( p.get(p.size()-2), p.get(p.size()-1) ) );
+       bdry.add( new Segment( p.get(p.size()-2), p.get(p.size()-1) ) );
+     }
    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

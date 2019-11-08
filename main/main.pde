@@ -13,8 +13,12 @@ ArrayList<Circle>   circleObjects    = new ArrayList<Circle>();
 ArrayList<Ellipse>  ellipseObjects   = new ArrayList<Ellipse>();
 ArrayList<Triangle> triangleObjects  = new ArrayList<Triangle>();
 ArrayList<Polygon>  polygonObjects   = new ArrayList<Polygon>();
+ArrayList<Curve>    curveObjects     = new ArrayList<Curve>();
+
 Polygon             poly             = new Polygon();
 Polygon             polyAux          = new Polygon();
+Curve               cur              = new Curve();
+Curve               curAux           = new Curve();
 
 
 int numberObjects = 0;
@@ -72,12 +76,17 @@ void draw(){
   }
     
   polyAux.draw();
-  
+  curAux.draw();
   
   for (Polygon po : polygonObjects){
     stroke(1);
     po.draw();
   }
+  
+  for (Curve c : curveObjects){
+    stroke(1);
+    c.draw();
+  }  
   
   for( Point p : allPoints ){
     fill(1);
@@ -86,7 +95,12 @@ void draw(){
   
   for( Point p : pointObjects ){
     p.draw();
-  }  
+  } 
+  
+  for( Line l : lineObjects ){
+    stroke(1);
+    l.draw();
+  }    
   
   for( Segment s : segmentObjects ){
     stroke(1);
@@ -95,17 +109,23 @@ void draw(){
   
    for( Triangle t : triangleObjects ){
     stroke(1);
+    noFill();
     t.draw();
+    fill(1);
   }    
 
    for( Circle c : circleObjects ){
     stroke(1);
+    noFill();
     c.draw();
+    fill(1);
   }  
   
    for( Ellipse e : ellipseObjects ){
     stroke(1);
+    noFill();
     e.draw();
+    fill(1);
   }  
   
      for( Polygon po : polygonObjects ){
@@ -141,7 +161,9 @@ void draw(){
   textRHC( "6: Triangle", 10, height-140 );
   textRHC( "7: Polygon", 10, height-160 );
   textRHC( "8: Circle", 10, height-180 ); 
-  textRHC( "c: Clear", 10, height-220 );   
+  textRHC( "p: Print Results", 10, height-220 ); 
+  textRHC( "c: Clear", 10, height-240 ); 
+  
   textRHC( "Selected Mode: " + selectedMode, width - 240, height - 20 ); 
   textRHC( "Number of Objects: " + numberObjects, width - 240, height - 40 ); 
   textRHC( "+/- Focus Object: " + focusObject, width - 240, height - 60 ); 
@@ -321,6 +343,10 @@ void mousePressed(){
           polyAux.addPoint(new Point(mouseXRHC,mouseYRHC));
           polyAux.draw();
         }
+        if (selectedMode == "Curve"){
+          curAux.addPoint(new Point(mouseXRHC,mouseYRHC));
+          curAux.draw();
+        }
     
 
 }
@@ -413,7 +439,34 @@ void mouseReleased(){
   
       if (selectedMode == "Curve")
       {
-        
+        println("Selected Mode: " + selectedMode);
+        println("Selected object: " + (selectedObject+1));
+        objMode[selectedObject] = "Curve";
+
+        if (stopPoint == true)
+        {
+          println("main points: ", points.size());
+          //polygonObjects.add(new Polygon (points));
+           for( Point p : points )
+                cur.addPoint(p);
+           curveObjects.add(cur);
+           cur = new Curve();
+           
+           objMode2.append("Curve");
+           
+           curAux = new Curve();
+           
+          //println("polygonObjects size: ", polygonObjects.size());
+          //println(polygonObjects.get(0));
+          objStatus[selectedObject] = "Filled";
+          points.clear(); 
+          selectedObject++;
+          objStatus[selectedObject] = "Active";
+          stopPoint = false;
+          
+          
+          numberObjects++;
+        }         
 
 
       }    

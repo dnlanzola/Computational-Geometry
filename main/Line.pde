@@ -9,9 +9,20 @@ class Line {
      
    }
  
-   public void draw(){
-     line( p0.p.x, p0.p.y, 
-           p1.p.x, p1.p.y );
+  void draw(){
+     
+     float s = slope(p0.p.x,p0.p.y,p1.p.x,p1.p.y);
+     float b = (p0.p.y) - (s*p0.p.x);
+     
+     float xMin = -50;
+     float yMin = (s*xMin)+b;
+     float xMax = 1500;
+     float yMax = (s*xMax)+b;
+     
+     
+     
+     line( xMin, yMin, 
+           xMax, yMax );
    }
    
 
