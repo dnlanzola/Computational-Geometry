@@ -326,6 +326,7 @@ void keyPressed(){
   if( key == '-' ) if (focusObject > 1) focusObject--;
   
   if (key == 'p') printResults();
+  if (key == 'd') distanceBetweenObjects();
   if( key == 'c' )
   {
 
