@@ -163,7 +163,7 @@ void draw(){
   textRHC( "8: Circle", 10, height-180 ); 
   
   textRHC( "p: Print Calculations", 10, height-240 ); 
-  textRHC( "e: Export to json", 10, height-220 ); 
+  textRHC( "e: Export Data", 10, height-220 ); 
 
   textRHC( "c: Clear", 10, height-260 ); 
   
@@ -349,6 +349,10 @@ void keyPressed(){
     ellipseObjects.clear();
     polygonObjects.clear();
     curveObjects.clear();
+    
+    numberObjects = 0;
+    
+    objMode2.clear();
     
     poly = new Polygon();
     
