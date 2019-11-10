@@ -161,8 +161,11 @@ void draw(){
   textRHC( "6: Triangle", 10, height-140 );
   textRHC( "7: Polygon", 10, height-160 );
   textRHC( "8: Circle", 10, height-180 ); 
-  textRHC( "p: Print Results", 10, height-220 ); 
-  textRHC( "c: Clear", 10, height-240 ); 
+  
+  textRHC( "p: Print Calculations", 10, height-240 ); 
+  textRHC( "e: Export to json", 10, height-220 ); 
+
+  textRHC( "c: Clear", 10, height-260 ); 
   
   textRHC( "Selected Mode: " + selectedMode, width - 240, height - 20 ); 
   textRHC( "Number of Objects: " + numberObjects, width - 240, height - 40 ); 
@@ -325,8 +328,8 @@ void keyPressed(){
   if( key == '+' ) if (focusObject < numberObjects) focusObject++;
   if( key == '-' ) if (focusObject > 1) focusObject--;
   
-  if (key == 'p') printResults();
-  if (key == 'd') distanceBetweenObjects();
+  if (key == 'e') printResults();
+  if (key == 'p') distanceBetweenObjects();
   if( key == 'c' )
   {
 
