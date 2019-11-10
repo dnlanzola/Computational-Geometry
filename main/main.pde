@@ -275,25 +275,7 @@ void draw(){
   
   
   
-  //for (int i = 1; i < numberObjects+1; i++)
-  //{
-  //  textRHC( "Object " + i + ": " + objMode[i-1], width - 190, height - 50-(i*20) ); 
-    
-    
-  //  if (objStatus[i-1] == "")
-  //    fill(255,0,0);
 
-  //  if (objStatus[i-1] == "Filled")
-  //    fill(0,255,0);
- 
-  //  if (objStatus[i-1] == "Active")
-  //    fill(255,128,0);
-
-    
-  //  noStroke();
-  //  ellipse( width - 200, (height+5) - 50-(i*20), 10,10);
-  //  fill(0);
-  //}
   
   
   
@@ -381,7 +363,7 @@ Point sel = null;
 
 void mousePressed(){
 
-
+      if (selectedMode != ""){
         int mouseXRHC = mouseX;
         int mouseYRHC = height-mouseY;
         
@@ -396,7 +378,7 @@ void mousePressed(){
           curAux.addPoint(new Point(mouseXRHC,mouseYRHC));
           curAux.draw();
         }
-    
+      }
 
 }
 
@@ -438,8 +420,8 @@ void mouseReleased(){
         objMode[selectedObject] = "Line";
         if (points.size() == 2)
         {
-          println(points.get(0));
-          println(points.get(1));
+          //println(points.get(0));
+          //println(points.get(1));
           
           objMode2.append("Line");
           
@@ -467,8 +449,8 @@ void mouseReleased(){
         objMode[selectedObject] = "Segment";
         if (points.size() == 2)
         {
-          println(points.get(0));
-          println(points.get(1));
+          //println(points.get(0));
+          //println(points.get(1));
           
           objMode2.append("Segment");
           
@@ -494,7 +476,7 @@ void mouseReleased(){
 
         if (stopPoint == true)
         {
-          println("main points: ", points.size());
+          //println("main points: ", points.size());
           //polygonObjects.add(new Polygon (points));
            for( Point p : points )
                 cur.addPoint(p);
@@ -528,9 +510,9 @@ void mouseReleased(){
         objMode[selectedObject] = "Ellipse";
         if (points.size() == 3)
         {
-          println(points.get(0));
-          println(points.get(1));
-          println(points.get(2));
+          //println(points.get(0));
+          //println(points.get(1));
+          //println(points.get(2));
           
           objMode2.append("Ellipse");
           
@@ -556,9 +538,9 @@ void mouseReleased(){
         objMode[selectedObject] = "Triangle";
         if (points.size() == 3)
         {
-          println(points.get(0));
-          println(points.get(1));
-          println(points.get(2));
+          //println(points.get(0));
+          //println(points.get(1));
+          //println(points.get(2));
           
           objMode2.append("Triangle");
           
@@ -584,7 +566,7 @@ void mouseReleased(){
 
         if (stopPoint == true)
         {
-          println("main points: ", points.size());
+          //println("main points: ", points.size());
           //polygonObjects.add(new Polygon (points));
            for( Point p : points )
                 poly.addPoint(p);
@@ -595,7 +577,7 @@ void mouseReleased(){
            
            polyAux = new Polygon();
            
-          println("polygonObjects size: ", polygonObjects.size());
+          //println("polygonObjects size: ", polygonObjects.size());
           //println(polygonObjects.get(0));
           objStatus[selectedObject] = "Filled";
           points.clear(); 
@@ -617,8 +599,8 @@ void mouseReleased(){
         objMode[selectedObject] = "Circle";
         if (points.size() == 2)
         {
-          println(points.get(0));
-          println(points.get(1));
+          //println(points.get(0));
+          //println(points.get(1));
           
           objMode2.append("Circle");
           
