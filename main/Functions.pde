@@ -50,16 +50,18 @@ public void distanceBetweenObjects()
                 
           }
       }
+      if (distances.size() != 0){
           TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
             newRow.setString("type", "Point");
             newRow.setFloat("min distance", distance);
             newRow.setFloat("max distance", 0);
+      }
 
 
           }
-      minDistance = distances.min();
-      maxDistance = distances.max();
+      //minDistance = distances.min();
+      //maxDistance = distances.max();
 
     // COMPARING POINT - LINE
     if (lineObjects.size() > 0) {
@@ -351,9 +353,9 @@ public void distanceBetweenObjects()
             
             distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.x);
             distances.append(distance);       
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.x);
+            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.x);
             distances.append(distance);
-            distance = dist(segmentObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, lineObjects.get(j).p1.p.x,lineObjects.get(j).p1.p.x);
+            distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, lineObjects.get(j).p1.p.x,lineObjects.get(j).p1.p.x);
             distances.append(distance);
             distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, lineObjects.get(j).p1.p.x,lineObjects.get(j).p1.p.x);
             distances.append(distance);
@@ -372,13 +374,15 @@ public void distanceBetweenObjects()
                 break;
               }
             }  
+        }
       }
-      }
-      TableRow newRow = table.addRow();
+          if (distances.size() != 0){
+            TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
             newRow.setString("type", "Line");
             newRow.setFloat("min distance", distances.min());
             newRow.setFloat("max distance", distances.max());
+          }
       }       
   
      // COMPARING LINE - SEGMENT
@@ -734,11 +738,13 @@ public void distanceBetweenObjects()
             }  
           }
       }
+        if (distances.size() != 0){
            TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
             newRow.setString("type", "Segment");
             newRow.setFloat("min distance", distances.min());
             newRow.setFloat("max distance", distances.max());
+        }
           
       }       
   
@@ -1262,12 +1268,13 @@ public void distanceBetweenObjects()
               }
             }  
       
-    
+    if (distances.size() != 0){
             TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
             newRow.setString("type", "Curve");
             newRow.setFloat("min distance", distances.min());
-            newRow.setFloat("max distance", distances.max());     
+            newRow.setFloat("max distance", distances.max());
+    }
         }
       }
       }       
@@ -1564,12 +1571,13 @@ public void distanceBetweenObjects()
               }
             }  
         }
-    
+    if (distances.size() != 0){
             TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
             newRow.setString("type", "Polygon");
             newRow.setFloat("min distance", distances.min());
-            newRow.setFloat("max distance", distances.max());     
+            newRow.setFloat("max distance", distances.max());   
+    }
         }
       }         
       
@@ -1630,7 +1638,7 @@ public void distanceBetweenObjects()
     {
       ins = 0;
       for (int i = 0; i < focusObject; i++)
-        if (objMode2.get(i) == "Curve")
+        if (objMode2.get(i) == "Ellipse")
           ins++;        
       
       // COMPARING ELLIPSE - POINT
@@ -1801,11 +1809,13 @@ public void distanceBetweenObjects()
             }  
       
       }
+      if (distances.size() != 0){
             TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
             newRow.setString("type", "Ellipse");
             newRow.setFloat("min distance", distances.min());
-            newRow.setFloat("max distance", 0);      
+            newRow.setFloat("max distance", 0);    
+      }
       
       }  
     }      
@@ -2076,11 +2086,13 @@ public void distanceBetweenObjects()
             }  
       
       }
+      if (distances.size() != 0){
             TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
             newRow.setString("type", "Circle");
             newRow.setFloat("min distance", distances.min());
-            newRow.setFloat("max distance", 0);      
+            newRow.setFloat("max distance", 0);  
+      }
       }
       }         
       
@@ -2248,11 +2260,11 @@ public void distanceBetweenObjects()
 
 
 
-    if (objMode2.get(focusObject-1) == "Point")
+    if (objMode2.get(focusObject-1) == "Triangle")
     {
       ins = 0;
       for (int i = 0; i < focusObject; i++)
-        if (objMode2.get(i) == "Point")
+        if (objMode2.get(i) == "Triangle")
           ins++;      
       
       
@@ -2418,11 +2430,14 @@ public void distanceBetweenObjects()
             }  
       }
       }
+      if (distances.size() != 0){
       TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
             newRow.setString("type", "Triangle");
             newRow.setFloat("min distance", distances.min());
-            newRow.setFloat("max distance", distances.max());      
+            newRow.setFloat("max distance", distances.max());    
+            
+      }
       
       } 
 
