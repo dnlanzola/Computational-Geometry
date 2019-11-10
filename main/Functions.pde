@@ -31,6 +31,7 @@ public void distanceBetweenObjects()
           
     // COMPARING POINT - POINT
     if (pointObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < pointObjects.size(); j++){
           if (j != ins-1)
           {
@@ -62,10 +63,11 @@ public void distanceBetweenObjects()
 
     // COMPARING POINT - LINE
     if (lineObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < lineObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.y);
             distances.append(distance);       
             distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, lineObjects.get(j).p1.p.x,lineObjects.get(j).p1.p.y);      
@@ -94,10 +96,11 @@ public void distanceBetweenObjects()
     
     // COMPARING POINT - SEGMENT
     if (segmentObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < segmentObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, segmentObjects.get(j).p0.p.x,segmentObjects.get(j).p0.p.y);
             distances.append(distance);       
             distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, segmentObjects.get(j).p1.p.x,segmentObjects.get(j).p1.p.y);      
@@ -126,10 +129,11 @@ public void distanceBetweenObjects()
       
       // COMPARING POINT - TRIANGLE
     if (triangleObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < triangleObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);       
             distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p1.p.y);      
@@ -161,10 +165,11 @@ public void distanceBetweenObjects()
       
       // COMPARING POINT - ELLIPSE
     if (ellipseObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < ellipseObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, ellipseObjects.get(j).p0.p.x,ellipseObjects.get(j).p0.p.y);
             distances.append(distance);       
 
@@ -193,10 +198,11 @@ public void distanceBetweenObjects()
       
       // COMPARING POINT - CIRCLE
     if (circleObjects.size() > 0) {
+       distances.clear();
       for (int j = 0; j < circleObjects.size(); j++){
 
 
-            distances.clear();
+           
             distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, circleObjects.get(j).p0.p.x,circleObjects.get(j).p0.p.y);
             distances.append(distance);       
 
@@ -225,9 +231,10 @@ public void distanceBetweenObjects()
 
       // COMPARING POINT - POLYGON
     if (polygonObjects.size() > 0) {
+       distances.clear();
       for (int j = 0; j < polygonObjects.size(); j++){
 
-        distances.clear();
+       
         for (int m=0; m < polygonObjects.get(j).p.size(); m++)
         {
           distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, polygonObjects.get(j).p.get(m).p.x,polygonObjects.get(j).p.get(m).p.y);
@@ -259,9 +266,10 @@ public void distanceBetweenObjects()
       
       // COMPARING POINT - CURVE
     if (curveObjects.size() > 0) {
+       distances.clear();
       for (int j = 0; j <curveObjects.size(); j++){
 
-        distances.clear();
+       
         for (int m=0; m < curveObjects.get(j).p.size(); m++)
         {
           distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, curveObjects.get(j).p.get(m).p.x,curveObjects.get(j).p.get(m).p.y);
@@ -302,10 +310,11 @@ public void distanceBetweenObjects()
           
     // COMPARING LINE - POINT
     if (pointObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < pointObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, pointObjects.get(j).p.x,pointObjects.get(j).p.y);
             distances.append(distance);       
             distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, pointObjects.get(j).p.x,pointObjects.get(j).p.y);
@@ -334,11 +343,12 @@ public void distanceBetweenObjects()
       
      // COMPARING LINE - LINE
     if (lineObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < lineObjects.size(); j++){
           if (j != ins-1)
           {
 
-            distances.clear();
+            
             distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.x);
             distances.append(distance);       
             distance = dist(segmentObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.x);
@@ -373,10 +383,11 @@ public void distanceBetweenObjects()
   
      // COMPARING LINE - SEGMENT
     if (segmentObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < segmentObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, segmentObjects.get(j).p0.p.x,segmentObjects.get(j).p0.p.x);
             distances.append(distance);       
             distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, segmentObjects.get(j).p0.p.x,segmentObjects.get(j).p0.p.x);
@@ -412,12 +423,13 @@ public void distanceBetweenObjects()
   
      // COMPARING LINE - CURVE
     if (curveObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < curveObjects.size(); j++){
 
 
 
             
-        distances.clear();
+        
         for (int m=0; m < curveObjects.get(j).p.size(); m++)
         {
           distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, curveObjects.get(j).p.get(m).p.x,curveObjects.get(j).p.get(m).p.y);
@@ -450,12 +462,13 @@ public void distanceBetweenObjects()
 
      // COMPARING LINE - POLYGON
     if (polygonObjects.size() > 0) {
+       distances.clear();
       for (int j = 0; j < polygonObjects.size(); j++){
 
 
-            distances.clear();
+           
             
-        distances.clear();
+       
         for (int m=0; m < polygonObjects.get(j).p.size(); m++)
         {
           distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, polygonObjects.get(j).p.get(m).p.x,polygonObjects.get(j).p.get(m).p.y);
@@ -489,10 +502,11 @@ public void distanceBetweenObjects()
 
     // COMPARING LINE - ELLIPSE
     if (ellipseObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < ellipseObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, ellipseObjects.get(j).p0.p.x,ellipseObjects.get(j).p0.p.y);
             distances.append(distance);       
             distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, ellipseObjects.get(j).p1.p.x,ellipseObjects.get(j).p1.p.y);
@@ -618,10 +632,11 @@ public void distanceBetweenObjects()
           
     // COMPARING SEGMENT - POINT
     if (pointObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < pointObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, pointObjects.get(j).p.x,pointObjects.get(j).p.y);
             distances.append(distance);       
             distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, pointObjects.get(j).p.x,pointObjects.get(j).p.y);
@@ -650,10 +665,11 @@ public void distanceBetweenObjects()
       
      // COMPARING SEGMENT - LINE
     if (lineObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < lineObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.x);
             distances.append(distance);       
             distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.x);
@@ -687,11 +703,12 @@ public void distanceBetweenObjects()
   
      // COMPARING SEGMENT - SEGMENT
     if (segmentObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < segmentObjects.size(); j++){
           if (j != ins-1)
           {
 
-            distances.clear();
+            
             distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, segmentObjects.get(j).p0.p.x,segmentObjects.get(j).p0.p.x);
             distances.append(distance);       
             distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, segmentObjects.get(j).p0.p.x,segmentObjects.get(j).p0.p.x);
@@ -727,12 +744,13 @@ public void distanceBetweenObjects()
   
      // COMPARING SEGMENT - CURVE
     if (curveObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < curveObjects.size(); j++){
 
 
 
             
-        distances.clear();
+        
         for (int m=0; m < curveObjects.get(j).p.size(); m++)
         {
           distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, curveObjects.get(j).p.get(m).p.x,curveObjects.get(j).p.get(m).p.y);
@@ -765,10 +783,11 @@ public void distanceBetweenObjects()
 
      // COMPARING SEGMENT - POLYGON
     if (polygonObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < polygonObjects.size(); j++){
 
 
-            distances.clear();
+            
             
         distances.clear();
         for (int m=0; m < polygonObjects.get(j).p.size(); m++)
@@ -804,10 +823,11 @@ public void distanceBetweenObjects()
 
     // COMPARING SEGMENT - ELLIPSE
     if (ellipseObjects.size() > 0) {
+      distances.clear();
       for (int j = 0; j < ellipseObjects.size(); j++){
 
 
-            distances.clear();
+            
             distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, ellipseObjects.get(j).p0.p.x,ellipseObjects.get(j).p0.p.y);
             distances.append(distance);       
             distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, ellipseObjects.get(j).p1.p.x,ellipseObjects.get(j).p1.p.y);
@@ -833,7 +853,7 @@ public void distanceBetweenObjects()
             newRow.setFloat("max distance", distances.max());
       }      
 
-//////////////// REPAIR ALL ABOVE
+
 
      // COMPARING SEGMENT - TRIANGLE
     if (triangleObjects.size() > 0) {
@@ -1234,7 +1254,7 @@ public void distanceBetweenObjects()
             
             insAux = 0;
             for (int k = 0; k < objMode2.size(); k++){
-              if (objMode2.get(k) == "Polygon")
+              if (objMode2.get(k) == "Curve")
                 insAux++;
               if (insAux == j+1){
                 varK = k;
@@ -1245,7 +1265,7 @@ public void distanceBetweenObjects()
     
             TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
-            newRow.setString("type", "Polygon");
+            newRow.setString("type", "Curve");
             newRow.setFloat("min distance", distances.min());
             newRow.setFloat("max distance", distances.max());     
         }
@@ -1640,7 +1660,7 @@ public void distanceBetweenObjects()
       }
             TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
-            newRow.setString("type", "Ellipse");
+            newRow.setString("type", "Point");
             newRow.setFloat("min distance", distances.min());
             newRow.setFloat("max distance", 0);      
       
@@ -2389,7 +2409,7 @@ public void distanceBetweenObjects()
             
             insAux = 0;
             for (int k = 0; k < objMode2.size(); k++){
-              if (objMode2.get(k) == "Segment")
+              if (objMode2.get(k) == "Triangle")
                 insAux++;
               if (insAux == j+1){
                 varK = k;
@@ -2400,7 +2420,7 @@ public void distanceBetweenObjects()
       }
       TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
-            newRow.setString("type", "Segment");
+            newRow.setString("type", "Triangle");
             newRow.setFloat("min distance", distances.min());
             newRow.setFloat("max distance", distances.max());      
       
