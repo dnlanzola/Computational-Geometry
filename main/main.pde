@@ -170,6 +170,13 @@ void draw(){
   textRHC( "Selected Mode: " + selectedMode, width - 240, height - 20 ); 
   textRHC( "Number of Objects: " + numberObjects, width - 240, height - 40 ); 
   textRHC( "+/- Focus Object: " + focusObject, width - 240, height - 60 ); 
+  
+  if (selectedMode == "Polygon" || selectedMode == "Curve"){
+    fill(255,0,0);
+    textRHC( "Press 'spacebar' to end input", width/2 - 100, height - 20 ); 
+  }
+  fill(0);
+  
   if (focusObject > 0){
     textRHC( "Type: " + objMode2.get(focusObject-1), width - 240, height - 80 ); 
     
