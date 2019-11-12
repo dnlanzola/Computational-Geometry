@@ -1,4 +1,9 @@
 import json
+import csv
+
+import sys,os
+
+import pandas as pd
 
 from Polygon import Polygon
 from Circle import Circle
@@ -10,8 +15,32 @@ from Segment import Segment
 from Triangle import Triangle
 
 
+
+
+
+
 def main():
-    with open("new.json", "r") as json_file:
+
+
+    # Read objMode csv file
+    objMode = []
+    with open("./Python/objMode.csv", "r") as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                line_count += 1
+            objMode.append({row["type"]})
+            line_count += 1
+
+    print(objMode)
+
+
+
+
+
+    # Read json file 
+    with open("./Python/new.json", "r") as json_file:
         fileobject = json.load(json_file)
         print("Total JSON List:")
         print(fileobject)
