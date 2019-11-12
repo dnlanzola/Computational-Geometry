@@ -1,3 +1,21 @@
+public void exportObjMode()
+{
+  Table table = new Table();
+  table.addColumn("id");
+  table.addColumn("type");
+  
+  for (int i = 0; i < objMode2.size(); i++)
+  {
+          TableRow newRow = table.addRow();
+            newRow.setInt("id", i);
+            newRow.setString("type", objMode2.get(i));    
+  }
+  
+    saveTable(table, "data/objMode.csv");
+  
+}
+
+
 public void distanceBetweenObjects()
 {
     int ins = 0;

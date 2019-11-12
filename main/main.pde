@@ -397,7 +397,7 @@ void keyPressed(){
   if( key == '+' ) if (focusObject < numberObjects) focusObject++;
   if( key == '-' ) if (focusObject > 1) focusObject--;
   
-  if (key == 'e') printResults();
+  if (key == 'e') {printResults(); exportObjMode();}
   if (key == 'p') distanceBetweenObjects();
   if( key == 'c' )
   {
