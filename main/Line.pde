@@ -1,4 +1,4 @@
-
+float uSlope;
 
 class Line {
   
@@ -12,6 +12,7 @@ class Line {
   void draw(){
      
      float s = slope(p0.p.x,p0.p.y,p1.p.x,p1.p.y);
+     uSlope = s;
      float b = (p0.p.y) - (s*p0.p.x);
      
      float xMin = -50;

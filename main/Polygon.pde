@@ -14,7 +14,27 @@ class Polygon {
    boolean isSimple(){
      // TODO: Check the boundary to see if it is simple or not.
      ArrayList<Segment> bdry = getBoundary();
-     return false;
+     int noInter = 0;
+
+     for (int i = 0; i < bdry.size(); i++) { 
+       for (int j = 0; j < bdry.size(); j++) {      
+       
+          if (j != i){
+             if (bdry.get(i).intersectionTest(bdry.get(j)) == true){
+               //println("True");
+               noInter = noInter + 1;
+             }
+
+          }
+         
+       }
+     }
+     
+     
+     if ((noInter - (bdry.size() * 2)) == 0)
+       return true;
+     else
+       return false;
    }
    
    

@@ -171,7 +171,7 @@ void draw(){
   textRHC( "Number of Objects: " + numberObjects, width - 240, height - 40 ); 
   textRHC( "+/- Focus Object: " + focusObject, width - 240, height - 60 ); 
   
-  if (selectedMode == "Polygon" || selectedMode == "Curve"){
+  if ((selectedMode == "Polygon" || selectedMode == "Curve") && points.size() > 1){
     fill(255,0,0);
     textRHC( "Press 'spacebar' to end input", width/2 - 100, height - 20 ); 
   }
@@ -188,7 +188,14 @@ void draw(){
       textRHC( "X: " + pointObjects.get(instances-1).p.x, width - 240, height - 100 );
       textRHC( "Y: " + pointObjects.get(instances-1).p.y, width - 240, height - 120 );
       
-      textRHC("SELECTED", pointObjects.get(instances-1).p.x, (pointObjects.get(instances-1).p.y)-20);
+      strokeWeight(4);
+      stroke(52, 146, 235);
+      fill(52, 146, 235);
+      pointObjects.get(instances-1).draw();
+      stroke(1);
+      noFill();
+      strokeWeight(1);
+      //textRHC("SELECTED", pointObjects.get(instances-1).p.x, (pointObjects.get(instances-1).p.y)-20);
     }
     
     
@@ -197,9 +204,17 @@ void draw(){
       for (int i = 0; i < focusObject; i++)
         if (objMode2.get(i) == "Line")
           instances++;
-      textRHC( "Slope: "  , width - 240, height - 180 );
+      textRHC( "Slope: " + uSlope  , width - 240, height - 100 );
+
+      strokeWeight(4);
+      stroke(52, 146, 235);
+      fill(52, 146, 235);
+      lineObjects.get(instances-1).draw();
+      stroke(1);
+      noFill();
+      strokeWeight(1);
       
-      textRHC("SELECTED", lineObjects.get(instances-1).p0.p.x, (lineObjects.get(instances-1).p0.p.y)-20);
+      //textRHC("SELECTED", lineObjects.get(instances-1).p0.p.x, (lineObjects.get(instances-1).p0.p.y)-20);
       
     }
     
@@ -213,8 +228,15 @@ void draw(){
       textRHC( "X2: " + segmentObjects.get(instances-1).p1.p.x, width - 240, height - 140 );
       textRHC( "Y2: " + segmentObjects.get(instances-1).p1.p.y, width - 240, height - 160 );
       textRHC( "Distance: " + dist(segmentObjects.get(instances-1).p0.p.x,segmentObjects.get(instances-1).p0.p.y,segmentObjects.get(instances-1).p1.p.x,segmentObjects.get(instances-1).p1.p.y)  , width - 240, height - 180 );
-      
-      textRHC("SELECTED", segmentObjects.get(instances-1).p0.p.x, (segmentObjects.get(instances-1).p0.p.y)-20);
+
+      strokeWeight(4);
+      stroke(52, 146, 235);
+      fill(52, 146, 235);
+      segmentObjects.get(instances-1).draw();
+      stroke(1);
+      noFill();      
+      strokeWeight(1);
+      //textRHC("SELECTED", segmentObjects.get(instances-1).p0.p.x, (segmentObjects.get(instances-1).p0.p.y)-20);
       
       
     }
@@ -225,9 +247,16 @@ void draw(){
       for (int i = 0; i < focusObject; i++)
         if (objMode2.get(i) == "Curve")
           instances++;
-      textRHC( "Slope: "  , width - 240, height - 180 );
-      
-      textRHC("SELECTED", curveObjects.get(instances-1).p.get(0).p.x, (curveObjects.get(instances-1).p.get(0).p.y)-20);  
+      //textRHC( "Slope: "  , width - 240, height - 180 );
+
+      strokeWeight(4);
+      stroke(52, 146, 235);
+      fill(52, 146, 235);
+      curveObjects.get(instances-1).draw();
+      stroke(1);
+      noFill();      
+      strokeWeight(1);
+      //textRHC("SELECTED", curveObjects.get(instances-1).p.get(0).p.x, (curveObjects.get(instances-1).p.get(0).p.y)-20);  
       
     }
   
@@ -237,22 +266,41 @@ void draw(){
       for (int i = 0; i < focusObject; i++)
         if (objMode2.get(i) == "Ellipse")
           instances++;
-      textRHC( "Center Point"  , width - 240, height - 180 );
-      textRHC( "X"  , width - 240, height - 180 );
-      textRHC( "Y"  , width - 240, height - 180 );
+      textRHC( "Center Point"  , width - 240, height - 100 );
+      textRHC( "X: " + ellipseObjects.get(instances-1).p0.p.x , width - 240, height - 120 );
+      textRHC( "Y: " + ellipseObjects.get(instances-1).p0.p.y  , width - 240, height - 140 );
+      textRHC( "Width: " + ellipseObjects.get(instances-1).p0.distance(ellipseObjects.get(instances-1).p1) * 2  , width - 240, height - 160 );
+      textRHC( "Height: " + ellipseObjects.get(instances-1).p0.distance(ellipseObjects.get(instances-1).p2) * 2  , width - 240, height - 180 );
+      strokeWeight(4);
+      stroke(52, 146, 235);
+      noFill(); 
+      ellipseObjects.get(instances-1).draw();
+      stroke(1);
+      noFill();
+      strokeWeight(1);
       
-      textRHC("SELECTED", ellipseObjects.get(instances-1).p0.p.x, (ellipseObjects.get(instances-1).p0.p.y)-20);
+      //textRHC("SELECTED", ellipseObjects.get(instances-1).p0.p.x, (ellipseObjects.get(instances-1).p0.p.y)-20);
       }
       
       if (objMode2.get(focusObject-1) == "Triangle"){
       instances = 0;
       for (int i = 0; i < focusObject; i++)
-        if (objMode2.get(i) == "Ellipse")
+        if (objMode2.get(i) == "Triangle")
           instances++;
-      textRHC( "Area: "  , width - 240, height - 180 );
-      textRHC( "Orientation: "  , width - 240, height - 180 );
+      textRHC( "Area: "  + triangleArea(instances), width - 240, height - 100 );
+      if (triangleOrientation(instances) == false)
+        textRHC( "Orientation: Counterclockwise"  , width - 240, height - 120 );
+      if (triangleOrientation(instances) == true)
+        textRHC( "Orientation: Clockwise"  , width - 240, height - 120 );
   
-      textRHC("SELECTED", triangleObjects.get(instances-1).p0.p.x, (triangleObjects.get(instances-1).p0.p.y)-20);
+      strokeWeight(4);
+      stroke(52, 146, 235);
+      noFill();
+      triangleObjects.get(instances-1).draw();
+      stroke(1);
+      strokeWeight(1);
+      
+      //textRHC("SELECTED", triangleObjects.get(instances-1).p0.p.x, (triangleObjects.get(instances-1).p0.p.y)-20);
       
     }  
   
@@ -261,10 +309,19 @@ void draw(){
       for (int i = 0; i < focusObject; i++)
         if (objMode2.get(i) == "Circle")
           instances++;
-      textRHC( "Area: "  , width - 240, height - 180 );
+      textRHC( "Radius: " + circleRadius(instances) , width - 240, height - 100 );
+      textRHC( "Diameter: "+ circleRadius(instances) * 2  , width - 240, height - 120 );
+      textRHC( "Area: " + circleArea(instances) , width - 240, height - 140 );
 
+
+      strokeWeight(4);
+      stroke(52, 146, 235);
+      noFill(); 
+      circleObjects.get(instances-1).draw();
+      stroke(1);
+      strokeWeight(1);
   
-      textRHC("SELECTED", circleObjects.get(instances-1).p0.p.x, (circleObjects.get(instances-1).p0.p.y)-20);
+      //textRHC("SELECTED", circleObjects.get(instances-1).p0.p.x, (circleObjects.get(instances-1).p0.p.y)-20);
  
       }
       if (objMode2.get(focusObject-1) == "Polygon"){
@@ -272,10 +329,33 @@ void draw(){
       for (int i = 0; i < focusObject; i++)
         if (objMode2.get(i) == "Polygon")
           instances++;
-      textRHC( "Area: "  , width - 240, height - 180 );
-
+      textRHC( "Simple: " + polygonObjects.get(instances-1).isSimple()  , width - 240, height - 100 );
+      textRHC( "Closed: " + polygonObjects.get(instances-1).isClosed()  , width - 240, height - 120 );
+      
+      
+      if (polygonObjects.get(instances-1).isSimple() == false)
+        textRHC( "Orientation: n/a"  , width - 240, height - 140 );
+      
+      else
+      {
+         if (ccw( polygonObjects.get(instances-1).p.get(0).p.x, polygonObjects.get(instances-1).p.get(0).p.y, polygonObjects.get(instances-1).p.get(1).p.x, polygonObjects.get(instances-1).p.get(1).p.y,polygonObjects.get(instances-1).p.get(2).p.x,polygonObjects.get(instances-1).p.get(2).p.y) == true)
+           textRHC( "Orientation: Clockwise"  , width - 240, height - 140 );
+         else
+           textRHC( "Orientation: Counterclockwise"  , width - 240, height - 140 );
+    
+      }
+      textRHC( "Orientation: "  , width - 240, height - 140 );
+      //textRHC( "Area: "  , width - 240, height - 160 );
+      
+      strokeWeight(4);
+      stroke(52, 146, 235);
+      fill(52, 146, 235);
+      polygonObjects.get(instances-1).draw();
+      stroke(1);
+      noFill();
+      strokeWeight(1);
   
-      textRHC("SELECTED", polygonObjects.get(instances-1).p.get(0).p.x, (polygonObjects.get(instances-1).p.get(0).p.y)-20);      
+      //textRHC("SELECTED", polygonObjects.get(instances-1).p.get(0).p.x, (polygonObjects.get(instances-1).p.get(0).p.y)-20);      
       
       
     }   

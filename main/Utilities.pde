@@ -46,12 +46,49 @@ public boolean cw(float x1, float y1, float x2, float y2, float x3, float y3){
 
    }
    
+public boolean triangleOrientation(int ins)
+{
+     if (ccw(triangleObjects.get(ins-1).p0.p.x, triangleObjects.get(ins-1).p0.p.y, triangleObjects.get(ins-1).p1.p.x, triangleObjects.get(ins-1).p1.p.y, triangleObjects.get(ins-1).p2.p.x, triangleObjects.get(ins-1).p2.p.y) == true)
+    {
+      println("Triangle's orientation is counterclockwise");
+      return true;
+    }
+
+    if (cw(triangleObjects.get(ins-1).p0.p.x, triangleObjects.get(ins-1).p0.p.y, triangleObjects.get(ins-1).p1.p.x, triangleObjects.get(ins-1).p1.p.y, triangleObjects.get(ins-1).p2.p.x, triangleObjects.get(ins-1).p2.p.y) == true)
+    {
+      println("Triangle's orientation is clockwise");
+      return false;
+    } 
+  
+  return false;
+}
+   
+   
+public float triangleArea(int ins)
+{
+   float area = abs((( triangleObjects.get(ins-1).p0.p.x * (triangleObjects.get(ins-1).p1.p.y - triangleObjects.get(ins-1).p2.p.y) ) + ( triangleObjects.get(ins-1).p1.p.x * (triangleObjects.get(ins-1).p2.p.y - triangleObjects.get(ins-1).p0.p.y) ) + (triangleObjects.get(ins-1).p2.p.x * (triangleObjects.get(ins-1).p0.p.y - triangleObjects.get(ins-1).p1.p.y)) ) / 2);
+   
+    return area;   
+}
+   
 public float slope(float x1, float y1, float x2, float y2){
   
   return (y2 - y1) / (x2 - x1);
   
 }
 
+
+public float circleArea(int ins)
+{
+    return PI * sq(circleRadius(ins));
+
+}
+
+public float circleRadius(int ins)
+{
+  return circleObjects.get(ins-1).p0.distance(circleObjects.get(ins-1).p1);
+  
+}
 
 public void printResults()
 {
