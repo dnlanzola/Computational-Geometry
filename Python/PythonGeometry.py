@@ -21,6 +21,9 @@ from Triangle import Triangle
 
 def main():
 
+    # Read focus object from user
+    focusObject = input("Enter ID of Focus Object: ")
+    print(focusObject)
 
     # Read objMode csv file
     objMode = []
