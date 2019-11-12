@@ -1,11 +1,9 @@
 class Curve:
-    x = 0
-    y = 0
-    array = [x, y, x, y, x, y, x, y]
-
     # setting parameter for the class
-    def _init_(self, ID, array):
+    def __init__(self, ID, value, val):
         self.ID = ID
-        self.points = array
+        self.value = value
+        self.val = val
+
 
 

@@ -1,108 +1,149 @@
 import json
 
-import Polygon
-import Circle
-import Curve
-import Ellipse
-import Line
+from Polygon import Polygon
+from Circle import Circle
+from Curve import Curve
+from Ellipse import Ellipse
+from Line import Line
 from Point import Point
-import Segment
-import Triangle
+from Segment import Segment
+from Triangle import Triangle
 
 
 def main():
     with open("new.json", "r") as json_file:
         fileobject = json.load(json_file)
+        print("Total JSON List:")
         print(fileobject)
 
-
-    print("\n")
-    print(fileobject[0])
-
-    print(fileobject[0].get('id'))
-    print(fileobject[0].get('x'))
-    print(fileobject[0].get('y'))
-    print(fileobject[0].get('type'))
-    print(len(fileobject[0]))
-
-    auxPoint = Point(fileobject[0].get('id'),fileobject[0].get('x'),fileobject[0].get('y'))
-    
     pointsArray = []
+    print("Points List:")
+    for i in range(0, len(fileobject) - 1):
+        if fileobject[i].get('type') == 'Point':
+            auxPoint = Point(fileobject[i].get('id'), fileobject[i].get('x'), fileobject[i].get('y'))
+            pointsArray.append(auxPoint)
+    for x in range(len(pointsArray)):
+        print(pointsArray[x].ID)
+        print(pointsArray[x].x1)
+        print(pointsArray[x].y1)
+        print("\n")
 
-    pointsArray.append(auxPoint)
+    lineArray = []
+    print("Line List:")
+    for i in range(0, len(fileobject) - 1):
+        if fileobject[i].get('type') == 'Line':
+            auxLine = Line(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'), fileobject[i].get('x2'), fileobject[i].get('y2'))
+            lineArray.append(auxLine)
+    for x in range(len(lineArray)):
+        print(lineArray[x].ID)
+        print(lineArray[x].x1)
+        print(lineArray[x].y1)
+        print(lineArray[x].x2)
+        print(lineArray[x].y2)
+        print("\n")
 
-    print("\n")
-    print(pointsArray[0].ID)
-    print(pointsArray[0].x1)
-    print(pointsArray[0].y1)
+    curveArray = []
+    print("Curve List:")
+    for i in range(0, len(fileobject) - 1):
+        if fileobject[i].get('type') == 'Curve':
+            curvetotal = len(fileobject[i])
+            curvetotal = curvetotal - 2
+            curvetotal = int(curvetotal/2)
+            for y in range(1, curvetotal):
+                value = "x" + str(y)
+                val = "y" + str(y)
+
+                auxCurve = Curve(fileobject[i].get('id'), fileobject[i].get(value), fileobject[i].get(val))
+                curveArray.append(auxCurve)
+
+            print(curveArray[x].ID)
+
+    for x in range(len(curveArray)):
+        print(curveArray[x].value)
+        print(curveArray[x].val)
 
 
+    segmentArray = []
+    print("Segment List:")
+    for i in range(0, len(fileobject) - 1):
+        if fileobject[i].get('type') == 'Segment':
+            auxSeg = Segment(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'), fileobject[i].get('x2'), fileobject[i].get('y2'))
+            segmentArray.append(auxSeg)
+    for x in range(len(segmentArray)):
+        print(segmentArray[x].ID)
+        print(segmentArray[x].x1)
+        print(segmentArray[x].y1)
+        print(segmentArray[x].x2)
+        print(segmentArray[x].y2)
+        print("\n")
 
+    ellipseArray = []
+    print("Ellipse List:")
+    for i in range(0, len(fileobject) - 1):
+        if fileobject[i].get('type') == 'Ellipse':
+            auxEllipse = Ellipse(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'), fileobject[i].get('x2'), fileobject[i].get('y2'), fileobject[i].get('x3'), fileobject[i].get('y3'))
+            ellipseArray.append(auxEllipse)
+    for x in range(len(ellipseArray)):
+        print(ellipseArray[x].ID)
+        print(ellipseArray[x].x1)
+        print(ellipseArray[x].y1)
+        print(ellipseArray[x].x2)
+        print(ellipseArray[x].y2)
+        print(ellipseArray[x].x3)
+        print(ellipseArray[x].y3)
+        print("\n")
 
-    # below is the list of array for each object input and method of printing data in each array
-    # pointsArray = []
-    # for i in range(1, len(fileobject) + 1):
-    #         pointsArray.append(i)
-    # print("Points List:")
-    # for x in range(len(pointsArray)):
-    #     print(pointsArray[x])
-    # print("\n")
+    circleArray = []
+    print("Circle List:")
+    for i in range(0, len(fileobject) - 1):
+        if fileobject[i].get('type') == 'Circle':
+            auxCircle = Circle(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'),
+                           fileobject[i].get('x2'), fileobject[i].get('y2'))
+            circleArray.append(auxCircle)
+    for x in range(len(circleArray)):
+        print(circleArray[x].ID)
+        print(circleArray[x].x1)
+        print(circleArray[x].y1)
+        print(circleArray[x].x2)
+        print(circleArray[x].y2)
+        print("\n")
 
-    # lineArray = []
-    # for i in range(1, len(fileobject) + 1):
-    #     lineArray.append(i)
-    # print("Line List:")
-    # for x in range(len(lineArray)):
-    #     print(lineArray[x])
-    # print("\n")
+    triangleArray = []
+    print("Triangle List:")
+    for i in range(0, len(fileobject) - 1):
+        if fileobject[i].get('type') == 'Triangle':
+            auxTriangle = Triangle(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'),
+                           fileobject[i].get('x2'), fileobject[i].get('y2'), fileobject[i].get('x3'), fileobject[i].get('y3'))
+            triangleArray.append(auxTriangle)
+    for x in range(len(triangleArray)):
+        print(triangleArray[x].ID)
+        print(triangleArray[x].x1)
+        print(triangleArray[x].y1)
+        print(triangleArray[x].x2)
+        print(triangleArray[x].y2)
+        print(triangleArray[x].x3)
+        print(triangleArray[x].y3)
+        print("\n")
 
-    # curveArray = []
-    # for i in range(1, len(fileobject) + 1):
-    #     curveArray.append(i)
-    # print("Curve List:")
-    # for x in range(len(curveArray)):
-    #     print(curveArray[x])
-    # print("\n")
+    polygonArray = []
+    print("Polygon List:")
+    for i in range(0, len(fileobject) - 1):
+        if fileobject[i].get('type') == 'Polygon':
+            polytotal = len(fileobject[i])
+            polytotal = polytotal - 2
+            polytotal = int(polytotal / 2)
+            for y in range(1, polytotal):
+                value = "x" + str(y)
+                val = "y" + str(y)
 
-    # segmentArray = []
-    # for i in range(1, len(fileobject) + 1):
-    #     segmentArray.append(i)
-    # print("Segment List:")
-    # for x in range(len(segmentArray)):
-    #     print(segmentArray[x])
-    # print("\n")
+                auxPolygon = Polygon(fileobject[i].get('id'), fileobject[i].get(value), fileobject[i].get(val))
+                polygonArray.append(auxPolygon)
 
-    # ellipseArray = []
-    # for i in range(1, len(fileobject) + 1):
-    #     ellipseArray.append(i)
-    # print("Ellipse List:")
-    # for x in range(len(ellipseArray)):
-    #     print(ellipseArray[x])
-    # print("\n")
+            print(polygonArray[x].ID)
 
-    # circleArray = []
-    # for i in range(1, len(fileobject) + 1):
-    #     circleArray.append(i)
-    # print("Circle List:")
-    # for x in range(len(circleArray)):
-    #     print(circleArray[x])
-    # print("\n")
-
-    # triangleArray = []
-    # for i in range(1, len(fileobject) + 1):
-    #     triangleArray.append(i)
-    # print("Triangle List:")
-    # for x in range(len(triangleArray)):
-    #     print(triangleArray[x])
-    # print("\n")
-
-    # polygonArray = []
-    # for i in range(1, len(fileobject) + 1):
-    #     polygonArray.append(i)
-    # print("Polygon List:")
-    # for x in range(len(polygonArray)):
-    #     print(polygonArray[x])
-    # print("\n")
+    for x in range(len(polygonArray)):
+        print(polygonArray[x].value)
+        print(polygonArray[x].val)
 
     json_file.close()
 
