@@ -3,8 +3,6 @@ import csv
 
 import sys,os
 
-import pandas as pd
-
 from Polygon import Polygon
 from Circle import Circle
 from Curve import Curve
@@ -13,11 +11,22 @@ from Line import Line
 from Point import Point
 from Segment import Segment
 from Triangle import Triangle
+from FuncObject import FuncObject
 
 
+# distance between objects function
+focusObject = 0
+objMode = []
 
-
-
+#  the array for the inputted objects from the json files
+pointsArray = []
+lineArray = []
+curveArray = []
+segmentArray = []
+ellipseArray = []
+triangleArray = []
+circleArray = []
+polygonArray = []
 
 def main():
 
@@ -26,8 +35,7 @@ def main():
     print(focusObject)
 
     # Read objMode csv file
-    objMode = []
-    with open("./Python/objMode.csv", "r") as csv_file:
+    with open("objMode.csv", "r") as csv_file:
         csv_reader = csv.DictReader(csv_file)
         line_count = 0
         for row in csv_reader:
@@ -38,17 +46,13 @@ def main():
 
     print(objMode)
 
-
-
-
-
     # Read json file 
-    with open("./Python/new.json", "r") as json_file:
+    with open("new.json", "r") as json_file:
         fileobject = json.load(json_file)
         print("Total JSON List:")
         print(fileobject)
 
-    pointsArray = []
+
     print("Points List:")
     for i in range(0, len(fileobject) - 1):
         if fileobject[i].get('type') == 'Point':
@@ -60,7 +64,7 @@ def main():
         print(pointsArray[x].y1)
         print("\n")
 
-    lineArray = []
+
     print("Line List:")
     for i in range(0, len(fileobject) - 1):
         if fileobject[i].get('type') == 'Line':
@@ -74,7 +78,7 @@ def main():
         print(lineArray[x].y2)
         print("\n")
 
-    curveArray = []
+
     print("Curve List:")
     for i in range(0, len(fileobject) - 1):
         if fileobject[i].get('type') == 'Curve':
@@ -95,7 +99,7 @@ def main():
         print(curveArray[x].val)
 
 
-    segmentArray = []
+
     print("Segment List:")
     for i in range(0, len(fileobject) - 1):
         if fileobject[i].get('type') == 'Segment':
@@ -109,7 +113,7 @@ def main():
         print(segmentArray[x].y2)
         print("\n")
 
-    ellipseArray = []
+
     print("Ellipse List:")
     for i in range(0, len(fileobject) - 1):
         if fileobject[i].get('type') == 'Ellipse':
@@ -125,7 +129,7 @@ def main():
         print(ellipseArray[x].y3)
         print("\n")
 
-    circleArray = []
+
     print("Circle List:")
     for i in range(0, len(fileobject) - 1):
         if fileobject[i].get('type') == 'Circle':
@@ -140,7 +144,7 @@ def main():
         print(circleArray[x].y2)
         print("\n")
 
-    triangleArray = []
+
     print("Triangle List:")
     for i in range(0, len(fileobject) - 1):
         if fileobject[i].get('type') == 'Triangle':
@@ -157,7 +161,7 @@ def main():
         print(triangleArray[x].y3)
         print("\n")
 
-    polygonArray = []
+
     print("Polygon List:")
     for i in range(0, len(fileobject) - 1):
         if fileobject[i].get('type') == 'Polygon':
