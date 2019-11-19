@@ -19,19 +19,10 @@ from Triangle import Triangle
 #############################################################################
 
 def distanceFormula(x1, y1, x2, y2):
-    # dist_sqt1 = (x1 - x2) * (x1 - x2)
-    # dist_sqt2 = (y1 - y2) * (y1 - y2)
-    # dist = math.sqrt(dist_sqt1 + dist_sqt2)
-    
-    
 
     dist = math.sqrt(( (y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1) ))
     
     return dist
-
-# export function to the csv file
-def exportObjMode():
-    x = 1
 
 def distanceBetweenObjects():
 
@@ -85,6 +76,146 @@ def distanceBetweenObjects():
                             if insAux == i+1:
                                 vark = k
                                 break
+
+        # Point - Line
+        if len(lineArray) > 0:
+            distance.clear()
+            for i in range(0, len(lineArray)):
+                distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
+                distances.append(distance)
+                distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
+                distances.append(distance)
+
+                #Print Statements to print the values
+
+                #code to traverse through objMode
+                insAux = 0
+                for k in range(0, len(objMode)):
+                    if objMode[k] == "{'Line'}":
+                        insAux += 1
+                        if insAux == i + 1:
+                            vark = k
+                            break
+
+        #Point - Segment
+        if len(segmentArray) > 0:
+            distance.clear()
+            for i in range(0, len(segmentArray)):
+                distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
+                distances.append(distance)
+                distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
+                distances.append(distance)
+
+                # Print Statements to print the values
+
+                # code to traverse through objMode
+                insAux = 0
+                for k in range(0, len(objMode)):
+                    if objMode[k] == "{'Segment'}":
+                        insAux += 1
+                        if insAux == i + 1:
+                            vark = k
+                            break
+
+        #Point - Triangle
+        if len(triangleArray) > 0:
+            distance.clear()
+            for i in range(0, len(triangleArray)):
+                distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                distances.append(distance)
+                distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                distances.append(distance)
+                distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                distances.append(distance)
+
+                # Print Statements to print the values
+
+                # code to traverse through objMode
+                insAux = 0
+                for k in range(0, len(objMode)):
+                    if objMode[k] == "{'Triangle'}":
+                        insAux += 1
+                        if insAux == i + 1:
+                            vark = k
+                            break
+
+        #Points - Ellipse
+        if len(ellipseArray) > 0:
+            distance.clear()
+            for i in range(0, len(ellipseArray)):
+                distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
+                distances.append(distance)
+
+                # Print Statements to print the values
+
+                # code to traverse through objMode
+                insAux = 0
+                for k in range(0, len(objMode)):
+                    if objMode[k] == "{'Triangle'}":
+                        insAux += 1
+                        if insAux == i + 1:
+                            vark = k
+                            break
+
+        #Points - Circle
+        if len(circleArray) > 0:
+            distance.clear()
+            for i in range(0, len(circleArray)):
+                distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
+                distances.append(distance)
+
+                # Print Statements to print the values
+
+                # code to traverse through objMode
+                insAux = 0
+                for k in range(0, len(objMode)):
+                    if objMode[k] == "{'Circle'}":
+                        insAux += 1
+                        if insAux == i + 1:
+                            vark = k
+                            break
+
+        #Points - Polygon
+        if len(polygonArray) > 0:
+            distance.clear()
+            for i in range(0, len(polygonArray)):
+                for j in range(0, len(polygonArray[i])):
+                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, polygonArray[i].x1, polygonArray[i].y1)
+                    distances.append(distance)
+
+                # Print Statements to print the values
+
+                # code to traverse through objMode
+                insAux = 0
+                for k in range(0, len(objMode)):
+                    if objMode[k] == "{'Polygon'}":
+                        insAux += 1
+                        if insAux == i + 1:
+                            vark = k
+                            break
+
+        #Points - Curve
+        if len(curveArray) > 0:
+            distance.clear()
+            for i in range(0, len(curveArray)):
+                for j in range(0, len(curveArray[i])):
+                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, curveArray[i].x1, curveArray[i].y1)
+                    distances.append(distance)
+
+                # Print Statements to print the values
+
+                # code to traverse through objMode
+                insAux = 0
+                for k in range(0, len(objMode)):
+                    if objMode[k] == "{'Curve'}":
+                        insAux += 1
+                        if insAux == i + 1:
+                            vark = k
+                            break
+
+
+
+
 
 
 
