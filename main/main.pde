@@ -247,7 +247,7 @@ void draw(){
       for (int i = 0; i < focusObject; i++)
         if (objMode2.get(i) == "Curve")
           instances++;
-      //textRHC( "Slope: "  , width - 240, height - 180 );
+      textRHC( "Length: " + curveObjects.get(instances-1).curveLen() , width - 240, height - 100 );
 
       strokeWeight(4);
       stroke(52, 146, 235);
