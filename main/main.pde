@@ -483,8 +483,8 @@ void mouseReleased(){
       if (selectedMode == "Point")
       {
         
-        println("Selected Mode: " + selectedMode);
-        println("Selected object: " + (selectedObject+1));
+        //println("Selected Mode: " + selectedMode);
+        //println("Selected object: " + (selectedObject+1));
 
         pointObjects.add(points.get(0));
         objMode[selectedObject] = "Point";
@@ -502,8 +502,8 @@ void mouseReleased(){
       if (selectedMode == "Line")
       {
         
-        println("Selected Mode: " + selectedMode);
-        println("Selected object: " + (selectedObject+1));
+        //println("Selected Mode: " + selectedMode);
+        //println("Selected object: " + (selectedObject+1));
         objMode[selectedObject] = "Line";
         if (points.size() == 2)
         {
@@ -531,8 +531,8 @@ void mouseReleased(){
       if (selectedMode == "Segment")
       {
         
-        println("Selected Mode: " + selectedMode);
-        println("Selected object: " + (selectedObject+1));
+        //println("Selected Mode: " + selectedMode);
+        //println("Selected object: " + (selectedObject+1));
         objMode[selectedObject] = "Segment";
         if (points.size() == 2)
         {
@@ -557,8 +557,8 @@ void mouseReleased(){
   
       if (selectedMode == "Curve")
       {
-        println("Selected Mode: " + selectedMode);
-        println("Selected object: " + (selectedObject+1));
+        //println("Selected Mode: " + selectedMode);
+        //println("Selected object: " + (selectedObject+1));
         objMode[selectedObject] = "Curve";
 
         if (stopPoint == true)
@@ -592,8 +592,8 @@ void mouseReleased(){
   
       if (selectedMode == "Ellipse")
       {
-        println("Selected Mode: " + selectedMode);
-        println("Selected object: " + (selectedObject+1));
+        //println("Selected Mode: " + selectedMode);
+        //println("Selected object: " + (selectedObject+1));
         objMode[selectedObject] = "Ellipse";
         if (points.size() == 3)
         {
@@ -620,8 +620,8 @@ void mouseReleased(){
 
       if (selectedMode == "Triangle")
       {
-        println("Selected Mode: " + selectedMode);
-        println("Selected object: " + (selectedObject+1));
+        //println("Selected Mode: " + selectedMode);
+        //println("Selected object: " + (selectedObject+1));
         objMode[selectedObject] = "Triangle";
         if (points.size() == 3)
         {
@@ -647,8 +647,8 @@ void mouseReleased(){
   
       if (selectedMode == "Polygon")
       {
-        println("Selected Mode: " + selectedMode);
-        println("Selected object: " + (selectedObject+1));
+        //println("Selected Mode: " + selectedMode);
+        //println("Selected object: " + (selectedObject+1));
         objMode[selectedObject] = "Polygon";
 
         if (stopPoint == true)
@@ -681,8 +681,8 @@ void mouseReleased(){
   
       if (selectedMode == "Circle")
       {
-        println("Selected Mode: " + selectedMode);
-        println("Selected object: " + (selectedObject+1));
+        //println("Selected Mode: " + selectedMode);
+        //println("Selected object: " + (selectedObject+1));
         objMode[selectedObject] = "Circle";
         if (points.size() == 2)
         {

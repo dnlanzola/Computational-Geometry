@@ -50,13 +50,13 @@ public boolean triangleOrientation(int ins)
 {
      if (ccw(triangleObjects.get(ins-1).p0.p.x, triangleObjects.get(ins-1).p0.p.y, triangleObjects.get(ins-1).p1.p.x, triangleObjects.get(ins-1).p1.p.y, triangleObjects.get(ins-1).p2.p.x, triangleObjects.get(ins-1).p2.p.y) == true)
     {
-      println("Triangle's orientation is counterclockwise");
+      //println("Triangle's orientation is counterclockwise");
       return true;
     }
 
     if (cw(triangleObjects.get(ins-1).p0.p.x, triangleObjects.get(ins-1).p0.p.y, triangleObjects.get(ins-1).p1.p.x, triangleObjects.get(ins-1).p1.p.y, triangleObjects.get(ins-1).p2.p.x, triangleObjects.get(ins-1).p2.p.y) == true)
     {
-      println("Triangle's orientation is clockwise");
+      //println("Triangle's orientation is clockwise");
       return false;
     } 
   

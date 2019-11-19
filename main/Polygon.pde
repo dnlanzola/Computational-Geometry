@@ -87,7 +87,7 @@ class Polygon {
    
 
    void draw(){
-     println( bdry.size() );
+     //println( bdry.size() );
      for( Segment e : bdry ){
        e.draw();
      }

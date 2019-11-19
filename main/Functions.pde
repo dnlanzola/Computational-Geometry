@@ -53,7 +53,7 @@ public void distanceBetweenObjects()
       for (int j = 0; j < pointObjects.size(); j++){
           if (j != ins-1)
           {
-            distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, pointObjects.get(j).p.x,pointObjects.get(j).p.x);
+            distance = dist(pointObjects.get(ins-1).p.x,pointObjects.get(ins-1).p.y, pointObjects.get(j).p.x,pointObjects.get(j).p.y);
             distances.append(distance);       
             
             insAux = 0;
