@@ -17,6 +17,15 @@ class Curve {
      }
    }
 
+  float curveLen(){
+    
+    float len = 0;
+    
+    for (int i = 0; i < p.size()-2; i++)
+      len = len + dist(p.get(i).p.x, p.get(i).p.y, p.get(i+1).p.x, p.get(i+1).p.y);
+
+    return len;   
+  }
 
    void addPoint( Point _p ){ 
      p.add( _p );
