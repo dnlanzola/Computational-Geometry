@@ -487,12 +487,12 @@ void mouseReleased(){
         //println("Selected object: " + (selectedObject+1));
 
         pointObjects.add(points.get(0));
-        objMode[selectedObject] = "Point";
+        //objMode[selectedObject] = "Point";
         objMode2.append("Point");
-        objStatus[selectedObject] = "Filled";
+        //objStatus[selectedObject] = "Filled";
 
         selectedObject++;
-        objStatus[selectedObject] = "Active";
+        //objStatus[selectedObject] = "Active";
         points.clear();
         
         numberObjects++;
@@ -504,7 +504,7 @@ void mouseReleased(){
         
         //println("Selected Mode: " + selectedMode);
         //println("Selected object: " + (selectedObject+1));
-        objMode[selectedObject] = "Line";
+        //objMode[selectedObject] = "Line";
         if (points.size() == 2)
         {
           //println(points.get(0));
@@ -513,10 +513,10 @@ void mouseReleased(){
           objMode2.append("Line");
           
           lineObjects.add(new Line (points.get(0),points.get(1)));
-          objStatus[selectedObject] = "Filled";
+          //objStatus[selectedObject] = "Filled";
           points.clear(); 
           selectedObject++;
-          objStatus[selectedObject] = "Active";
+          //objStatus[selectedObject] = "Active";
           
           
           numberObjects++;
@@ -533,7 +533,7 @@ void mouseReleased(){
         
         //println("Selected Mode: " + selectedMode);
         //println("Selected object: " + (selectedObject+1));
-        objMode[selectedObject] = "Segment";
+        //objMode[selectedObject] = "Segment";
         if (points.size() == 2)
         {
           //println(points.get(0));
@@ -542,10 +542,10 @@ void mouseReleased(){
           objMode2.append("Segment");
           
           segmentObjects.add(new Segment (points.get(0),points.get(1)));
-          objStatus[selectedObject] = "Filled";
+          //objStatus[selectedObject] = "Filled";
           points.clear(); 
           selectedObject++;
-          objStatus[selectedObject] = "Active";
+          //objStatus[selectedObject] = "Active";
           
           
           
@@ -559,7 +559,7 @@ void mouseReleased(){
       {
         //println("Selected Mode: " + selectedMode);
         //println("Selected object: " + (selectedObject+1));
-        objMode[selectedObject] = "Curve";
+        //objMode[selectedObject] = "Curve";
 
         if (stopPoint == true)
         {
@@ -576,10 +576,10 @@ void mouseReleased(){
            
           //println("polygonObjects size: ", polygonObjects.size());
           //println(polygonObjects.get(0));
-          objStatus[selectedObject] = "Filled";
+          //objStatus[selectedObject] = "Filled";
           points.clear(); 
           selectedObject++;
-          objStatus[selectedObject] = "Active";
+          //objStatus[selectedObject] = "Active";
           stopPoint = false;
           
           
@@ -594,7 +594,7 @@ void mouseReleased(){
       {
         //println("Selected Mode: " + selectedMode);
         //println("Selected object: " + (selectedObject+1));
-        objMode[selectedObject] = "Ellipse";
+        //objMode[selectedObject] = "Ellipse";
         if (points.size() == 3)
         {
           //println(points.get(0));
@@ -604,10 +604,10 @@ void mouseReleased(){
           objMode2.append("Ellipse");
           
           ellipseObjects.add(new Ellipse (points.get(0),points.get(1),points.get(2)));
-          objStatus[selectedObject] = "Filled";
+          //objStatus[selectedObject] = "Filled";
           points.clear(); 
           selectedObject++;
-          objStatus[selectedObject] = "Active";
+         // objStatus[selectedObject] = "Active";
           
           
           
@@ -622,7 +622,7 @@ void mouseReleased(){
       {
         //println("Selected Mode: " + selectedMode);
         //println("Selected object: " + (selectedObject+1));
-        objMode[selectedObject] = "Triangle";
+        //objMode[selectedObject] = "Triangle";
         if (points.size() == 3)
         {
           //println(points.get(0));
@@ -632,10 +632,10 @@ void mouseReleased(){
           objMode2.append("Triangle");
           
           triangleObjects.add(new Triangle (points.get(0),points.get(1),points.get(2)));
-          objStatus[selectedObject] = "Filled";
+          //objStatus[selectedObject] = "Filled";
           points.clear(); 
           selectedObject++;
-          objStatus[selectedObject] = "Active";
+          //objStatus[selectedObject] = "Active";
           
           
           
@@ -649,7 +649,7 @@ void mouseReleased(){
       {
         //println("Selected Mode: " + selectedMode);
         //println("Selected object: " + (selectedObject+1));
-        objMode[selectedObject] = "Polygon";
+        //objMode[selectedObject] = "Polygon";
 
         if (stopPoint == true)
         {
@@ -666,10 +666,10 @@ void mouseReleased(){
            
           //println("polygonObjects size: ", polygonObjects.size());
           //println(polygonObjects.get(0));
-          objStatus[selectedObject] = "Filled";
+          //objStatus[selectedObject] = "Filled";
           points.clear(); 
           selectedObject++;
-          objStatus[selectedObject] = "Active";
+          //objStatus[selectedObject] = "Active";
           stopPoint = false;
           
           
@@ -681,9 +681,9 @@ void mouseReleased(){
   
       if (selectedMode == "Circle")
       {
-        //println("Selected Mode: " + selectedMode);
-        //println("Selected object: " + (selectedObject+1));
-        objMode[selectedObject] = "Circle";
+        println("Selected Mode: " + selectedMode);
+        println("Selected object: " + (selectedObject+1));
+        //objMode[selectedObject] = "Circle";
         if (points.size() == 2)
         {
           //println(points.get(0));
@@ -692,10 +692,10 @@ void mouseReleased(){
           objMode2.append("Circle");
           
           circleObjects.add(new Circle (points.get(0),points.get(1)));
-          objStatus[selectedObject] = "Filled";
+          //objStatus[selectedObject] = "Filled";
           points.clear(); 
           selectedObject++;
-          objStatus[selectedObject] = "Active";
+         // objStatus[selectedObject] = "Active";
           
           
           numberObjects++;

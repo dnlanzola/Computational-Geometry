@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.util.concurrent.TimeUnit;
+
 public void exportObjMode()
 {
   Table table = new Table();
@@ -18,6 +21,7 @@ public void exportObjMode()
 
 public void distanceBetweenObjects()
 {
+    long startTime = System.nanoTime();
     int ins = 0;
     int insAux = 0;
     int varK = 0;
@@ -2654,9 +2658,9 @@ public void distanceBetweenObjects()
 
 
 
+      long finishTime = System.nanoTime();
 
-
-
+      println("Runtime: " + (finishTime - startTime));
     
     
           
