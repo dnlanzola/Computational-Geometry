@@ -1,6 +1,5 @@
 import json
 import csv
-import Functions
 import sys,os
 import math
 
@@ -79,7 +78,7 @@ def distanceBetweenObjects():
 
         # Point - Line
         if len(lineArray) > 0:
-            distance.clear()
+            distances.clear()
             for i in range(0, len(lineArray)):
                 distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
                 distances.append(distance)
@@ -99,7 +98,7 @@ def distanceBetweenObjects():
 
         #Point - Segment
         if len(segmentArray) > 0:
-            distance.clear()
+            distances.clear()
             for i in range(0, len(segmentArray)):
                 distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
                 distances.append(distance)
@@ -119,7 +118,7 @@ def distanceBetweenObjects():
 
         #Point - Triangle
         if len(triangleArray) > 0:
-            distance.clear()
+            distances.clear()
             for i in range(0, len(triangleArray)):
                 distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
                 distances.append(distance)
@@ -141,7 +140,7 @@ def distanceBetweenObjects():
 
         #Points - Ellipse
         if len(ellipseArray) > 0:
-            distance.clear()
+            distances.clear()
             for i in range(0, len(ellipseArray)):
                 distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
                 distances.append(distance)
@@ -159,7 +158,7 @@ def distanceBetweenObjects():
 
         #Points - Circle
         if len(circleArray) > 0:
-            distance.clear()
+            distances.clear()
             for i in range(0, len(circleArray)):
                 distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
                 distances.append(distance)
@@ -177,10 +176,10 @@ def distanceBetweenObjects():
 
         #Points - Polygon
         if len(polygonArray) > 0:
-            distance.clear()
+            distances.clear()
             for i in range(0, len(polygonArray)):
-                for j in range(0, len(polygonArray[i])):
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, polygonArray[i].x1, polygonArray[i].y1)
+                for j in range(0, len(polygonArray[i].value)):
+                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
                     distances.append(distance)
 
                 # Print Statements to print the values
@@ -196,7 +195,7 @@ def distanceBetweenObjects():
 
         #Points - Curve
         if len(curveArray) > 0:
-            distance.clear()
+            distances.clear()
             for i in range(0, len(curveArray)):
                 for j in range(0, len(curveArray[i])):
                     distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, curveArray[i].x1, curveArray[i].y1)
@@ -212,6 +211,10 @@ def distanceBetweenObjects():
                         if insAux == i + 1:
                             vark = k
                             break
+
+
+
+
 
 
 
@@ -302,22 +305,28 @@ for x in range(len(lineArray)):
 
 print("Curve List:")
 for i in range(0, len(fileobject)):
+    auxCurve = Curve(0,[])
+
     if fileobject[i].get('type') == 'Curve':
+
         curvetotal = len(fileobject[i])
         curvetotal = curvetotal - 2
-        curvetotal = int(curvetotal/2)
-        for y in range(1, curvetotal):
+        curvetotal = int(curvetotal / 2)
+        auxListC = []
+        for y in range(1, curvetotal+1):
             value = "x" + str(y)
             val = "y" + str(y)
 
-            auxCurve = Curve(fileobject[i].get('id'), fileobject[i].get(value), fileobject[i].get(val))
-            curveArray.append(auxCurve)
+            auxC = Point(fileobject[i].get('id'), fileobject[i].get(value),fileobject[i].get(val))
 
-        print(curveArray[x].ID)
+            auxListC.append(auxC)
 
-for x in range(len(curveArray)):
-    print(curveArray[x].value)
-    print(curveArray[x].val)
+        auxCurve.ID = fileobject[i].get('id')
+        print("AuxListP LEN")
+        print(len(auxListC))
+        auxCurve.value = auxListC
+
+        curveArray.append(auxCurve)
 
 
 
@@ -385,22 +394,30 @@ for x in range(len(triangleArray)):
 
 print("Polygon List:")
 for i in range(0, len(fileobject)):
+    auxPoly = Polygon(0,[])
+
     if fileobject[i].get('type') == 'Polygon':
+
         polytotal = len(fileobject[i])
         polytotal = polytotal - 2
         polytotal = int(polytotal / 2)
-        for y in range(1, polytotal):
+        auxListP = []
+        for y in range(1, polytotal+1):
             value = "x" + str(y)
             val = "y" + str(y)
 
-            auxPolygon = Polygon(fileobject[i].get('id'), fileobject[i].get(value), fileobject[i].get(val))
-            polygonArray.append(auxPolygon)
+            auxP = Point(fileobject[i].get('id'), fileobject[i].get(value),fileobject[i].get(val))
 
-        print(polygonArray[x].ID)
+            auxListP.append(auxP)
 
-for x in range(len(polygonArray)):
-    print(polygonArray[x].value)
-    print(polygonArray[x].val)
+        auxPoly.ID = fileobject[i].get('id')
+        print("AuxListP LEN")
+        print(len(auxListP))
+        auxPoly.value = auxListP
+
+        polygonArray.append(auxPoly)
+
+
 
 json_file.close()
 
