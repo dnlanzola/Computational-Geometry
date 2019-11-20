@@ -2,6 +2,7 @@ import json
 import csv
 import sys,os
 import math
+import time
 
 from Polygon import Polygon
 from Circle import Circle
@@ -59,12 +60,12 @@ def distanceBetweenObjects():
                     # distance formula required
                     distance = distanceFormula(pointsArray[ins-1].x1, pointsArray[ins-1].y1, pointsArray[i].x1, pointsArray[i].y1)
                     
-                    print("x1:" + str(pointsArray[ins-1].x1))
-                    print("y1:" + str(pointsArray[ins-1].y1))
-                    print("x2:" + str(pointsArray[i].x1))
-                    print("y2:" + str(pointsArray[i].y1))
-                    print("Distance: " + str(distance))
-                    print("--")
+                    # print("x1:" + str(pointsArray[ins-1].x1))
+                    # print("y1:" + str(pointsArray[ins-1].y1))
+                    # print("x2:" + str(pointsArray[i].x1))
+                    # print("y2:" + str(pointsArray[i].y1))
+                    # print("Distance: " + str(distance))
+                    # print("--")
                     distances.append(distance)
 
                     #code to traverse through objMode
@@ -197,8 +198,8 @@ def distanceBetweenObjects():
         if len(curveArray) > 0:
             distances.clear()
             for i in range(0, len(curveArray)):
-                for j in range(0, len(curveArray[i])):
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, curveArray[i].x1, curveArray[i].y1)
+                for j in range(0, len(curveArray[i].value)):
+                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
                     distances.append(distance)
 
                 # Print Statements to print the values
@@ -282,11 +283,11 @@ for i in range(0, len(fileobject)):
     if fileobject[i].get('type') == 'Point':
         auxPoint = Point(fileobject[i].get('id'), fileobject[i].get('x'), fileobject[i].get('y'))
         pointsArray.append(auxPoint)
-for x in range(len(pointsArray)):
-    print("ID: " + str(pointsArray[x].ID))
-    print(pointsArray[x].x1)
-    print(pointsArray[x].y1)
-    print("\n")
+#for x in range(len(pointsArray)):
+    # print("ID: " + str(pointsArray[x].ID))
+    # print(pointsArray[x].x1)
+    # print(pointsArray[x].y1)
+    # print("\n")
 
 
 print("Line List:")
@@ -294,13 +295,13 @@ for i in range(0, len(fileobject)):
     if fileobject[i].get('type') == 'Line':
         auxLine = Line(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'), fileobject[i].get('x2'), fileobject[i].get('y2'))
         lineArray.append(auxLine)
-for x in range(len(lineArray)):
-    print(lineArray[x].ID)
-    print(lineArray[x].x1)
-    print(lineArray[x].y1)
-    print(lineArray[x].x2)
-    print(lineArray[x].y2)
-    print("\n")
+#for x in range(len(lineArray)):
+    # print(lineArray[x].ID)
+    # print(lineArray[x].x1)
+    # print(lineArray[x].y1)
+    # print(lineArray[x].x2)
+    # print(lineArray[x].y2)
+    # print("\n")
 
 
 print("Curve List:")
@@ -322,8 +323,8 @@ for i in range(0, len(fileobject)):
             auxListC.append(auxC)
 
         auxCurve.ID = fileobject[i].get('id')
-        print("AuxListP LEN")
-        print(len(auxListC))
+       # print("AuxListP LEN")
+        #print(len(auxListC))
         auxCurve.value = auxListC
 
         curveArray.append(auxCurve)
@@ -335,13 +336,13 @@ for i in range(0, len(fileobject)):
     if fileobject[i].get('type') == 'Segment':
         auxSeg = Segment(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'), fileobject[i].get('x2'), fileobject[i].get('y2'))
         segmentArray.append(auxSeg)
-for x in range(len(segmentArray)):
-    print(segmentArray[x].ID)
-    print(segmentArray[x].x1)
-    print(segmentArray[x].y1)
-    print(segmentArray[x].x2)
-    print(segmentArray[x].y2)
-    print("\n")
+#for x in range(len(segmentArray)):
+   # print(segmentArray[x].ID)
+   #  print(segmentArray[x].x1)
+   # print(segmentArray[x].y1)
+   # print(segmentArray[x].x2)
+   # print(segmentArray[x].y2)
+   # print("\n")
 
 
 print("Ellipse List:")
@@ -349,15 +350,15 @@ for i in range(0, len(fileobject)):
     if fileobject[i].get('type') == 'Ellipse':
         auxEllipse = Ellipse(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'), fileobject[i].get('x2'), fileobject[i].get('y2'), fileobject[i].get('x3'), fileobject[i].get('y3'))
         ellipseArray.append(auxEllipse)
-for x in range(len(ellipseArray)):
-    print(ellipseArray[x].ID)
-    print(ellipseArray[x].x1)
-    print(ellipseArray[x].y1)
-    print(ellipseArray[x].x2)
-    print(ellipseArray[x].y2)
-    print(ellipseArray[x].x3)
-    print(ellipseArray[x].y3)
-    print("\n")
+#for x in range(len(ellipseArray)):
+ #   print(ellipseArray[x].ID)
+#    print(ellipseArray[x].x1)
+  #  print(ellipseArray[x].y1)
+   # print(ellipseArray[x].x2)
+   # print(ellipseArray[x].y2)
+    #print(ellipseArray[x].x3)
+    #print(ellipseArray[x].y3)
+    #print("\n")
 
 
 print("Circle List:")
@@ -366,14 +367,14 @@ for i in range(0, len(fileobject)):
         auxCircle = Circle(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'),
                         fileobject[i].get('x2'), fileobject[i].get('y2'))
         circleArray.append(auxCircle)
-for x in range(len(circleArray)):
-    print(circleArray[x].ID)
-    print(circleArray[x].x1)
-    print(circleArray[x].y1)
-    print(circleArray[x].x2)
-    print(circleArray[x].y2)
-    print("\n")
-
+# for x in range(len(circleArray)):
+#     print(circleArray[x].ID)
+#     print(circleArray[x].x1)
+#     print(circleArray[x].y1)
+#     print(circleArray[x].x2)
+#     print(circleArray[x].y2)
+#     print("\n")
+#
 
 print("Triangle List:")
 for i in range(0, len(fileobject)):
@@ -381,15 +382,15 @@ for i in range(0, len(fileobject)):
         auxTriangle = Triangle(fileobject[i].get('id'), fileobject[i].get('x1'), fileobject[i].get('y1'),
                         fileobject[i].get('x2'), fileobject[i].get('y2'), fileobject[i].get('x3'), fileobject[i].get('y3'))
         triangleArray.append(auxTriangle)
-for x in range(len(triangleArray)):
-    print(triangleArray[x].ID)
-    print(triangleArray[x].x1)
-    print(triangleArray[x].y1)
-    print(triangleArray[x].x2)
-    print(triangleArray[x].y2)
-    print(triangleArray[x].x3)
-    print(triangleArray[x].y3)
-    print("\n")
+# for x in range(len(triangleArray)):
+#     print(triangleArray[x].ID)
+#     print(triangleArray[x].x1)
+#     print(triangleArray[x].y1)
+#     print(triangleArray[x].x2)
+#     print(triangleArray[x].y2)
+#     print(triangleArray[x].x3)
+#     print(triangleArray[x].y3)
+#     print("\n")
 
 
 print("Polygon List:")
@@ -411,8 +412,8 @@ for i in range(0, len(fileobject)):
             auxListP.append(auxP)
 
         auxPoly.ID = fileobject[i].get('id')
-        print("AuxListP LEN")
-        print(len(auxListP))
+        # print("AuxListP LEN")
+        # print(len(auxListP))
         auxPoly.value = auxListP
 
         polygonArray.append(auxPoly)
@@ -427,7 +428,10 @@ print("Points: " + str(len(pointsArray)))
 
 print("JSON FILE CLOSED.")
 
+# test the time of python calculation
+test_time = time.time()
 distanceBetweenObjects()
+print("--- %s seconds ---"%(time.time() - test_time))
 
 
 
