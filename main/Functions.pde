@@ -2879,10 +2879,7 @@ public void intersectionBetweenObjects()
           
           
         }                      
-      
-            
-            
-            
+
             insAux = 0;
             for (int k = 0; k < objMode2.size(); k++){
               if (objMode2.get(k) == "Curve")
@@ -2904,45 +2901,41 @@ public void intersectionBetweenObjects()
     }       
 
      // COMPARING SEGMENT - POLYGON
-  //  if (polygonObjects.size() > 0) {
-  //    distances.clear();
-  //    for (int j = 0; j < polygonObjects.size(); j++){
+    if (polygonObjects.size() > 0) {
+      distances.clear();
+      for (int j = 0; j < polygonObjects.size(); j++){
 
 
-            
-            
-  //      distances.clear();
-  //      for (int m=0; m < polygonObjects.get(j).p.size(); m++)
-  //      {
-  //        distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, polygonObjects.get(j).p.get(m).p.x,polygonObjects.get(j).p.get(m).p.y);
-  //        distances.append(distance); 
-  //        distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, polygonObjects.get(j).p.get(m).p.x,polygonObjects.get(j).p.get(m).p.y);
-  //        distances.append(distance);           
-  //      }
+        for (int m=0; m < polygonObjects.get(j).bdry.size(); m++)
+        {
+          
+              if (segmentObjects.get(ins-1).intersectionTest(polygonObjects.get(j).bdry.get(m)) && interResult == false)
+                interResult = true;
+        
+          
+        }       
+      
 
-                      
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Polygon")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
       
-            
-            
-            
-  //          insAux = 0;
-  //          for (int k = 0; k < objMode2.size(); k++){
-  //            if (objMode2.get(k) == "Polygon")
-  //              insAux++;
-  //            if (insAux == j+1){
-  //              varK = k;
-  //              break;
-  //            }
-  //          }  
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Polygon");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
       
-  //          TableRow newRow = table.addRow();
-  //          newRow.setInt("id", varK+1);
-  //          newRow.setString("type", "Polygon");
-  //          newRow.setFloat("min distance", distances.min());
-  //          newRow.setFloat("max distance", distances.max());
-      
-  //  }
-  //} 
+    }
+  } 
   
   
   
