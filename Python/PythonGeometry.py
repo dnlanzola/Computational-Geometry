@@ -4,6 +4,8 @@ import sys,os
 import math
 import time
 
+from shapely.geometry import Point, Polygon
+
 from Polygon import Polygon
 from Circle import Circle
 from Curve import Curve
@@ -224,9 +226,14 @@ def distanceBetweenObjects():
 
 
 
+######################### Point Inside Objects ################
 
+def pointInsideObjects():
+#########################################################################
 
-
+######################### Intersection Bewteen  Objects ################
+def intersectionBetweenObjects():
+#########################################################################
 
 
 ###########################################################################################
@@ -431,6 +438,8 @@ print("JSON FILE CLOSED.")
 # test the time of python calculation
 test_time = time.time()
 distanceBetweenObjects()
+#pointInsideObjects()
+#intersectionBetweenObjects()
 print("--- %s seconds ---"%(time.time() - test_time))
 
 
