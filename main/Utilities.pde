@@ -273,5 +273,4 @@ public void printResults()
 
   saveJSONArray(jsonArr, "data/objects.json");
   
-  
 }
