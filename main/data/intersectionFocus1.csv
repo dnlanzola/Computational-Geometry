@@ -1,2 +1,3 @@
 id,type,intersection
-2,Triangle,true
+2,Curve,true
+3,Curve,false
