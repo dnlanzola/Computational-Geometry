@@ -2670,15 +2670,6 @@ public void distanceBetweenObjects()
 }
     
 
-public void pointInsideObjects()
-{
-  
-  
-  
-  
-  
-  
-}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
   ///////////////////////////////        INTERSECTION BETWEEN OBJECTS         ///////////////////////////////    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3872,3 +3863,151 @@ public void intersectionBetweenObjects()
 
 
 } // END FUNCTION
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+  ///////////////////////////////        POINT INSIDE OBJECTS         ///////////////////////////////    
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+public void pointInsideObjects()
+{
+    long startTime = System.nanoTime();
+    int ins = 0;
+    int insAux = 0;
+    int varK = 0;
+    float distance = 0;
+    float minDistance = 0;
+    float maxDistance = 0;
+    FloatList distances = new FloatList();
+    
+    Table table = new Table();
+    
+    table.addColumn("id");
+    table.addColumn("type");
+    table.addColumn("min distance");
+    table.addColumn("max distance");  
+  
+      if (objMode2.get(focusObject-1) == "Triangle")
+    {
+      ins = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Triangle")
+          ins++;      
+      
+      
+      // COMPARING TRIANGLE - POINT
+    if (pointObjects.size() > 0) {
+      distances.clear();
+      for (int m = 0; m < pointObjects.size(); m++){
+      boolean pointInside = false;  
+        
+        
+        Polygon tPoly = triangleObjects.get(ins-1).toPoly();
+        
+     for (int i = 0, j = tPoly.p.size() - 1; i < tPoly.p.size(); j = i++) { 
+        if (((tPoly.p.get(i).p.y > pointObjects.get(m).p.y) != (tPoly.p.get(j).p.y > pointObjects.get(m).p.y)) && 
+        
+        (pointObjects.get(m).p.x < (tPoly.p.get(j).p.x - tPoly.p.get(i).p.x)
+        
+        * (pointObjects.get(m).p.y - tPoly.p.get(i).p.y) / 
+       
+        (tPoly.p.get(j).p.y - tPoly.p.get(i).p.y) +
+        
+        tPoly.p.get(i).p.x))
+          pointInside = !pointInside;
+    }
+
+            
+
+            
+      
+            
+            
+            
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Point")
+                insAux++;
+              if (insAux == m+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Point");
+                if (pointInside == true)
+                  newRow.setString("Point inside", "true");
+                if (pointInside == false)
+                    newRow.setString("Point inside", "false");  
+      }
+      }
+      
+    } // END FOCUS = TRIANGLE
+    
+    
+     if (objMode2.get(focusObject-1) == "Polygon")
+    {
+      ins = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Polygon")
+          ins++;      
+      
+      // COMPARING POLYGON - POINT
+    if (pointObjects.size() > 0){
+    distances.clear();
+      for (int m = 0; m < pointObjects.size(); m++){
+      boolean pointInside = false;  
+        
+     for (int i = 0, j = polygonObjects.get(ins-1).p.size() - 1; i < polygonObjects.get(ins-1).p.size(); j = i++) { 
+        if (((polygonObjects.get(ins-1).p.get(i).p.y > pointObjects.get(m).p.y) != (polygonObjects.get(ins-1).p.get(j).p.y > pointObjects.get(m).p.y)) && 
+        
+        (pointObjects.get(m).p.x < (polygonObjects.get(ins-1).p.get(j).p.x - polygonObjects.get(ins-1).p.get(i).p.x)
+        
+        * (pointObjects.get(m).p.y - polygonObjects.get(ins-1).p.get(i).p.y) / 
+       
+        (polygonObjects.get(ins-1).p.get(j).p.y - polygonObjects.get(ins-1).p.get(i).p.y) +
+        
+        polygonObjects.get(ins-1).p.get(i).p.x))
+          pointInside = !pointInside;
+    }
+      
+            
+            
+            
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Point")
+                insAux++;
+              if (insAux == m+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+    
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Point");
+                if (pointInside == true)
+                  newRow.setString("Point inside", "true");
+                if (pointInside == false)
+                    newRow.setString("Point inside", "false");
+        }    
+        }
+      }// END FOCUS = POLY
+     saveTable(table, "data/pointInsideFocus" + focusObject + ".csv");  
+  }
+    
+  
+  
+  
