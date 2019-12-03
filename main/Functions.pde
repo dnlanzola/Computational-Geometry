@@ -26,8 +26,6 @@ public void distanceBetweenObjects()
     int insAux = 0;
     int varK = 0;
     float distance = 0;
-    float minDistance = 0;
-    float maxDistance = 0;
     FloatList distances = new FloatList();
     
     Table table = new Table();
@@ -2685,13 +2683,10 @@ public void distanceBetweenObjects()
 
 public void intersectionBetweenObjects()
 {
-    long startTime = System.nanoTime();
+
     int ins = 0;
     int insAux = 0;
     int varK = 0;
-    float distance = 0;
-    float minDistance = 0;
-    float maxDistance = 0;
     FloatList distances = new FloatList();
     Boolean interResult = false;
     
@@ -2702,7 +2697,7 @@ public void intersectionBetweenObjects()
     table.addColumn("intersection");
 
   ///////////////////////////////        SEGMENT COMPARISONS         ///////////////////////////////               
-     
+   if (focusObject > 0) {
     interResult = false;
     if (objMode2.get(focusObject-1) == "Segment")
     {
@@ -2826,7 +2821,6 @@ public void intersectionBetweenObjects()
      // COMPARING SEGMENT - CURVE
     interResult = false;
     if (curveObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < curveObjects.size(); j++){
 
 
@@ -2870,7 +2864,6 @@ public void intersectionBetweenObjects()
      // COMPARING SEGMENT - POLYGON
      interResult = false;
     if (polygonObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < polygonObjects.size(); j++){
 
 
@@ -2921,7 +2914,6 @@ public void intersectionBetweenObjects()
       
      // COMPARING LINE - LINE
     if (lineObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < lineObjects.size(); j++){
           if (j != ins-1)
           {
@@ -2957,7 +2949,6 @@ public void intersectionBetweenObjects()
      // COMPARING LINE - SEGMENT
      interResult = false;
     if (segmentObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < segmentObjects.size(); j++){
 
             
@@ -2996,7 +2987,6 @@ public void intersectionBetweenObjects()
      // COMPARING LINE - TRIANGLE
      interResult = false;
     if (triangleObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < triangleObjects.size(); j++){
 
             
@@ -3035,7 +3025,6 @@ public void intersectionBetweenObjects()
      // COMPARING LINE - CURVE
     interResult = false;
     if (curveObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < curveObjects.size(); j++){
         interResult = false;
 
@@ -3083,7 +3072,6 @@ public void intersectionBetweenObjects()
      // COMPARING LINE - POLYGON
      interResult = false;
     if (polygonObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < polygonObjects.size(); j++){
         interResult = false;
 
@@ -3137,7 +3125,6 @@ public void intersectionBetweenObjects()
      // COMPARING TRIANGLE - LINE
      interResult = false;
     if (lineObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < lineObjects.size(); j++){
 
             
@@ -3176,7 +3163,6 @@ public void intersectionBetweenObjects()
      // COMPARING TRIANGLE - SEGMENT
      interResult = false;
     if (segmentObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < segmentObjects.size(); j++){
 
             
@@ -3264,7 +3250,6 @@ public void intersectionBetweenObjects()
      // COMPARING TRIANGLE - CURVE
     interResult = false;
     if (curveObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < curveObjects.size(); j++){
         interResult = false;
 
@@ -3315,7 +3300,6 @@ public void intersectionBetweenObjects()
      // COMPARING TRIANGLE - POLYGON
      interResult = false;
     if (polygonObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < polygonObjects.size(); j++){
         interResult = false;
 
@@ -3381,7 +3365,6 @@ public void intersectionBetweenObjects()
      // COMPARING POLYGON - LINE
      interResult = false;
     if (lineObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < lineObjects.size(); j++){
         interResult = false;
 
@@ -3421,7 +3404,6 @@ public void intersectionBetweenObjects()
      // COMPARING POLYGON - SEGMENT
      interResult = false;
     if (segmentObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < segmentObjects.size(); j++){
         interResult = false;
 
@@ -3462,7 +3444,6 @@ public void intersectionBetweenObjects()
      // COMPARING POLYGON - TRIANGLE
      interResult = false;
     if (triangleObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < triangleObjects.size(); j++){
         interResult = false;
 
@@ -3615,7 +3596,6 @@ public void intersectionBetweenObjects()
      // COMPARING CURVE - SEGMENT
     interResult = false;
     if (segmentObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < segmentObjects.size(); j++){
 
 
@@ -3657,7 +3637,6 @@ public void intersectionBetweenObjects()
      // COMPARING CURVE - LINE
     interResult = false;
     if (lineObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < lineObjects.size(); j++){
 
 
@@ -3701,7 +3680,6 @@ public void intersectionBetweenObjects()
      // COMPARING CURVE - TRIANGLE
     interResult = false;
     if (triangleObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < triangleObjects.size(); j++){
 
 
@@ -3861,7 +3839,7 @@ public void intersectionBetweenObjects()
 
 
 
-
+   }// END FOCUS VERIFICATION
 
 
 } // END FUNCTION
@@ -3881,13 +3859,9 @@ public void intersectionBetweenObjects()
 
 public void pointInsideObjects()
 {
-    long startTime = System.nanoTime();
     int ins = 0;
     int insAux = 0;
     int varK = 0;
-    float distance = 0;
-    float minDistance = 0;
-    float maxDistance = 0;
     FloatList distances = new FloatList();
     
     Table table = new Table();
@@ -3896,6 +3870,8 @@ public void pointInsideObjects()
     table.addColumn("type");
     table.addColumn("min distance");
     table.addColumn("max distance");  
+  
+  if (focusObject > 0){
   
       if (objMode2.get(focusObject-1) == "Triangle")
     {
@@ -3907,7 +3883,6 @@ public void pointInsideObjects()
       
       // COMPARING TRIANGLE - POINT
     if (pointObjects.size() > 0) {
-      distances.clear();
       for (int m = 0; m < pointObjects.size(); m++){
       boolean pointInside = false;  
         
@@ -3966,7 +3941,6 @@ public void pointInsideObjects()
       
       // COMPARING POLYGON - POINT
     if (pointObjects.size() > 0){
-    distances.clear();
       for (int m = 0; m < pointObjects.size(); m++){
       boolean pointInside = false;  
         
@@ -4010,6 +3984,6 @@ public void pointInsideObjects()
      saveTable(table, "data/pointInsideFocus" + focusObject + ".csv");  
   }
     
-  
+}
   
   
