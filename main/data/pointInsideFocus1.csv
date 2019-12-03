@@ -1,6 +1,1 @@
-id,type,min distance,max distance,Point inside
-2,Point,,,true
-3,Point,,,false
-4,Point,,,false
-5,Point,,,false
-6,Point,,,true
+id,type,min distance,max distance
