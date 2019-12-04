@@ -26,8 +26,6 @@ public void distanceBetweenObjects()
     int insAux = 0;
     int varK = 0;
     float distance = 0;
-    float minDistance = 0;
-    float maxDistance = 0;
     FloatList distances = new FloatList();
     
     Table table = new Table();
@@ -579,17 +577,17 @@ public void distanceBetweenObjects()
 
 
             
-            distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.x);
+            distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p0.p.x);
+            distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p0.p.x);
+            distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.x);
+            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p0.p.x);
+            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);  
-            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p0.p.x);
+            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);              
 
      
@@ -709,13 +707,13 @@ public void distanceBetweenObjects()
 
 
             
-            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.x);
+            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.x);
+            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, lineObjects.get(j).p0.p.x,lineObjects.get(j).p0.p.y);
             distances.append(distance);
-            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, lineObjects.get(j).p1.p.x,lineObjects.get(j).p1.p.x);
+            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, lineObjects.get(j).p1.p.x,lineObjects.get(j).p1.p.y);
             distances.append(distance);
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, lineObjects.get(j).p1.p.x,lineObjects.get(j).p1.p.x);
+            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, lineObjects.get(j).p1.p.x,lineObjects.get(j).p1.p.y);
             distances.append(distance);
             
             
@@ -749,13 +747,13 @@ public void distanceBetweenObjects()
           {
 
             
-            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, segmentObjects.get(j).p0.p.x,segmentObjects.get(j).p0.p.x);
+            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, segmentObjects.get(j).p0.p.x,segmentObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, segmentObjects.get(j).p0.p.x,segmentObjects.get(j).p0.p.x);
+            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, segmentObjects.get(j).p0.p.x,segmentObjects.get(j).p0.p.y);
             distances.append(distance);
-            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, segmentObjects.get(j).p1.p.x,segmentObjects.get(j).p1.p.x);
+            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, segmentObjects.get(j).p1.p.x,segmentObjects.get(j).p1.p.y);
             distances.append(distance);
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, segmentObjects.get(j).p1.p.x,segmentObjects.get(j).p1.p.x);
+            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, segmentObjects.get(j).p1.p.x,segmentObjects.get(j).p1.p.y);
             distances.append(distance);
             
             
@@ -1873,7 +1871,8 @@ public void distanceBetweenObjects()
             distances.append(distance);       
             distance = dist(ellipseObjects.get(ins-1).p0.p.x,ellipseObjects.get(ins-1).p0.p.y,triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p1.p.y );
             distances.append(distance);       
-
+            distance = dist(ellipseObjects.get(ins-1).p0.p.x,ellipseObjects.get(ins-1).p0.p.y,triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y );
+            distances.append(distance); 
       
             
             
@@ -2185,7 +2184,8 @@ public void distanceBetweenObjects()
             distances.append(distance);       
             distance = dist(circleObjects.get(ins-1).p0.p.x,circleObjects.get(ins-1).p0.p.y,triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p1.p.y );
             distances.append(distance);       
-
+            distance = dist(circleObjects.get(ins-1).p0.p.x,circleObjects.get(ins-1).p0.p.y,triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y );
+            distances.append(distance);  
       
             
             
@@ -2452,11 +2452,11 @@ public void distanceBetweenObjects()
             distances.append(distance);      
             distance = dist(triangleObjects.get(ins-1).p2.p.x,triangleObjects.get(ins-1).p2.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p1.p.y);
             distances.append(distance);              
-            distance = dist(triangleObjects.get(ins-1).p0.p.x,triangleObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p1.p.y);
+            distance = dist(triangleObjects.get(ins-1).p0.p.x,triangleObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y);
             distances.append(distance);      
-            distance = dist(triangleObjects.get(ins-1).p1.p.x,triangleObjects.get(ins-1).p1.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p1.p.y);
+            distance = dist(triangleObjects.get(ins-1).p1.p.x,triangleObjects.get(ins-1).p1.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y);
             distances.append(distance);      
-            distance = dist(triangleObjects.get(ins-1).p2.p.x,triangleObjects.get(ins-1).p2.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p1.p.y);
+            distance = dist(triangleObjects.get(ins-1).p2.p.x,triangleObjects.get(ins-1).p2.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y);
             distances.append(distance);      
             
             
@@ -2670,26 +2670,23 @@ public void distanceBetweenObjects()
 }
     
 
-public void pointInsideObjects()
-{
-  
-  
-  
-  
-  
-  
-}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+  ///////////////////////////////        INTERSECTION BETWEEN OBJECTS         ///////////////////////////////    
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 
 public void intersectionBetweenObjects()
 {
-    long startTime = System.nanoTime();
+
     int ins = 0;
     int insAux = 0;
     int varK = 0;
-    float distance = 0;
-    float minDistance = 0;
-    float maxDistance = 0;
     FloatList distances = new FloatList();
     Boolean interResult = false;
     
@@ -2700,8 +2697,11 @@ public void intersectionBetweenObjects()
     table.addColumn("intersection");
 
   ///////////////////////////////        SEGMENT COMPARISONS         ///////////////////////////////               
-     if (objMode2.get(focusObject-1) == "Segment")
+   if (focusObject > 0) {
+    interResult = false;
+    if (objMode2.get(focusObject-1) == "Segment")
     {
+      println("It is segment");
       ins = 0;
       for (int i = 0; i < focusObject; i++)
         if (objMode2.get(i) == "Segment")
@@ -2709,13 +2709,216 @@ public void intersectionBetweenObjects()
               
       
       
-     // COMPARING SEGMENT - LINE
-    if (lineObjects.size() > 0) {
-      distances.clear();
-      for (int j = 0; j < lineObjects.size(); j++){
-
-            
+       // COMPARING SEGMENT - LINE
+       if (lineObjects.size() > 0) 
+       {
+          for (int j = 0; j < lineObjects.size(); j++)
+          {
             if (segmentObjects.get(ins-1).intersectionTest(lineObjects.get(j).toSeg()))
+                interResult = true;
+            else
+                interResult = false;
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++)
+            {
+              if (objMode2.get(k) == "Line")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Line");
+            if (interResult == true)
+               newRow.setString("intersection", "true");
+            if (interResult == false)
+               newRow.setString("intersection", "false");
+         }  
+      }       
+  
+     // COMPARING SEGMENT - SEGMENT
+       interResult = false;
+       if (segmentObjects.size() > 0) 
+       {
+          for (int j = 0; j < segmentObjects.size(); j++)
+          {
+              if (j != ins-1)
+              {
+            
+                  if (segmentObjects.get(ins-1).intersectionTest(segmentObjects.get(j)))
+                      interResult = true;
+                  else
+                      interResult = false;            
+
+                  insAux = 0;
+                  for (int k = 0; k < objMode2.size(); k++)
+                  {
+                    if (objMode2.get(k) == "Segment")
+                      insAux++;
+                    if (insAux == j+1){
+                      varK = k;
+                      break;
+                     }
+                  }  
+              
+      
+
+                 TableRow newRow = table.addRow();
+                  newRow.setInt("id", varK+1);
+                  newRow.setString("type", "Segment");
+                  if (interResult == true)
+                    newRow.setString("intersection", "true");
+                  if (interResult == false)
+                      newRow.setString("intersection", "false");
+                }
+            }
+          
+        }       
+  
+ 
+     // COMPARING SEGMENT - TRIANGLE
+     interResult = false;
+    if (triangleObjects.size() > 0) 
+    {
+      for (int j = 0; j < triangleObjects.size(); j++)
+      {
+            Segment t1 = new Segment (triangleObjects.get(j).p0, triangleObjects.get(j).p1);
+            Segment t2 = new Segment (triangleObjects.get(j).p0, triangleObjects.get(j).p2);
+            Segment t3 = new Segment (triangleObjects.get(j).p1, triangleObjects.get(j).p2);
+            
+            if (segmentObjects.get(ins-1).intersectionTest(t1) || segmentObjects.get(ins-1).intersectionTest(t2) || segmentObjects.get(ins-1).intersectionTest(t3))
+                interResult = true;
+            else
+                interResult = false;
+            
+        
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++)
+            {
+              if (objMode2.get(k) == "Triangle")
+                insAux++;
+              if (insAux == j+1)
+              {
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Triangle");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+      }  
+    }       
+  
+     // COMPARING SEGMENT - CURVE
+    interResult = false;
+    if (curveObjects.size() > 0) {
+      for (int j = 0; j < curveObjects.size(); j++){
+
+
+
+        for (int m=0; m < curveObjects.get(j).p.size()-1; m++)
+        {
+
+          Point p1 = new Point(  curveObjects.get(j).p.get(m).p.x,  curveObjects.get(j).p.get(m).p.y);
+          Point p2 = new Point ( curveObjects.get(j).p.get(m+1).p.x,  curveObjects.get(j).p.get(m+1).p.x);
+          
+          Segment c1 = new Segment (p1,p2);
+          
+          if (segmentObjects.get(ins-1).intersectionTest(c1) && interResult == false)
+            interResult = true;
+          
+          
+          
+        }                      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Curve")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Curve");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+    }  
+    }
+    
+
+     // COMPARING SEGMENT - POLYGON
+     interResult = false;
+    if (polygonObjects.size() > 0) {
+      for (int j = 0; j < polygonObjects.size(); j++){
+
+
+        for (int m=0; m < polygonObjects.get(j).bdry.size(); m++)
+        {
+          
+              if (segmentObjects.get(ins-1).intersectionTest(polygonObjects.get(j).bdry.get(m)) && interResult == false)
+                interResult = true;
+        
+          
+        }       
+      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Polygon")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Polygon");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+      
+    }
+  } 
+  saveTable(table, "data/intersectionFocus" + focusObject + ".csv");
+    }
+  
+   ///////////////////////////////        LINE COMPARISONS         ///////////////////////////////               
+     
+     interResult = false;
+     if (objMode2.get(focusObject-1) == "Line")
+    {
+      ins = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Line")
+          ins++;
+              
+      
+      
+     // COMPARING LINE - LINE
+    if (lineObjects.size() > 0) {
+      for (int j = 0; j < lineObjects.size(); j++){
+          if (j != ins-1)
+          {
+            
+            if (lineObjects.get(ins-1).toSeg().intersectionTest(lineObjects.get(j).toSeg()))
                 interResult = true;
             else
                 interResult = false;
@@ -2730,7 +2933,7 @@ public void intersectionBetweenObjects()
                 break;
               }
             }  
-      
+          
       TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
             newRow.setString("type", "Line");
@@ -2738,17 +2941,18 @@ public void intersectionBetweenObjects()
               newRow.setString("intersection", "true");
             if (interResult == false)
                 newRow.setString("intersection", "false");
-    }  
-    }       
+  }  
+  }  
+    }                   
+    
   
-     // COMPARING SEGMENT - SEGMENT
+     // COMPARING LINE - SEGMENT
+     interResult = false;
     if (segmentObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < segmentObjects.size(); j++){
-          if (j != ins-1)
-          {
+
             
-            if (segmentObjects.get(ins-1).intersectionTest(segmentObjects.get(j)))
+            if (lineObjects.get(ins-1).toSeg().intersectionTest(segmentObjects.get(j)))
                 interResult = true;
             else
                 interResult = false;            
@@ -2758,32 +2962,31 @@ public void intersectionBetweenObjects()
             
             insAux = 0;
             for (int k = 0; k < objMode2.size(); k++){
-              if (objMode2.get(k) == "Line")
+              if (objMode2.get(k) == "Segment")
                 insAux++;
               if (insAux == j+1){
                 varK = k;
                 break;
               }
             }  
-          }
       
-        if (distances.size() != 0){
+      
+
            TableRow newRow = table.addRow();
             newRow.setInt("id", varK+1);
-            newRow.setString("type", "Line");
+            newRow.setString("type", "Segment");
             if (interResult == true)
               newRow.setString("intersection", "true");
             if (interResult == false)
                 newRow.setString("intersection", "false");
-      }  
+       } 
       }
           
-      }       
+             
   
- 
-     // COMPARING SEGMENT - TRIANGLE
+     // COMPARING LINE - TRIANGLE
+     interResult = false;
     if (triangleObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < triangleObjects.size(); j++){
 
             
@@ -2792,7 +2995,7 @@ public void intersectionBetweenObjects()
             Segment t3 = new Segment (triangleObjects.get(j).p1, triangleObjects.get(j).p2);
             
         
-            if (segmentObjects.get(ins-1).intersectionTest(t1) || segmentObjects.get(ins-1).intersectionTest(t2) || segmentObjects.get(ins-1).intersectionTest(t3))
+            if (lineObjects.get(ins-1).toSeg().intersectionTest(t1) || lineObjects.get(ins-1).toSeg().intersectionTest(t2) || lineObjects.get(ins-1).toSeg().intersectionTest(t3))
                 interResult = true;
             else
                 interResult = false;
@@ -2817,52 +3020,13 @@ public void intersectionBetweenObjects()
                 newRow.setString("intersection", "false");
     }  
     }       
-  
-     // COMPARING SEGMENT - SEGMENT
-    if (segmentObjects.size() > 0) {
-      distances.clear();
-      for (int j = 0; j < segmentObjects.size(); j++){
-          if (j != ins-1)
-          {
-            
-            if (segmentObjects.get(ins-1).intersectionTest(segmentObjects.get(j)))
-                interResult = true;
-            else
-                interResult = false;            
-      
-           
-            
-            
-            insAux = 0;
-            for (int k = 0; k < objMode2.size(); k++){
-              if (objMode2.get(k) == "Segment")
-                insAux++;
-              if (insAux == j+1){
-                varK = k;
-                break;
-              }
-            }  
-          }
-      
-        if (distances.size() != 0){
-           TableRow newRow = table.addRow();
-            newRow.setInt("id", varK+1);
-            newRow.setString("type", "Segment");
-            if (interResult == true)
-              newRow.setString("intersection", "true");
-            if (interResult == false)
-                newRow.setString("intersection", "false");
-      }  
-      }
-          
-      }  
-  
-     // COMPARING SEGMENT - CURVE
+
+
+     // COMPARING LINE - CURVE
     interResult = false;
     if (curveObjects.size() > 0) {
-      distances.clear();
       for (int j = 0; j < curveObjects.size(); j++){
-
+        interResult = false;
 
 
         for (int m=0; m < curveObjects.get(j).p.size()-1; m++)
@@ -2873,16 +3037,13 @@ public void intersectionBetweenObjects()
           
           Segment c1 = new Segment (p1,p2);
           
-          if (segmentObjects.get(ins-1).intersectionTest(c1) && interResult == false)
+          if (lineObjects.get(ins-1).toSeg().intersectionTest(c1) && interResult == false)
             interResult = true;
           
           
           
         }                      
-      
-            
-            
-            
+
             insAux = 0;
             for (int k = 0; k < objMode2.size(); k++){
               if (objMode2.get(k) == "Curve")
@@ -2901,55 +3062,928 @@ public void intersectionBetweenObjects()
             if (interResult == false)
                 newRow.setString("intersection", "false");
     }  
-    }       
+    }     
 
-     // COMPARING SEGMENT - POLYGON
-  //  if (polygonObjects.size() > 0) {
-  //    distances.clear();
-  //    for (int j = 0; j < polygonObjects.size(); j++){
+ 
 
+
+
+
+     // COMPARING LINE - POLYGON
+     interResult = false;
+    if (polygonObjects.size() > 0) {
+      for (int j = 0; j < polygonObjects.size(); j++){
+        interResult = false;
+
+        for (int m=0; m < polygonObjects.get(j).bdry.size(); m++)
+        {
+          
+              if (lineObjects.get(ins-1).toSeg().intersectionTest(polygonObjects.get(j).bdry.get(m)) && interResult == false)
+                interResult = true;
+        
+          
+        }       
+      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Polygon")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Polygon");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+      
+    }
+  }  
+
+
+ saveTable(table, "data/intersectionFocus" + focusObject + ".csv");
+
+} // END OBJMODE = LINE
+
+   ///////////////////////////////        TRIANGLE COMPARISONS         ///////////////////////////////               
+     
+     interResult = false;
+     if (objMode2.get(focusObject-1) == "Triangle")
+    {
+      ins = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Triangle")
+          ins++;
+          
+          
+     // COMPARING TRIANGLE - LINE
+     interResult = false;
+    if (lineObjects.size() > 0) {
+      for (int j = 0; j < lineObjects.size(); j++){
 
             
+            Segment t1 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p1);
+            Segment t2 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p2);
+            Segment t3 = new Segment (triangleObjects.get(ins-1).p1, triangleObjects.get(ins-1).p2);
             
-  //      distances.clear();
-  //      for (int m=0; m < polygonObjects.get(j).p.size(); m++)
-  //      {
-  //        distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, polygonObjects.get(j).p.get(m).p.x,polygonObjects.get(j).p.get(m).p.y);
-  //        distances.append(distance); 
-  //        distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, polygonObjects.get(j).p.get(m).p.x,polygonObjects.get(j).p.get(m).p.y);
-  //        distances.append(distance);           
-  //      }
+        
+            if (lineObjects.get(j).toSeg().intersectionTest(t1) || lineObjects.get(j).toSeg().intersectionTest(t2) || lineObjects.get(j).toSeg().intersectionTest(t3))
+                interResult = true;
+            else
+                interResult = false;
+            
+        
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Line")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Line");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+    }  
+    }           
+          
+ 
+     // COMPARING TRIANGLE - SEGMENT
+     interResult = false;
+    if (segmentObjects.size() > 0) {
+      for (int j = 0; j < segmentObjects.size(); j++){
 
-                      
+            
+            Segment t1 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p1);
+            Segment t2 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p2);
+            Segment t3 = new Segment (triangleObjects.get(ins-1).p1, triangleObjects.get(ins-1).p2);
+            
+        
+            if (segmentObjects.get(j).intersectionTest(t1) || segmentObjects.get(j).intersectionTest(t2) || segmentObjects.get(j).intersectionTest(t3))
+                interResult = true;
+            else
+                interResult = false;
+            
+        
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Segment")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Segment");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+    }  
+    }            
+          
+       // COMPARING TRIANGLE - TRIANGLE
+     interResult = false;
+    if (triangleObjects.size() > 0) {
+
+      for (int j = 0; j < triangleObjects.size(); j++){
+          if (j != ins-1)
+          {
+            
+            Segment t1 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p1);
+            Segment t2 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p2);
+            Segment t3 = new Segment (triangleObjects.get(ins-1).p1, triangleObjects.get(ins-1).p2);
+            
+            Segment t4 = new Segment (triangleObjects.get(j).p0, triangleObjects.get(j).p1);
+            Segment t5 = new Segment (triangleObjects.get(j).p0, triangleObjects.get(j).p2);
+            Segment t6 = new Segment (triangleObjects.get(j).p1, triangleObjects.get(j).p2);
+            
+
+            
+        
+            if ( t1.intersectionTest(t4) || t1.intersectionTest(t5) || t1.intersectionTest(t6) ||
+            t2.intersectionTest(t4) || t2.intersectionTest(t5) || t2.intersectionTest(t6) ||
+            t3.intersectionTest(t4) || t3.intersectionTest(t5) || t3.intersectionTest(t6))
+            
+                interResult = true;
+            else
+                interResult = false;
+            
+        
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Triangle")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Triangle");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+    } 
+      }
+    }          
+          
+          
+     // COMPARING TRIANGLE - CURVE
+    interResult = false;
+    if (curveObjects.size() > 0) {
+      for (int j = 0; j < curveObjects.size(); j++){
+        interResult = false;
+
+
+        for (int m=0; m < curveObjects.get(j).p.size()-1; m++)
+        {
+
+          Point p1 = new Point(  curveObjects.get(j).p.get(m).p.x,  curveObjects.get(j).p.get(m).p.y);
+          Point p2 = new Point ( curveObjects.get(j).p.get(m+1).p.x,  curveObjects.get(j).p.get(m+1).p.x);
+          
+          Segment c1 = new Segment (p1,p2);
+          
+            Segment t1 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p1);
+            Segment t2 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p2);
+            Segment t3 = new Segment (triangleObjects.get(ins-1).p1, triangleObjects.get(ins-1).p2);          
+          
+          
+          
+          if (    ( t1.intersectionTest(c1) ||  t2.intersectionTest(c1) || t3.intersectionTest(c1) )        
+              && interResult == false )
+            interResult = true;
+          
+          
+          
+        }                      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Curve")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Curve");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+    }  
+    }     
+          
+          
+     // COMPARING TRIANGLE - POLYGON
+     interResult = false;
+    if (polygonObjects.size() > 0) {
+      for (int j = 0; j < polygonObjects.size(); j++){
+        interResult = false;
+
+        for (int m=0; m < polygonObjects.get(j).bdry.size(); m++)
+        {
+          
+            Segment t1 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p1);
+            Segment t2 = new Segment (triangleObjects.get(ins-1).p0, triangleObjects.get(ins-1).p2);
+            Segment t3 = new Segment (triangleObjects.get(ins-1).p1, triangleObjects.get(ins-1).p2);             
+          
+          
+              if (  (  t1.intersectionTest(polygonObjects.get(j).bdry.get(m)) || t2.intersectionTest(polygonObjects.get(j).bdry.get(m)) || t3.intersectionTest(polygonObjects.get(j).bdry.get(m)) )
+              
+              && interResult == false)
+                interResult = true;
+        
+          
+        }       
+      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Polygon")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Polygon");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+      
+    }
+  }            
+
+          
+     saveTable(table, "data/intersectionFocus" + focusObject + ".csv");          
+          
+          
+    } // END OBJMODE = TRIANGLE
+
+
+
+
+
+   ///////////////////////////////        POLYGON COMPARISONS         ///////////////////////////////               
+     
+     interResult = false;
+     if (objMode2.get(focusObject-1) == "Polygon")
+    {
+      ins = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Polygon")
+          ins++;
+              
+
+     // COMPARING POLYGON - LINE
+     interResult = false;
+    if (lineObjects.size() > 0) {
+      for (int j = 0; j < lineObjects.size(); j++){
+        interResult = false;
+
+        for (int m=0; m < polygonObjects.get(ins-1).bdry.size(); m++)
+        {
+          
+              if (lineObjects.get(j).toSeg().intersectionTest(polygonObjects.get(ins-1).bdry.get(m)) && interResult == false)
+                interResult = true;
+        
+          
+        }       
+      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Line")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Line");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+      
+    }
+  }  
+
+  
+
+     // COMPARING POLYGON - SEGMENT
+     interResult = false;
+    if (segmentObjects.size() > 0) {
+      for (int j = 0; j < segmentObjects.size(); j++){
+        interResult = false;
+
+        for (int m=0; m < polygonObjects.get(ins-1).bdry.size(); m++)
+        {
+          
+              if (segmentObjects.get(j).intersectionTest(polygonObjects.get(ins-1).bdry.get(m)) && interResult == false)
+                interResult = true;
+        
+          
+        }       
+      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Segment")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Segment");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+      
+    }
+  } 
+
+
+
+
+     // COMPARING POLYGON - TRIANGLE
+     interResult = false;
+    if (triangleObjects.size() > 0) {
+      for (int j = 0; j < triangleObjects.size(); j++){
+        interResult = false;
+
+        for (int m=0; m < polygonObjects.get(ins-1).bdry.size(); m++)
+        {
+          
+            Segment t1 = new Segment (triangleObjects.get(j).p0, triangleObjects.get(j).p1);
+            Segment t2 = new Segment (triangleObjects.get(j).p0, triangleObjects.get(j).p2);
+            Segment t3 = new Segment (triangleObjects.get(j).p1, triangleObjects.get(j).p2);             
+          
+          
+              if (  (  t1.intersectionTest(polygonObjects.get(ins-1).bdry.get(m)) || t2.intersectionTest(polygonObjects.get(ins-1).bdry.get(m)) || t3.intersectionTest(polygonObjects.get(ins-1).bdry.get(m)) )
+              
+              && interResult == false)
+                interResult = true;
+        
+          
+        }       
+      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Triangle")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Triangle");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+      
+    }
+  }   
+
+
+     // COMPARING POLYGON - POLYGON
+    if (polygonObjects.size() > 0){
+        
+      for (int j = 0; j < polygonObjects.size(); j++){
+        interResult = false;
+        if (j != ins-1)
+        {
+        
+        for (int m=0; m < polygonObjects.get(ins-1).bdry.size(); m++)
+        {
+
+          for (int n=0; n < polygonObjects.get(j).bdry.size();n++){
+            
+             if (   polygonObjects.get(j).bdry.get(n).intersectionTest(polygonObjects.get(ins-1).bdry.get(m)) && interResult == false)
+                interResult = true;
+          }
+
+        }
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Polygon")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+        
+
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Polygon");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+        }
+        }
+      }  
+
+
+     // COMPARING POLYGON - CURVE
+     interResult = false;
+    if (curveObjects.size() > 0) {
+
+      for (int j = 0; j < curveObjects.size(); j++){
+        interResult = false;
+
+        for (int m=0; m < polygonObjects.get(ins-1).bdry.size(); m++)
+        {
+          for (int n=0; n < curveObjects.get(j).p.size()-1;n++){
+              
+              Point p1 = new Point(  curveObjects.get(j).p.get(n).p.x,  curveObjects.get(j).p.get(n).p.y);
+              Point p2 = new Point ( curveObjects.get(j).p.get(n+1).p.x,  curveObjects.get(j).p.get(n+1).p.x);
+              
+              Segment c1 = new Segment (p1,p2);
+            
+            
+            if (c1.intersectionTest(polygonObjects.get(ins-1).bdry.get(m)) && interResult == false)
+                interResult = true;
+        
+          }
+        }       
+      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Curve")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Curve");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+      
+    }
+  } 
+
+
+
+
+     saveTable(table, "data/intersectionFocus" + focusObject + ".csv");  
+
+    } // END OBJMODE = POLYGON
+
+  ///////////////////////////////        SEGMENT COMPARISONS         ///////////////////////////////               
+     
+    interResult = false;
+    if (objMode2.get(focusObject-1) == "Curve")
+    {
+      println("It is Curve");
+      ins = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Curve")
+          ins++;
+
+
+
+
+     // COMPARING CURVE - SEGMENT
+    interResult = false;
+    if (segmentObjects.size() > 0) {
+      for (int j = 0; j < segmentObjects.size(); j++){
+
+
+
+        for (int m=0; m < curveObjects.get(ins-1).p.size()-1; m++)
+        {
+
+          Point p1 = new Point(  curveObjects.get(ins-1).p.get(m).p.x,  curveObjects.get(ins-1).p.get(m).p.y);
+          Point p2 = new Point ( curveObjects.get(ins-1).p.get(m+1).p.x,  curveObjects.get(ins-1).p.get(m+1).p.x);
+          
+          Segment c1 = new Segment (p1,p2);
+          
+          if (segmentObjects.get(j).intersectionTest(c1) && interResult == false)
+            interResult = true;
+
+        }                      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Segment")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Segment");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+    }  
+    }
+
+
+     // COMPARING CURVE - LINE
+    interResult = false;
+    if (lineObjects.size() > 0) {
+      for (int j = 0; j < lineObjects.size(); j++){
+
+
+
+        for (int m=0; m < curveObjects.get(ins-1).p.size()-1; m++)
+        {
+
+          Point p1 = new Point(  curveObjects.get(ins-1).p.get(m).p.x,  curveObjects.get(ins-1).p.get(m).p.y);
+          Point p2 = new Point ( curveObjects.get(ins-1).p.get(m+1).p.x,  curveObjects.get(ins-1).p.get(m+1).p.x);
+          
+          Segment c1 = new Segment (p1,p2);
+          
+          if (lineObjects.get(j).toSeg().intersectionTest(c1) && interResult == false)
+            interResult = true;
+
+        }                      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Line")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Line");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+    }  
+    }
+
+
+
+
+     // COMPARING CURVE - TRIANGLE
+    interResult = false;
+    if (triangleObjects.size() > 0) {
+      for (int j = 0; j < triangleObjects.size(); j++){
+
+
+
+        for (int m=0; m < curveObjects.get(ins-1).p.size()-1; m++)
+        {
+
+          Point p1 = new Point(  curveObjects.get(ins-1).p.get(m).p.x,  curveObjects.get(ins-1).p.get(m).p.y);
+          Point p2 = new Point ( curveObjects.get(ins-1).p.get(m+1).p.x,  curveObjects.get(ins-1).p.get(m+1).p.x);
+          
+          Segment c1 = new Segment (p1,p2);
+          
+            Segment t1 = new Segment (triangleObjects.get(j).p0, triangleObjects.get(j).p1);
+            Segment t2 = new Segment (triangleObjects.get(j).p0, triangleObjects.get(j).p2);
+            Segment t3 = new Segment (triangleObjects.get(j).p1, triangleObjects.get(j).p2);             
+          
+          
+              if (  (  t1.intersectionTest(c1) || t2.intersectionTest(c1) || t3.intersectionTest(c1) )
+              
+              && interResult == false)
+                interResult = true;
+
+        }                      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Tringle")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Triangle");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+    }  
+    }
+
+
+
+
+     // COMPARING CURVE - POLYGON
+     interResult = false;
+    if (curveObjects.size() > 0) {
+
+      for (int j = 0; j < curveObjects.size(); j++){
+        interResult = false;
+
+        for (int m=0; m < polygonObjects.get(j).bdry.size(); m++)
+        {
+          for (int n=0; n < curveObjects.get(ins-1).p.size()-1;n++){
+              
+              Point p1 = new Point(  curveObjects.get(ins-1).p.get(n).p.x,  curveObjects.get(ins-1).p.get(n).p.y);
+              Point p2 = new Point ( curveObjects.get(ins-1).p.get(n+1).p.x,  curveObjects.get(ins-1).p.get(n+1).p.x);
+              
+              Segment c1 = new Segment (p1,p2);
+            
+            
+            if (c1.intersectionTest(polygonObjects.get(j).bdry.get(m)) && interResult == false)
+                interResult = true;
+        
+          }
+        }       
+      
+
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Polygon")
+                insAux++;
+              if (insAux == j+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Polygon");
+            if (interResult == true)
+              newRow.setString("intersection", "true");
+            if (interResult == false)
+                newRow.setString("intersection", "false");
+      
+    }
+  } 
+
+
+
+     // COMPARING CURVE - POLYGON
+     interResult = false;
+    if (curveObjects.size() > 0) {
+
+      for (int j = 0; j < curveObjects.size(); j++){
+        interResult = false;
+        if (j != ins-1)
+        {
+            for (int m=0; m < curveObjects.get(j).p.size()-1; m++)
+            {
+              for (int n=0; n < curveObjects.get(ins-1).p.size()-1;n++){
+                  
+                  Point p1 = new Point(  curveObjects.get(ins-1).p.get(n).p.x,  curveObjects.get(ins-1).p.get(n).p.y);
+                  Point p2 = new Point ( curveObjects.get(ins-1).p.get(n+1).p.x,  curveObjects.get(ins-1).p.get(n+1).p.x);
+                  
+                  Segment c1 = new Segment (p1,p2);
+ 
+                
+                   Point p3 = new Point(  curveObjects.get(j).p.get(m).p.x,  curveObjects.get(j).p.get(m).p.y);
+                  Point p4 = new Point ( curveObjects.get(j).p.get(m+1).p.x,  curveObjects.get(j).p.get(m+1).p.x);
+                  
+                  Segment c2 = new Segment (p3,p4);               
+                
+                
+                
+                if (c1.intersectionTest(c2) && interResult == false)
+                    interResult = true;
+            
+              }
+            }       
+          
+    
+                insAux = 0;
+                for (int k = 0; k < objMode2.size(); k++){
+                  if (objMode2.get(k) == "Curve")
+                    insAux++;
+                  if (insAux == j+1){
+                    varK = k;
+                    break;
+                  }
+                }  
+          
+                TableRow newRow = table.addRow();
+                newRow.setInt("id", varK+1);
+                newRow.setString("type", "Curve");
+                if (interResult == true)
+                  newRow.setString("intersection", "true");
+                if (interResult == false)
+                    newRow.setString("intersection", "false");
+        }
+    }
+  } 
+
+
+
+
+
+
+     saveTable(table, "data/intersectionFocus" + focusObject + ".csv");  
+
+    } // END OBJMODE = CURVE
+
+
+
+
+   }// END FOCUS VERIFICATION
+
+
+} // END FUNCTION
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+  ///////////////////////////////        POINT INSIDE OBJECTS         ///////////////////////////////    
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+public void pointInsideObjects()
+{
+    int ins = 0;
+    int insAux = 0;
+    int varK = 0;
+    FloatList distances = new FloatList();
+    
+    Table table = new Table();
+    
+    table.addColumn("id");
+    table.addColumn("type");
+    table.addColumn("min distance");
+    table.addColumn("max distance");  
+  
+  if (focusObject > 0){
+  
+      if (objMode2.get(focusObject-1) == "Triangle")
+    {
+      ins = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Triangle")
+          ins++;      
+      
+      
+      // COMPARING TRIANGLE - POINT
+    if (pointObjects.size() > 0) {
+      for (int m = 0; m < pointObjects.size(); m++){
+      boolean pointInside = false;  
+        
+        
+        Polygon tPoly = triangleObjects.get(ins-1).toPoly();
+        
+     for (int i = 0, j = tPoly.p.size() - 1; i < tPoly.p.size(); j = i++) { 
+        if (((tPoly.p.get(i).p.y > pointObjects.get(m).p.y) != (tPoly.p.get(j).p.y > pointObjects.get(m).p.y)) && 
+        
+        (pointObjects.get(m).p.x < (tPoly.p.get(j).p.x - tPoly.p.get(i).p.x)
+        
+        * (pointObjects.get(m).p.y - tPoly.p.get(i).p.y) / 
+       
+        (tPoly.p.get(j).p.y - tPoly.p.get(i).p.y) +
+        
+        tPoly.p.get(i).p.x))
+          pointInside = !pointInside;
+    }
+
+            
+
+            
       
             
             
             
-  //          insAux = 0;
-  //          for (int k = 0; k < objMode2.size(); k++){
-  //            if (objMode2.get(k) == "Polygon")
-  //              insAux++;
-  //            if (insAux == j+1){
-  //              varK = k;
-  //              break;
-  //            }
-  //          }  
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Point")
+                insAux++;
+              if (insAux == m+1){
+                varK = k;
+                break;
+              }
+            }  
       
-  //          TableRow newRow = table.addRow();
-  //          newRow.setInt("id", varK+1);
-  //          newRow.setString("type", "Polygon");
-  //          newRow.setFloat("min distance", distances.min());
-  //          newRow.setFloat("max distance", distances.max());
+      TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Point");
+                if (pointInside == true)
+                  newRow.setString("Point inside", "true");
+                if (pointInside == false)
+                    newRow.setString("Point inside", "false");  
+      }
+      }
       
-  //  }
-  //} 
-  
-  
-  
-  
-  
-  saveTable(table, "data/intersectionFocus" + focusObject + ".csv");
-  
-  
+    } // END FOCUS = TRIANGLE
+    
+    
+     if (objMode2.get(focusObject-1) == "Polygon")
+    {
+      ins = 0;
+      for (int i = 0; i < focusObject; i++)
+        if (objMode2.get(i) == "Polygon")
+          ins++;      
+      
+      // COMPARING POLYGON - POINT
+    if (pointObjects.size() > 0){
+      for (int m = 0; m < pointObjects.size(); m++){
+      boolean pointInside = false;  
+        
+     for (int i = 0, j = polygonObjects.get(ins-1).p.size() - 1; i < polygonObjects.get(ins-1).p.size(); j = i++) { 
+        if (((polygonObjects.get(ins-1).p.get(i).p.y > pointObjects.get(m).p.y) != (polygonObjects.get(ins-1).p.get(j).p.y > pointObjects.get(m).p.y)) && 
+        
+        (pointObjects.get(m).p.x < (polygonObjects.get(ins-1).p.get(j).p.x - polygonObjects.get(ins-1).p.get(i).p.x)
+        
+        * (pointObjects.get(m).p.y - polygonObjects.get(ins-1).p.get(i).p.y) / 
+       
+        (polygonObjects.get(ins-1).p.get(j).p.y - polygonObjects.get(ins-1).p.get(i).p.y) +
+        
+        polygonObjects.get(ins-1).p.get(i).p.x))
+          pointInside = !pointInside;
+    }
+      
+            
+            
+            
+            insAux = 0;
+            for (int k = 0; k < objMode2.size(); k++){
+              if (objMode2.get(k) == "Point")
+                insAux++;
+              if (insAux == m+1){
+                varK = k;
+                break;
+              }
+            }  
+      
+    
+            TableRow newRow = table.addRow();
+            newRow.setInt("id", varK+1);
+            newRow.setString("type", "Point");
+                if (pointInside == true)
+                  newRow.setString("Point inside", "true");
+                if (pointInside == false)
+                    newRow.setString("Point inside", "false");
+        }    
+        }
+      }// END FOCUS = POLY
+     saveTable(table, "data/pointInsideFocus" + focusObject + ".csv");  
+  }
+    
 }
-}
+  
+  

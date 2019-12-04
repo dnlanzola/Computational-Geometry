@@ -19,4 +19,18 @@ class Triangle {
                p2.p.x, p2.p.y );   
    }
    
+   
+   public Polygon toPoly()
+   {
+     Polygon tPoly = new Polygon();
+     
+     tPoly.addPoint(p0);
+     tPoly.addPoint(p1);
+     tPoly.addPoint(p2);
+     
+     
+     return tPoly;
+   }
+   
+   
 }
