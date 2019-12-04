@@ -1,0 +1,6 @@
+id,type
+0,Point
+1,Line
+2,Segment
+3,Curve
+4,Polygon
