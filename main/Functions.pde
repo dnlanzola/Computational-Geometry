@@ -585,11 +585,11 @@ distances.clear();
             distances.append(distance);       
             distance = dist(lineObjects.get(ins-1).p0.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y);
             distances.append(distance);       
-            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.y);
+            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p1.p.y);
+            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p1.p.y);
             distances.append(distance);  
-            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y);
+            distance = dist(lineObjects.get(ins-1).p1.p.x,lineObjects.get(ins-1).p1.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y);
             distances.append(distance);              
 
      
@@ -877,7 +877,7 @@ distances.clear();
             
             distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, ellipseObjects.get(j).p0.p.x,ellipseObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, ellipseObjects.get(j).p1.p.x,ellipseObjects.get(j).p1.p.y);
+            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, ellipseObjects.get(j).p0.p.x,ellipseObjects.get(j).p0.p.y);
             distances.append(distance);
       
             
@@ -912,15 +912,15 @@ distances.clear();
             
             distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p0.p.y);
+            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p1.p.y);
             distances.append(distance);       
-            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p0.p.y);
+            distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y);
             distances.append(distance);       
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.y);
+            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, triangleObjects.get(j).p0.p.x,triangleObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p0.p.y);
+            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, triangleObjects.get(j).p1.p.x,triangleObjects.get(j).p1.p.y);
             distances.append(distance);  
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p0.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p0.p.y);
+            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, triangleObjects.get(j).p2.p.x,triangleObjects.get(j).p2.p.y);
             distances.append(distance);              
 
      
@@ -955,7 +955,7 @@ distances.clear();
             
             distance = dist(segmentObjects.get(ins-1).p0.p.x,segmentObjects.get(ins-1).p0.p.y, circleObjects.get(j).p0.p.x,circleObjects.get(j).p0.p.y);
             distances.append(distance);       
-            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, circleObjects.get(j).p1.p.x,circleObjects.get(j).p1.p.y);
+            distance = dist(segmentObjects.get(ins-1).p1.p.x,segmentObjects.get(ins-1).p1.p.y, circleObjects.get(j).p0.p.x,circleObjects.get(j).p0.p.y);
             distances.append(distance);
       
             
