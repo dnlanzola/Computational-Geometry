@@ -1853,7 +1853,7 @@ def pointInsideObjects():
         if pointInside == False:
             rows = [[], [], ["False"]]
         # writing the rows
-        csvwriter.writerows(rows)
+        csvwriter.writerow(rows)
 
 ######        #End of comparison
 
@@ -3003,8 +3003,8 @@ print("JSON FILE CLOSED.")
 # test the time of python calculation
 test_time = time.time()
 distanceBetweenObjects()
-pointInsideObjects()
-intersectionBetweenObjects()
+#pointInsideObjects()
+#intersectionBetweenObjects()
 print("--- %s seconds ---"%(time.time() - test_time))
 
 
