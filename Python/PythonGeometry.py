@@ -62,785 +62,182 @@ def distanceBetweenObjects():
                     if (objMode[i] == "{'Point'}"):
                         ins = ins + 1
 
-            print(ins)
+                print(ins)
 
-            #Point - Point
-            if len(pointsArray) > 0:
-                distances.clear()
-                for i in range(0, len(pointsArray)):
-                    if i != ins-1:
-                        # distance formula required
-                        distance = distanceFormula(pointsArray[ins-1].x1, pointsArray[ins-1].y1, pointsArray[i].x1, pointsArray[i].y1)
+                #Point - Point
+                if len(pointsArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(pointsArray)):
+                        distances.clear()
+                        if i != ins-1:
+                            # distance formula required
+                            distance = distanceFormula(pointsArray[ins-1].x1, pointsArray[ins-1].y1, pointsArray[i].x1, pointsArray[i].y1)
 
-                        # print("x1:" + str(pointsArray[ins-1].x1))
-                        # print("y1:" + str(pointsArray[ins-1].y1))
-                        # print("x2:" + str(pointsArray[i].x1))
-                        # print("y2:" + str(pointsArray[i].y1))
-                        # print("Distance: " + str(distance))
-                        # print("--")
+                            # print("x1:" + str(pointsArray[ins-1].x1))
+                            # print("y1:" + str(pointsArray[ins-1].y1))
+                            # print("x2:" + str(pointsArray[i].x1))
+                            # print("y2:" + str(pointsArray[i].y1))
+                            # print("Distance: " + str(distance))
+                            # print("--")
+                            distances.append(distance)
+
+                            #code to traverse through objMode
+                            insAux = 0
+                            for k in range(0, len(objMode)):
+                                if objMode[k] == "{'Point'}":
+                                    insAux += 1
+                                    if insAux == i+1:
+                                        vark = k
+                                        break
+
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Point"], [distance], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+                # Point - Line
+                if len(lineArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(lineArray)):
+                        distances.clear()
+                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
                         distances.append(distance)
+                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+
+                        #Print Statements to print the values
 
                         #code to traverse through objMode
                         insAux = 0
                         for k in range(0, len(objMode)):
-                            if objMode[k] == "{'Point'}":
+                            if objMode[k] == "{'Line'}":
                                 insAux += 1
-                                if insAux == i+1:
+                                if insAux == i + 1:
                                     vark = k
                                     break
 
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Point"], [distance], [0]]
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Line"], [min(distances)], [0]]
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-            # Point - Line
-            if len(lineArray) > 0:
-                distances.clear()
-                for i in range(0, len(lineArray)):
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-
-                    #Print Statements to print the values
-
-                    #code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Line'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Line"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
+                            # writing the rows
+                            csvwriter.writerow(rows)
 
 
-            #Point - Segment
-            if len(segmentArray) > 0:
-                distances.clear()
-                for i in range(0, len(segmentArray)):
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Segment'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Segment"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-
-            #Point - Triangle
-            if len(triangleArray) > 0:
-                distances.clear()
-                for i in range(0, len(triangleArray)):
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Triangle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Triangle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-            #Points - Ellipse
-            if len(ellipseArray) > 0:
-                distances.clear()
-                for i in range(0, len(ellipseArray)):
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Ellipse'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Ellipse"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-            #Points - Circle
-            if len(circleArray) > 0:
-                distances.clear()
-                for i in range(0, len(circleArray)):
-                    distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Circle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Circle"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-            #Points - Polygon
-            if len(polygonArray) > 0:
-                distances.clear()
-                for i in range(0, len(polygonArray)):
-                    for j in range(0, len(polygonArray[i].value)):
-                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                #Point - Segment
+                if len(segmentArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(segmentArray)):
+                        distances.clear()
+                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
                         distances.append(distance)
 
-                    # Print Statements to print the values
+                        # Print Statements to print the values
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Polygon'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Segment'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
 
-            #Points - Curve
-            if len(curveArray) > 0:
-                distances.clear()
-                for i in range(0, len(curveArray)):
-                    for j in range(0, len(curveArray[i].value)):
-                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Segment"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+
+                #Point - Triangle
+                if len(triangleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(triangleArray)):
+                        distances.clear()
+                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
                         distances.append(distance)
 
-                    # Print Statements to print the values
+                        # Print Statements to print the values
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Curve'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Curve"], [min(distance)], [max(distance)]]
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Triangle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Triangle"], [min(distances)], [0]]
 
-    ###############################################################################
+                            # writing the rows
+                            csvwriter.writerow(rows)
 
-    ######################### Line COMPARISON ############################
-            print(objMode[focusObject - 1])
-            if (objMode[focusObject - 1] == "{'Line'}"):
-                ins = 0
-                for i in range(0, focusObject):
-                    if (objMode[i] == "{'Line'}"):
-                        ins = ins + 1
-
-            print(ins)
-
-            #line to Point
-            if len(pointsArray) > 0:
-                distances.clear()
-                for i in range(0, len(pointsArray)):
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Point'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Point"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            #line to line
-            if len(lineArray) > 0:
-                distances.clear()
-                for i in range(0, len(lineArray)):
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Line'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Line"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            #line to segment
-            if len(segmentArray) > 0:
-                distances.clear()
-                for i in range(0, len(segmentArray)):
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Segment'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Segment"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            #line to curve
-            if len(curveArray) > 0:
-                distances.clear()
-                for i in range(0, len(curveArray)):
-                    for j in range(0, len(curveArray[i].value)):
-                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                #Points - Ellipse
+                if len(ellipseArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(ellipseArray)):
+                        distances.clear()
+                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
                         distances.append(distance)
 
-                    # Print Statements to print the values
+                        # Print Statements to print the values
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Curve'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Ellipse'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
 
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Curve"], [min(distance)], [max(distance)]]
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Ellipse"], [min(distances)], [0]]
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
+                            # writing the rows
+                            csvwriter.writerow(rows)
 
-
-            #line to polygon
-            if len(polygonArray) > 0:
-                distances.clear()
-                for i in range(0, len(polygonArray)):
-                    for j in range(0, len(polygonArray[i].value)):
-                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                #Points - Circle
+                if len(circleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(circleArray)):
+                        distances.clear()
+                        distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
                         distances.append(distance)
 
-                    # Print Statements to print the values
+                        # Print Statements to print the values
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Polygon'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Polygon"], [min(distance)], [max(distance)]]
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Circle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            #line to ellipse
-            if len(ellipseArray) > 0:
-                distances.clear()
-                for i in range(0, len(ellipseArray)):
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Circle"], [min(distances)], [0]]
 
-                    # Print Statements to print the values
+                            # writing the rows
+                            csvwriter.writerow(rows)
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Ellipse'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Ellipse"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            #line to Triangle
-            if len(triangleArray) > 0:
-                distances.clear()
-                for i in range(0, len(triangleArray)):
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Triangle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Triangle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            #line to circle
-            if len(circleArray) > 0:
-                distances.clear()
-                for i in range(0, len(circleArray)):
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Circle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Circle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-
-    ############################### END OF LINE COMPARISON #########################################
-
-    ######################### SEGMENT COMPARISON ############################
-            print(objMode[focusObject - 1])
-            if (objMode[focusObject - 1] == "{'Segment'}"):
-                ins = 0
-                for i in range(0, focusObject):
-                    if (objMode[i] == "{'Segment'}"):
-                        ins = ins + 1
-
-            print(ins)
-
-
-            # segment to Point
-            if len(pointsArray) > 0:
-                distances.clear()
-                for i in range(0, len(pointsArray)):
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Point'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Point"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # segment to line
-            if len(lineArray) > 0:
-                distances.clear()
-                for i in range(0, len(lineArray)):
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Line'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Line"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # segment to segment
-            if len(segmentArray) > 0:
-                distances.clear()
-                for i in range(0, len(segmentArray)):
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Segment'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Segment"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # segment to curve
-            if len(curveArray) > 0:
-                distances.clear()
-                for i in range(0, len(curveArray)):
-                    for j in range(0, len(curveArray[i].value)):
-                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Curve'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Curve"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # segment to polygon
-            if len(polygonArray) > 0:
-                distances.clear()
-                for i in range(0, len(polygonArray)):
-                    for j in range(0, len(polygonArray[i].value)):
-                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Polygon'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Polygon"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # segment to ellipse
-            if len(ellipseArray) > 0:
-                distances.clear()
-                for i in range(0, len(ellipseArray)):
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Ellipse'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Ellipse"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # segment to Triangle
-            if len(triangleArray) > 0:
-                distances.clear()
-                for i in range(0, len(triangleArray)):
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Triangle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Triangle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # segment to circle
-            if len(circleArray) > 0:
-                distances.clear()
-                for i in range(0, len(circleArray)):
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Circle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Circle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-
-    ############################### END OF SEGMENT COMPARISON #########################################
-
-    ######################### CURVE COMPARISON ############################
-            print(objMode[focusObject - 1])
-            if (objMode[focusObject - 1] == "{'Curve'}"):
-                ins = 0
-                for i in range(0, focusObject):
-                    if (objMode[i] == "{'Curve'}"):
-                        ins = ins + 1
-
-            print(ins)
-
-
-            # curve to Point
-            if len(pointsArray) > 0:
-                distances.clear()
-                for i in range(0, len(pointsArray)):
-                    for j in range(0, len(curveArray[ins - 1].value)):
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, pointsArray[i].x1, pointsArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Point'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Point"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # curve to line (line to curve)
-            if len(lineArray) > 0:
-                distances.clear()
-                for i in range(0, len(lineArray)):
-                    for j in range(0, len(curveArray[ins - 1].value)):
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, lineArray[i].x1, lineArray[i].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, lineArray[i].x1, lineArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Line'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Line"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # curve to segment
-            if len(segmentArray) > 0:
-                distances.clear()
-                for i in range(0, len(segmentArray)):
-                    for j in range(0, len(curveArray[ins - 1].value)):
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, segmentArray[i].x1, segmentArray[i].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, segmentArray[i].x1, segmentArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Segment'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Segment"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # curve to curve
-            if len(curveArray) > 0:
-                distances.clear()
-                for i in range(0, len(curveArray)):
-                    if i != ins - 1:
-                        for j in range(0, len(curveArray[ins - 1].value)):
-                            for k in range(0, len(curveArray[i].value)):
-                                distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, curveArray[i].value[k].x1, curveArray[i].value[k].y1)
-                                distances.append(distance)
-
-                            # Print Statements to print the values
-
-                            # code to traverse through objMode
-                            insAux = 0
-                            for k in range(0, len(objMode)):
-                                if objMode[k] == "{'Curve'}":
-                                    insAux += 1
-                                    if insAux == i + 1:
-                                        vark = k
-                                        break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Curve"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # curve to polygon
-            if len(polygonArray) > 0:
-                distances.clear()
-                for i in range(0, len(polygonArray)):
-                    for j in range(0, len(curveArray[ins - 1].value)):
-                        for k in range(0, len(polygonArray[i].value)):
-                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, polygonArray[i].value[k].x1, polygonArray[i].value[k].y1)
+                #Points - Polygon
+                if len(polygonArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(polygonArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[i].value)):
+                            distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
                             distances.append(distance)
 
                         # Print Statements to print the values
@@ -853,180 +250,20 @@ def distanceBetweenObjects():
                                 if insAux == i + 1:
                                     vark = k
                                     break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Polygon"], [min(distance)], [max(distance)]]
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # curve to ellipse
-            if len(ellipseArray) > 0:
-                distances.clear()
-                for i in range(0, len(ellipseArray)):
-                    for j in range(0, len(curveArray[ins - 1].value)):
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                        distances.append(distance)
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Polygon"], [min(distances)], [0]]
 
-                    # Print Statements to print the values
+                            # writing the rows
+                            csvwriter.writerow(rows)
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Ellipse'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Ellipse"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-            # curve to Triangle
-            if len(triangleArray) > 0:
-                distances.clear()
-                for i in range(0, len(triangleArray)):
-                    for j in range(0, len(curveArray[ins - 1].value)):
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, triangleArray[i].x1, triangleArray[i].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, triangleArray[i].x1, triangleArray[i].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, triangleArray[i].x1, triangleArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Triangle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Triangle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # curve to circle
-            if len(circleArray) > 0:
-                distances.clear()
-                for i in range(0, len(circleArray)):
-                    for j in range(0, len(curveArray[ins - 1].value)):
-                        distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, circleArray[i].x1, circleArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Circle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Triangle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-
-    ############################### END OF CURVE COMPARISON #########################################
-
-    ######################### POLYGON COMPARISON ############################
-            print(objMode[focusObject - 1])
-            if (objMode[focusObject - 1] == "{'Polygon'}"):
-                ins = 0
-                for i in range(0, focusObject):
-                    if (objMode[i] == "{'Polygon'}"):
-                        ins = ins + 1
-
-            print(ins)
-
-
-            # Polygon to Point
-            if len(pointsArray) > 0:
-                distances.clear()
-                for i in range(0, len(pointsArray)):
-                    for j in range(0, len(polygonArray[ins - 1].value)):
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, pointsArray[i].x1, pointsArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Point'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Point"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # Polygon to line
-            if len(lineArray) > 0:
-                distances.clear()
-                for i in range(0, len(lineArray)):
-                    for j in range(0, len(polygonArray[ins - 1].value)):
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, lineArray[i].x1, lineArray[i].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, lineArray[i].x1, lineArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Line'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Line"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # Polygon to segment
-            if len(segmentArray) > 0:
-                distances.clear()
-                for i in range(0, len(segmentArray)):
-                    for j in range(0, len(polygonArray[ins - 1].value)):
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, segmentArray[i].x1, segmentArray[i].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, segmentArray[i].x1, segmentArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Segment'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Segment"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # Polygon to curve
-            if len(curveArray) > 0:
-                distances.clear()
-                for i in range(0, len(curveArray)):
-                    for j in range(0, len(polygonArray[ins - 1].value)):
-                        for k in range(0, len(curveArray[i].value)):
-                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, curveArray[i].value[k].x1, curveArray[i].value[k].y1)
+                #Points - Curve
+                if len(curveArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(curveArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[i].value)):
+                            distance = distanceFormula(pointsArray[ins - 1].x1, pointsArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
                             distances.append(distance)
 
                         # Print Statements to print the values
@@ -1039,789 +276,150 @@ def distanceBetweenObjects():
                                 if insAux == i + 1:
                                     vark = k
                                     break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Curve"], [min(distance)], [max(distance)]]
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Curve"], [min(distances)], [0]]
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # Polygon to polygon
-            if len(polygonArray) > 0:
-                distances.clear()
-                for i in range(0, len(polygonArray)):
-                    if i != ins - 1:
-                        for j in range(0, len(polygonArray[ins - 1].value)):
-                            for k in range(0, len(polygonArray[i].value)):
-                                distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, polygonArray[i].value[k].x1, polygonArray[i].value[k].y1)
-                                distances.append(distance)
+                            # writing the rows
+                            csvwriter.writerow(rows)
 
-                            # Print Statements to print the values
+    ###############################################################################
 
-                            # code to traverse through objMode
-                            insAux = 0
-                            for k in range(0, len(objMode)):
-                                if objMode[k] == "{'Polygon'}":
-                                    insAux += 1
-                                    if insAux == i + 1:
-                                        vark = k
-                                        break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Polygon"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # Polygon to ellipse
-            if len(ellipseArray) > 0:
-                distances.clear()
-                for i in range(0, len(ellipseArray)):
-                    for j in range(0, len(polygonArray[ins - 1].value)):
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Ellipse'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Ellipse"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # Polygon to Triangle
-            if len(triangleArray) > 0:
-                distances.clear()
-                for i in range(0, len(triangleArray)):
-                    for j in range(0, len(polygonArray[ins - 1].value)):
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, triangleArray[i].x1, triangleArray[i].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, triangleArray[i].x1, triangleArray[i].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, triangleArray[i].x1, triangleArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Triangle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Triangle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # Polygon to circle
-            if len(circleArray) > 0:
-                distances.clear()
-                for i in range(0, len(circleArray)):
-                    for j in range(0, len(polygonArray[ins - 1].value)):
-                        distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, circleArray[i].x1, circleArray[i].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Circle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Circle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-
-    ############################### END OF POLYGON COMPARISON #########################################
-
-    ######################### ELLIPSE COMPARISON ############################
+    ######################### Line COMPARISON ############################
             print(objMode[focusObject - 1])
-            if (objMode[focusObject - 1] == "{'Ellipse'}"):
+            if (objMode[focusObject - 1] == "{'Line'}"):
                 ins = 0
                 for i in range(0, focusObject):
-                    if (objMode[i] == "{'Ellipse'}"):
+                    if (objMode[i] == "{'Line'}"):
                         ins = ins + 1
 
-            print(ins)
+                print(ins)
 
-
-            # ellipse to Point
-            if len(pointsArray) > 0:
-                distances.clear()
-                for i in range(0, len(pointsArray)):
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Point'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Point"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # ellipse to line
-            if len(lineArray) > 0:
-                distances.clear()
-                for i in range(0, len(lineArray)):
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Line'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Line"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # ellipse to segment
-            if len(segmentArray) > 0:
-                distances.clear()
-                for i in range(0, len(segmentArray)):
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Segment'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Segment"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # ellipse to curve
-            if len(curveArray) > 0:
-                distances.clear()
-                for i in range(0, len(curveArray)):
-                    for j in range(0, len(curveArray[i].value)):
-                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                #line to Point
+                if len(pointsArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(pointsArray)):
+                        distances.clear()
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, pointsArray[i].x1, pointsArray[i].y1)
                         distances.append(distance)
 
-                    # Print Statements to print the values
+                        # Print Statements to print the values
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Curve'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Curve"], [min(distance)], [max(distance)]]
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Point'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Point"], [min(distances)], [max(distances)]]
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # ellipse to polygon
-            if len(polygonArray) > 0:
-                distances.clear()
-                for i in range(0, len(polygonArray)):
-                    for j in range(0, len(polygonArray[i].value)):
-                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                #line to line
+                if len(lineArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(lineArray)):
+                        distances.clear()
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, lineArray[i].x2, lineArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, lineArray[i].x2, lineArray[i].y2)
                         distances.append(distance)
 
-                    # Print Statements to print the values
+                        # Print Statements to print the values
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Polygon'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Polygon"], [min(distance)], [max(distance)]]
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Line'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Line"], [min(distances)], [max(distances)]]
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # ellipse to ellipse
-            if len(ellipseArray) > 0:
-                distances.clear()
-                for i in range(0, len(ellipseArray)):
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Ellipse'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Ellipse"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # ellipse to Triangle
-            if len(triangleArray) > 0:
-                distances.clear()
-                for i in range(0, len(triangleArray)):
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Triangle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Triangle"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # ellipse to circle
-            if len(circleArray) > 0:
-                distances.clear()
-                for i in range(0, len(circleArray)):
-                    distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Circle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Circle"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-
-    ############################### END OF ELLIPSE COMPARISON #########################################
-
-    ######################### TRIANGLE COMPARISON ############################
-            print(objMode[focusObject - 1])
-            if (objMode[focusObject - 1] == "{'Triangle'}"):
-                ins = 0
-                for i in range(0, focusObject):
-                    if (objMode[i] == "{'Triangle'}"):
-                        ins = ins + 1
-
-            print(ins)
-
-
-            # triangle to Point
-            if len(pointsArray) > 0:
-                distances.clear()
-                for i in range(0, len(pointsArray)):
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Point'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Point"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # triangle to line
-            if len(lineArray) > 0:
-                distances.clear()
-                for i in range(0, len(lineArray)):
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Line'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Line"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # triangle to segment
-            if len(segmentArray) > 0:
-                distances.clear()
-                for i in range(0, len(segmentArray)):
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Segment'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Segment"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # triangle to curve
-            if len(curveArray) > 0:
-                distances.clear()
-                for i in range(0, len(curveArray)):
-                    for j in range(0, len(curveArray[i].value)):
-                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                #line to segment
+                if len(segmentArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(segmentArray)):
+                        distances.clear()
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
                         distances.append(distance)
-                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, segmentArray[i].x2, segmentArray[i].y2)
                         distances.append(distance)
-                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, segmentArray[i].x1, segmentArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, segmentArray[i].x2, segmentArray[i].y2)
                         distances.append(distance)
 
-                    # Print Statements to print the values
+                        # Print Statements to print the values
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Curve'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Curve"], [min(distance)], [max(distance)]]
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Segment'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Segment"], [min(distances)], [max(distances)]]
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # triangle to polygon
-            if len(polygonArray) > 0:
-                distances.clear()
-                for i in range(0, len(polygonArray)):
-                    for j in range(0, len(polygonArray[i].value)):
-                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
-                        distances.append(distance)
-                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
-                        distances.append(distance)
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                #line to curve
+                if len(curveArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(curveArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[i].value)):
+                            distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            distances.append(distance)
 
-                    # Print Statements to print the values
+                        # Print Statements to print the values
 
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Polygon'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Polygon"], [min(distance)], [max(distance)]]
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Curve'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
 
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # triangle to ellipse
-            if len(ellipseArray) > 0:
-                distances.clear()
-                for i in range(0, len(ellipseArray)):
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Curve"], [min(distances)], [max(distances)]]
 
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Ellipse'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Ellipse"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # triangle to Triangle
-            if len(triangleArray) > 0:
-                distances.clear()
-                for i in range(0, len(triangleArray)):
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Triangle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Triangle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # triangle to circle
-            if len(circleArray) > 0:
-                distances.clear()
-                for i in range(0, len(circleArray)):
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Circle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Circle"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
+                            # writing the rows
+                            csvwriter.writerow(rows)
 
 
-    ############################### END OF TRIANGLE COMPARISON #########################################
+                #line to polygon
+                if len(polygonArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(polygonArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[i].value)):
+                            distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            distances.append(distance)
 
-    ######################### CIRCLE COMPARISON ############################
-            print(objMode[focusObject - 1])
-            if (objMode[focusObject - 1] == "{'Circle'}"):
-                ins = 0
-                for i in range(0, focusObject):
-                    if (objMode[i] == "{'Circle'}"):
-                        ins = ins + 1
+                        # Print Statements to print the values
 
-            print(ins)
-
-
-            # circle to Point
-            if len(pointsArray) > 0:
-                distances.clear()
-                for i in range(0, len(pointsArray)):
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Point'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Point"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # circle to line
-            if len(lineArray) > 0:
-                distances.clear()
-                for i in range(0, len(lineArray)):
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Line'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Line"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # circle to segment
-            if len(segmentArray) > 0:
-                distances.clear()
-                for i in range(0, len(segmentArray)):
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Segment'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Segment"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # circle to curve
-            if len(curveArray) > 0:
-                distances.clear()
-                for i in range(0, len(curveArray)):
-                    for j in range(0, len(curveArray[i].value)):
-                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Curve'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Curve"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # circle to polygon
-            if len(polygonArray) > 0:
-                distances.clear()
-                for i in range(0, len(polygonArray)):
-                    for j in range(0, len(polygonArray[i].value)):
-                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
-                        distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Polygon'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Polygon"], [min(distance)], [max(distance)]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # circle to ellipse
-            if len(ellipseArray) > 0:
-                distances.clear()
-                for i in range(0, len(ellipseArray)):
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Ellipse'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Ellipse"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # circle to Triangle
-            if len(triangleArray) > 0:
-                distances.clear()
-                for i in range(0, len(triangleArray)):
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Triangle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Triangle"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-            # circle to circle
-            if len(circleArray) > 0:
-                distances.clear()
-                for i in range(0, len(circleArray)):
-                    distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
-                    distances.append(distance)
-
-                    # Print Statements to print the values
-
-                    # code to traverse through objMode
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Circle'}":
-                            insAux += 1
-                            if insAux == i + 1:
-                                vark = k
-                                break
-                    if len(distances) != 0:
-                        rows = [[vark+1], ["Circle"], [min(distance)], [0]]
-
-                        # writing the rows
-                        csvwriter.writerows(rows)
-
-    ############################### END OF CIRCLE COMPARISON #########################################
-
-
-
-
-
-
-
-######################### Point Inside Objects ################
-
-def pointInsideObjects():
-    filename = "pPointInsideFocus" + str(focusObject) + ".csv"
-    fields = ['Id', 'Type', 'Intersect']
-    #main section
-    # start time implementation
-    ins = 0
-    insAux = 0
-    vark = 0
-    distance = 0
-    minDistance = 0
-    maxDistance = 0
-    distances = []
-
-    #csv file in python
-    with open(filename, 'w') as csvfile:
-        # writer object
-        csvwriter = csv.writer(csvfile)
-
+<<<<<<< HEAD
         # write the fields
         csvwriter.writerow(fields)
 ######
@@ -1889,913 +487,2450 @@ def pointInsideObjects():
         csvwriter.writerows(rows)
 
 ####        # End of comparison
+=======
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Polygon'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Polygon"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                #line to ellipse
+                if len(ellipseArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(ellipseArray)):
+                        distances.clear()
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, ellipseArray[i].x1, ellipseArray[i].y1)
+                        distances.append(distance)
+>>>>>>> 098683c5584a19bf1fc308d724959b0d739173ec
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Ellipse'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Ellipse"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                #line to Triangle
+                if len(triangleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(triangleArray)):
+                        distances.clear()
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, triangleArray[i].x2, triangleArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, triangleArray[i].x3, triangleArray[i].y3)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, triangleArray[i].x2, triangleArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, triangleArray[i].x3, triangleArray[i].y3)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Triangle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Triangle"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                #line to circle
+                if len(circleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(circleArray)):
+                        distances.clear()
+                        distance = distanceFormula(lineArray[ins - 1].x1, lineArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(lineArray[ins - 1].x2, lineArray[ins - 1].y2, circleArray[i].x1, circleArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Circle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Circle"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+
+    ############################### END OF LINE COMPARISON #########################################
+
+    ######################### SEGMENT COMPARISON ############################
+            print(objMode[focusObject - 1])
+            if (objMode[focusObject - 1] == "{'Segment'}"):
+                ins = 0
+                for i in range(0, focusObject):
+                    if (objMode[i] == "{'Segment'}"):
+                        ins = ins + 1
+
+                print(ins)
+
+
+                # segment to Point
+                if len(pointsArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(pointsArray)):
+                        distances.clear()
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, pointsArray[i].x1, pointsArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Point'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Point"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # segment to line
+                if len(lineArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(lineArray)):
+                        distances.clear()
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, lineArray[i].x2, lineArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, lineArray[i].x2, lineArray[i].y2)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Line'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Line"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # segment to segment
+                if len(segmentArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(segmentArray)):
+                        distances.clear()
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, segmentArray[i].x2, segmentArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, segmentArray[i].x1, segmentArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, segmentArray[i].x2, segmentArray[i].y2)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Segment'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Segment"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # segment to curve
+                if len(curveArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(curveArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[i].value)):
+                            distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Curve'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Curve"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # segment to polygon
+                if len(polygonArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(polygonArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[i].value)):
+                            distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Polygon'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Polygon"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # segment to ellipse
+                if len(ellipseArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(ellipseArray)):
+                        distances.clear()
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, ellipseArray[i].x1, ellipseArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Ellipse'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Ellipse"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # segment to Triangle
+                if len(triangleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(triangleArray)):
+                        distances.clear()
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, triangleArray[i].x2, triangleArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, triangleArray[i].x3, triangleArray[i].y3)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, triangleArray[i].x2, triangleArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, triangleArray[i].x3, triangleArray[i].y3)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Triangle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Triangle"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # segment to circle
+                if len(circleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(circleArray)):
+                        distance = distanceFormula(segmentArray[ins - 1].x1, segmentArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(segmentArray[ins - 1].x2, segmentArray[ins - 1].y2, circleArray[i].x1, circleArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Circle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Circle"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+
+    ############################### END OF SEGMENT COMPARISON #########################################
+
+    ######################### CURVE COMPARISON ############################
+            print(objMode[focusObject - 1])
+            if (objMode[focusObject - 1] == "{'Curve'}"):
+                ins = 0
+                for i in range(0, focusObject):
+                    if (objMode[i] == "{'Curve'}"):
+                        ins = ins + 1
+
+                print(ins)
+
+
+                # curve to Point
+                if len(pointsArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(pointsArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[ins - 1].value)):
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, pointsArray[i].x1, pointsArray[i].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Point'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Point"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # curve to line (line to curve)
+                if len(lineArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(lineArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[ins - 1].value)):
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, lineArray[i].x1, lineArray[i].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, lineArray[i].x2, lineArray[i].y2)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Line'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Line"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # curve to segment
+                if len(segmentArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(segmentArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[ins - 1].value)):
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, segmentArray[i].x1, segmentArray[i].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, segmentArray[i].x2, segmentArray[i].y2)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Segment'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Segment"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # curve to curve
+                if len(curveArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(curveArray)):
+                        distances.clear()
+                        if i != ins - 1:
+                            for j in range(0, len(curveArray[ins - 1].value)):
+                                for k in range(0, len(curveArray[i].value)):
+                                    distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, curveArray[i].value[k].x1, curveArray[i].value[k].y1)
+                                    distances.append(distance)
+
+                                # Print Statements to print the values
+
+                                # code to traverse through objMode
+                                insAux = 0
+                                for k in range(0, len(objMode)):
+                                    if objMode[k] == "{'Curve'}":
+                                        insAux += 1
+                                        if insAux == i + 1:
+                                            vark = k
+                                            break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Curve"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # curve to polygon
+                if len(polygonArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(polygonArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[ins - 1].value)):
+                            for k in range(0, len(polygonArray[i].value)):
+                                distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, polygonArray[i].value[k].x1, polygonArray[i].value[k].y1)
+                                distances.append(distance)
+
+                            # Print Statements to print the values
+
+                            # code to traverse through objMode
+                            insAux = 0
+                            for k in range(0, len(objMode)):
+                                if objMode[k] == "{'Polygon'}":
+                                    insAux += 1
+                                    if insAux == i + 1:
+                                        vark = k
+                                        break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Polygon"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # curve to ellipse
+                if len(ellipseArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(ellipseArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[ins - 1].value)):
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, ellipseArray[i].x1, ellipseArray[i].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Ellipse'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Ellipse"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+                # curve to Triangle
+                if len(triangleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(triangleArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[ins - 1].value)):
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, triangleArray[i].x1, triangleArray[i].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, triangleArray[i].x2, triangleArray[i].y2)
+                            distances.append(distance)
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, triangleArray[i].x3, triangleArray[i].y3)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Triangle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Triangle"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # curve to circle
+                if len(circleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(circleArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[ins - 1].value)):
+                            distance = distanceFormula(curveArray[ins - 1].value[j].x1, curveArray[ins - 1].value[j].y1, circleArray[i].x1, circleArray[i].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Circle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Circle"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+
+    ############################### END OF CURVE COMPARISON #########################################
+
+    ######################### POLYGON COMPARISON ############################
+            print(objMode[focusObject - 1])
+            if (objMode[focusObject - 1] == "{'Polygon'}"):
+                ins = 0
+                for i in range(0, focusObject):
+                    if (objMode[i] == "{'Polygon'}"):
+                        ins = ins + 1
+
+                print(ins)
+
+
+                # Polygon to Point
+                if len(pointsArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(pointsArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[ins - 1].value)):
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, pointsArray[i].x1, pointsArray[i].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Point'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Point"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # Polygon to line
+                if len(lineArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(lineArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[ins - 1].value)):
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, lineArray[i].x1, lineArray[i].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, lineArray[i].x2, lineArray[i].y2)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Line'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Line"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # Polygon to segment
+                if len(segmentArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(segmentArray)):
+                        for j in range(0, len(polygonArray[ins - 1].value)):
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, segmentArray[i].x1, segmentArray[i].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, segmentArray[i].x2, segmentArray[i].y2)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Segment'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Segment"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # Polygon to curve
+                if len(curveArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(curveArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[ins - 1].value)):
+                            for k in range(0, len(curveArray[i].value)):
+                                distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, curveArray[i].value[k].x1, curveArray[i].value[k].y1)
+                                distances.append(distance)
+
+                            # Print Statements to print the values
+
+                            # code to traverse through objMode
+                            insAux = 0
+                            for k in range(0, len(objMode)):
+                                if objMode[k] == "{'Curve'}":
+                                    insAux += 1
+                                    if insAux == i + 1:
+                                        vark = k
+                                        break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Curve"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # Polygon to polygon
+                if len(polygonArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(polygonArray)):
+                        distances.clear()
+                        if i != ins - 1:
+                            for j in range(0, len(polygonArray[ins - 1].value)):
+                                for k in range(0, len(polygonArray[i].value)):
+                                    distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, polygonArray[i].value[k].x1, polygonArray[i].value[k].y1)
+                                    distances.append(distance)
+
+                                # Print Statements to print the values
+
+                                # code to traverse through objMode
+                                insAux = 0
+                                for k in range(0, len(objMode)):
+                                    if objMode[k] == "{'Polygon'}":
+                                        insAux += 1
+                                        if insAux == i + 1:
+                                            vark = k
+                                            break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Polygon"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # Polygon to ellipse
+                if len(ellipseArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(ellipseArray)):
+                        for j in range(0, len(polygonArray[ins - 1].value)):
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, ellipseArray[i].x1, ellipseArray[i].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Ellipse'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Ellipse"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # Polygon to Triangle
+                if len(triangleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(triangleArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[ins - 1].value)):
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, triangleArray[i].x1, triangleArray[i].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, triangleArray[i].x2, triangleArray[i].y2)
+                            distances.append(distance)
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, triangleArray[i].x3, triangleArray[i].y3)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Triangle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Triangle"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # Polygon to circle
+                if len(circleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(circleArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[ins - 1].value)):
+                            distance = distanceFormula(polygonArray[ins - 1].value[j].x1, polygonArray[ins - 1].value[j].y1, circleArray[i].x1, circleArray[i].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Circle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Circle"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+
+    ############################### END OF POLYGON COMPARISON #########################################
+
+    ######################### ELLIPSE COMPARISON ############################
+            print(objMode[focusObject - 1])
+            if (objMode[focusObject - 1] == "{'Ellipse'}"):
+                ins = 0
+                for i in range(0, focusObject):
+                    if (objMode[i] == "{'Ellipse'}"):
+                        ins = ins + 1
+
+                    print(ins)
+
+
+                # ellipse to Point
+                if len(pointsArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(pointsArray)):
+                        distances.clear()
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Point'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Point"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # ellipse to line
+                if len(lineArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(lineArray)):
+                        distances.clear()
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, lineArray[i].x2, lineArray[i].y2)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Line'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Line"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # ellipse to segment
+                if len(segmentArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(segmentArray)):
+                        distances.clear()
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, segmentArray[i].x2, segmentArray[i].y2)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Segment'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Segment"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # ellipse to curve
+                if len(curveArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(curveArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[i].value)):
+                            distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Curve'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Curve"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # ellipse to polygon
+                if len(polygonArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(polygonArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[i].value)):
+                            distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Polygon'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Polygon"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # ellipse to ellipse
+                if len(ellipseArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(ellipseArray)):
+                        distances.clear()
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Ellipse'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Ellipse"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # ellipse to Triangle
+                if len(triangleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(triangleArray)):
+                        distances.clear()
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, triangleArray[i].x2, triangleArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, triangleArray[i].x3, triangleArray[i].y3)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Triangle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Triangle"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # ellipse to circle
+                if len(circleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(circleArray)):
+                        distances.clear()
+                        distance = distanceFormula(ellipseArray[ins - 1].x1, ellipseArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Circle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Circle"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+
+    ############################### END OF ELLIPSE COMPARISON #########################################
+
+    ######################### TRIANGLE COMPARISON ############################
+            print(objMode[focusObject - 1])
+            if (objMode[focusObject - 1] == "{'Triangle'}"):
+                ins = 0
+                for i in range(0, focusObject):
+                    if (objMode[i] == "{'Triangle'}"):
+                        ins = ins + 1
+
+                print(ins)
+
+
+                # triangle to Point
+                if len(pointsArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(pointsArray)):
+                        distances.clear()
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, pointsArray[i].x1, pointsArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, pointsArray[i].x1, pointsArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Point'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Point"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # triangle to line
+                if len(lineArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(lineArray)):
+                        distances.clear()
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, lineArray[i].x2, lineArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, lineArray[i].x2, lineArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, lineArray[i].x2, lineArray[i].y2)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Line'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Line"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # triangle to segment
+                if len(segmentArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(segmentArray)):
+                        distances.clear()
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, segmentArray[i].x1, segmentArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, segmentArray[i].x1, segmentArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, segmentArray[i].x2, segmentArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, segmentArray[i].x2, segmentArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, segmentArray[i].x2, segmentArray[i].y2)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Segment'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Segment"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # triangle to curve
+                if len(curveArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(curveArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[i].value)):
+                            distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Curve'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Curve"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # triangle to polygon
+                if len(polygonArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(polygonArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[i].value)):
+                            distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            distances.append(distance)
+                            distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Polygon'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Polygon"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # triangle to ellipse
+                if len(ellipseArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(ellipseArray)):
+                        distances.clear()
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, ellipseArray[i].x1, ellipseArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, ellipseArray[i].x1, ellipseArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Ellipse'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Ellipse"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # triangle to Triangle
+                if len(triangleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(triangleArray)):
+                        distances.clear()
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x2, triangleArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, triangleArray[i].x2, triangleArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, triangleArray[i].x2, triangleArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, triangleArray[i].x3, triangleArray[i].y3)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, triangleArray[i].x3, triangleArray[i].y3)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, triangleArray[i].x3, triangleArray[i].y3)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Triangle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Triangle"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # triangle to circle
+                if len(circleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(circleArray)):
+                        distances.clear()
+                        distance = distanceFormula(triangleArray[ins - 1].x1, triangleArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x2, triangleArray[ins - 1].y2, circleArray[i].x1, circleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(triangleArray[ins - 1].x3, triangleArray[ins - 1].y3, circleArray[i].x1, circleArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Circle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Circle"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+
+    ############################### END OF TRIANGLE COMPARISON #########################################
+
+    ######################### CIRCLE COMPARISON ############################
+            print(objMode[focusObject - 1])
+            if (objMode[focusObject - 1] == "{'Circle'}"):
+                ins = 0
+                for i in range(0, focusObject):
+                    if (objMode[i] == "{'Circle'}"):
+                        ins = ins + 1
+
+                print(ins)
+
+
+                # circle to Point
+                if len(pointsArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(pointsArray)):
+                        distances.clear()
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, pointsArray[i].x1, pointsArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Point'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Point"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # circle to line
+                if len(lineArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(lineArray)):
+                        distances.clear()
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, lineArray[i].x1, lineArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, lineArray[i].x2, lineArray[i].y2)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Line'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Line"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # circle to segment
+                if len(segmentArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(segmentArray)):
+                        distances.clear()
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, segmentArray[i].x1, segmentArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, segmentArray[i].x2, segmentArray[i].y2)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Segment'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Segment"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # circle to curve
+                if len(curveArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(curveArray)):
+                        distances.clear()
+                        for j in range(0, len(curveArray[i].value)):
+                            distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, curveArray[i].value[j].x1, curveArray[i].value[j].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Curve'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Curve"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # circle to polygon
+                if len(polygonArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(polygonArray)):
+                        distances.clear()
+                        for j in range(0, len(polygonArray[i].value)):
+                            distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, polygonArray[i].value[j].x1, polygonArray[i].value[j].y1)
+                            distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Polygon'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Polygon"], [min(distances)], [max(distances)]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # circle to ellipse
+                if len(ellipseArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(ellipseArray)):
+                        distances.clear()
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, ellipseArray[i].x1, ellipseArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Ellipse'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Ellipse"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # circle to Triangle
+                if len(triangleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(triangleArray)):
+                        distances.clear()
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, triangleArray[i].x1, triangleArray[i].y1)
+                        distances.append(distance)
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, triangleArray[i].x2, triangleArray[i].y2)
+                        distances.append(distance)
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, triangleArray[i].x3, triangleArray[i].y3)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Triangle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Triangle"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+                # circle to circle
+                if len(circleArray) > 0:
+                    distances.clear()
+                    for i in range(0, len(circleArray)):
+                        distances.clear()
+                        distance = distanceFormula(circleArray[ins - 1].x1, circleArray[ins - 1].y1, circleArray[i].x1, circleArray[i].y1)
+                        distances.append(distance)
+
+                        # Print Statements to print the values
+
+                        # code to traverse through objMode
+                        insAux = 0
+                        for k in range(0, len(objMode)):
+                            if objMode[k] == "{'Circle'}":
+                                insAux += 1
+                                if insAux == i + 1:
+                                    vark = k
+                                    break
+                        if len(distances) != 0:
+                            rows = [[vark+1], ["Circle"], [min(distances)], [0]]
+
+                            # writing the rows
+                            csvwriter.writerow(rows)
+
+    ############################### END OF CIRCLE COMPARISON #########################################
+
+
+
+
+
+
+
+# ######################### Point Inside Objects ################
+
+# def pointInsideObjects():
+#     filename = "pPointInsideFocus" + str(focusObject) + ".csv"
+#     fields = ['Id', 'Type', 'Intersect']
+#     #main section
+#     # start time implementation
+#     ins = 0
+#     insAux = 0
+#     vark = 0
+#     distance = 0
+#     minDistance = 0
+#     maxDistance = 0
+#     distances = []
+
+#     #csv file in python
+#     with open(filename, 'w') as csvfile:
+#         # writer object
+#         csvwriter = csv.writer(csvfile)
+
+#         # write the fields
+#         csvwriter.writerow(fields)
+# ######
+#     if objMode[focusObject - 1] == "Triangle":
+#         ins = 0
+#         for i in range(0, len(focusObject)):
+#             if objMode[i] == "Triangle":
+#                 ins = ins + 1
+
+#         # Comparing Triangle - Point
+#         if len(pointsArray) > 0:
+#             distances.clear()
+#             for i in range(0, len(pointsArray)):
+#                 pointInside = False
+
+#         #Implement Function
+
+#         insAux = 0
+#         for k in range(0, len(objMode)):
+#             if objMode[k] == "{'Point'}":
+#                 insAux += 1
+#                 if insAux == i + 1:
+#                     vark = k
+#                     break
+
+#         rows = [[vark + 1], ["Point"], []]
+#         if pointInside == True:
+#             rows = [[], [], ["True"]]
+#         if pointInside == False:
+#             rows = [[], [], ["False"]]
+#         # writing the rows
+#         csvwriter.writerow(rows)
+
+# ######        #End of comparison
+
+# #####
+#     if objMode[focusObject - 1] == "Polygon":
+#         ins = 0
+#         for i in range(0, len(focusObject)):
+#             if objMode[i] == "Polygon":
+#                 ins = ins + 1
+
+#         # Comparing Polygon - Point
+#         if len(pointsArray) > 0:
+#             distances.clear()
+#             for i in range(0, len(pointsArray)):
+#                 pointInside = False
+
+#         #Implement Function
+
+#         insAux = 0
+#         for k in range(0, len(objMode)):
+#             if objMode[k] == "{'Point'}":
+#                 insAux += 1
+#                 if insAux == i + 1:
+#                     vark = k
+#                     break
+
+#         rows = [[vark + 1], ["Point"], []]
+#         if pointInside == True:
+#             rows = [[], [], ["True"]]
+#         if pointInside == False:
+#             rows = [[], [], ["False"]]
+#         # writing the rows
+#         csvwriter.writerow(rows)
+
+# ####        # End of comparison
 
 #########################################################################
 
 ######################### Intersection Bewteen  Objects ################
-def intersectionBetweenObjects():
-    filename = "pIntersectionObjectFocus" + str(focusObject) + ".csv"
-    fields = ['Id', 'Type', 'Intersect']
-    # start timer position
-    ins = 0
-    insAux = 0
-    vark = 0
-    distance = 0.0
-    minDistance = 0.0
-    maxDistance = 0.0
-    distances = [] #Same as the distances used before??
-    interResult = False
-
-    #save csv python
-    with open(filename, 'w') as csvfile:
-        # writer object
-        csvwriter = csv.writer(csvfile)
-
-        # write the fields
-        csvwriter.writerow(fields)
-
-    ########## Segment Comparison ##########
-
-    interResult = False
-    if objMode.get(focusObject - 1) == "Segment":
-        print("it is segment")
-        ins = 0
-        for i in range(0, len(focusObject)):
-            if objMode.get(i) == "Segment":
-                ins = ins + 1
-
-        #Comparing segment to line
-        if len(lineArray) > 0:
-            distance.clear
-            for j in range(0, len(lineArray)):
-                #using python built-in 'intersection' function
-                #implement line extensions outside of segment
-                if segmentArray.get(ins - 1).intersection(lineArray.get(j)):
-                    interResult = True
-                else:
-                    interResult = False
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Line'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-            rows = [[vark + 1], ["Line"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-        # Comparing segment to segment
-        interResult = False
-        if len(segmentArray) > 0:
-            for j in range(0, len(segmentArray)):
-                if j != ins - 1:
-                    #using python built-in 'intersection' function
-                    if segmentArray.get(ins - 1).intersection(segmentArray.get(j)):
-                        interResult = True
-                    else:
-                        interResult = False
-
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Segment'}":
-                            insAux += 1
-                            if insAux == j + 1:
-                                vark = k
-                                break
-                rows = [[vark + 1], ["Segment"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-        #Comparing segment to Triangle
-        interResult = False
-        if len(triangleArray) > 0:
-            distance.clear
-            for j in range(0, len(triangleArray)):
-                # for triangle we have to split triangle in segments to be compared
-                t1 = Segment()
-                t1 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-                t2 = Segment()
-                t2 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-                t3 = Segment()
-                t3 = (triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-                # using python built-in 'intersection' function
-                if segmentArray.get(ins - 1).intersection(t1) or segmentArray.get(ins - 1).intersection(t2) or segmentArray.get(ins - 1).intersection(t3):
-                    interResult = True
-                else:
-                    interResult = False
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Triangle'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-                rows = [[vark + 1], ["Triangle"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-        #Comparing segment to Curve
-        interResult = False
-        if len(curveArray) > 0:
-            distances.clear
-            for j in range(0, len(curveArray)):
-                for m in range(0, len(curveArray[j] - 1)):
-                    # points usage in curve
-                    p1 = Point()
-                    p1 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                    p2 = Point()
-                    p2 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                    #Point p1 = new Point(curveObjects.get(j).p.get(m).p.x, curveObjects.get(j).p.get(m).p.y);
-                    #Point p2 = new Point(curveObjects.get(j).p.get(m + 1).p.x, curveObjects.get(j).p.get(m + 1).p.x);
-
-                    #segment c1 = new segment(p1, p2);
-                    c1 = Segment()
-                    c1 = (p1, p2)
-
-                    # using python built-in 'intersection' function
-                    if segmentArray.get(ins - 1).intersection(c1) and interResult == False:
-                        interResult = True
-
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Curve'}":
-                            insAux += 1
-                            if insAux == j + 1:
-                                vark = k
-                                break
-                rows = [[vark + 1], ["Curve"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-
-        #Comparing segment to Polygon
-        interResult = False
-        if len(polygonArray) > 0:
-            distances.clear
-            for j in range(0, len(polygonArray)):
-                for m in range(0, len(polygonArray[j] - 1)):
-
-                    # using python built-in 'intersection' function
-                    if segmentArray.get(ins - 1).intersection(polygonArray.get(j)) and interResult == False:
-                        interResult = True
-
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Polygon'}":
-                            insAux += 1
-                            if insAux == j + 1:
-                                vark = k
-                                break
-                rows = [[vark + 1], ["Polygon"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-
-    ########## Line Comparison ##########
-    interResult = False
-    if objMode.get(focusObject - 1) == "Line":
-        ins = 0
-        for i in range(0, len(focusObject)):
-            if objMode.get(i) == "Line":
-                ins = ins + 1
-
-    # Comparing line to line
-    if len(lineArray) > 0:
-        distance.clear
-        for j in range(0, len(lineArray)):
-            if j != ins - 1:
-                # using python built-in 'intersection' function
-                # implement line extensions outside of segment
-                if lineArray.get(ins - 1).intersection(lineArray.get(j)):
-                    interResult = True
-                else:
-                    interResult = False
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Line'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-            rows = [[vark + 1], ["Line"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-    # Comparing line to segment
-    interResult = False
-    if len(segmentArray) > 0:
-        distance.clear
-        for j in range(0, len(segmentArray)):
-            # using python built-in 'intersection' function
-            if lineArray.get(ins - 1).intersection(segmentArray.get(j)):
-                interResult = True
-            else:
-                interResult = False
-
-            insAux = 0
-            for k in range(0, len(objMode)):
-                if objMode[k] == "{'Segment'}":
-                    insAux += 1
-                    if insAux == j + 1:
-                        vark = k
-                        break
-            rows = [[vark + 1], ["Segment"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-    # Comparing line to Triangle
-    interResult = False
-    if len(triangleArray) > 0:
-        distance.clear
-        for j in range(0, len(triangleArray)):
-            # for triangle we have to split triangle in segments to be compared
-            t1 = Segment()
-            t1 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-            t2 = Segment()
-            t2 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-            t3 = Segment()
-            t3 = (triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-            # using python built-in 'intersection' function
-            if lineArray.get(ins - 1).intersection(t1) or lineArray.get(ins - 1).intersection(t2) or lineArray.get(ins - 1).intersection(t3):
-                interResult = True
-            else:
-                interResult = False
-
-            insAux = 0
-            for k in range(0, len(objMode)):
-                if objMode[k] == "{'Triangle'}":
-                    insAux += 1
-                    if insAux == j + 1:
-                        vark = k
-                        break
-            rows = [[vark + 1], ["Triangle"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-    # Comparing line to Curve
-    interResult = False
-    if len(curveArray) > 0:
-        distances.clear
-        for j in range(0, len(curveArray)):
-            for m in range(0, len(curveArray[j] - 1)):
-                # points usage in curve
-                p1 = Point()
-                p1 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                p2 = Point()
-                p2 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                # Point p1 = new Point(curveObjects.get(j).p.get(m).p.x, curveObjects.get(j).p.get(m).p.y);
-                # Point p2 = new Point(curveObjects.get(j).p.get(m + 1).p.x, curveObjects.get(j).p.get(m + 1).p.x);
-
-                # segment c1 = new segment(p1, p2);
-                c1 = Segment()
-                c1 = (p1, p2)
-
-                # using python built-in 'intersection' function
-                if lineArray.get(ins - 1).intersection(c1) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Curve'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-                rows = [[vark + 1], ["Curve"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-    # Comparing line to Polygon
-    interResult = False
-    if len(polygonArray) > 0:
-        distances.clear
-        for j in range(0, len(polygonArray)):
-            for m in range(0, len(polygonArray[j] - 1)):
-
-                # using python built-in 'intersection' function
-                if lineArray.get(ins - 1).intersection(polygonArray.get(j)) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Polygon'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-                rows = [[vark + 1], ["Polygon"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-
-    ########## Triangle Comparison ##########
-    interResult = False
-    if objMode.get(focusObject - 1) == "Triangle":
-        ins = 0
-        for i in range(0, len(focusObject)):
-            if objMode.get(i) == "Tringle":
-                ins = ins + 1
-
-    # Comparing triangle to line
-    interResult = False
-    if len(lineArray) > 0:
-        distance.clear
-        for j in range(0, len(lineArray)):
-            # for triangle we have to split triangle in segments to be compared
-            t1 = Segment()
-            t1 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-            t2 = Segment()
-            t2 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-            t3 = Segment()
-            t3 = (triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-            # using python built-in 'intersection' function
-            if lineArray.get(ins - 1).intersection(t1) or lineArray.get(ins - 1).intersection(t2) or lineArray.get(ins - 1).intersection(t3):
-                interResult = True
-            else:
-                interResult = False
-
-            insAux = 0
-            for k in range(0, len(objMode)):
-                if objMode[k] == "{'Line'}":
-                    insAux += 1
-                    if insAux == j + 1:
-                        vark = k
-                        break
-            rows = [[vark + 1], ["Line"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-    # Comparing triangle to segment
-    interResult = False
-    if len(segmentArray) > 0:
-        distance.clear
-        for j in range(0, len(segmentArray)):
-            # for triangle we have to split triangle in segments to be compared
-            t1 = Segment()
-            t1 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-            t2 = Segment()
-            t2 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-            t3 = Segment()
-            t3 = (triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-            # using python built-in 'intersection' function
-            if segmentArray.get(ins - 1).intersection(t1) or segmentArray.get(ins - 1).intersection(t2) or segmentArray.get(ins - 1).intersection(t3):
-                interResult = True
-            else:
-                interResult = False
-
-            insAux = 0
-            for k in range(0, len(objMode)):
-                if objMode[k] == "{'Segment'}":
-                    insAux += 1
-                    if insAux == j + 1:
-                        vark = k
-                        break
-            rows = [[vark + 1], ["Segment"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-    # Comparing triangle to Triangle
-    interResult = False
-    if len(segmentArray) > 0:
-        distance.clear
-        for j in range(0, len(segmentArray)):
-            if j!= ins - 1:
-                # for triangle we have to split triangle in segments to be compared
-                t1 = Segment()
-                t1 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-                t2 = Segment()
-                t2 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-                t3 = Segment()
-                t3 = (triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-                t4 = Segment()
-                t4 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-                t5 = Segment()
-                t5 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-                t6 = Segment()
-                t6 = (triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-                # using python built-in 'intersection' function
-                if t1.intersection(t4) or t1.intersection(t5) or t1.intersection(t6) or t2.intersection(t4) or t2.intersection(t5) or t2.intersection(t6) or t3.intersection(t4) or t3.intersection(t5) or t3.intersection(t6):
-                    interResult = True
-                else:
-                    interResult = False
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Triangle'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-                rows = [[vark + 1], ["Triangle"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-    # Comparing triangle to Curve
-    interResult = False
-    if len(curveArray) > 0:
-        distances.clear
-        for j in range(0, len(curveArray)):
-            for m in range(0, len(curveArray[j] - 1)):
-                # points usage in curve
-                p1 = Point()
-                p1 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                p2 = Point()
-                p2 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                # Point p1 = new Point(curveObjects.get(j).p.get(m).p.x, curveObjects.get(j).p.get(m).p.y);
-                # Point p2 = new Point(curveObjects.get(j).p.get(m + 1).p.x, curveObjects.get(j).p.get(m + 1).p.x);
-
-                # segment c1 = new segment(p1, p2);
-                c1 = Segment()
-                c1 = (p1, p2)
-
-                # for triangle we have to split triangle in segments to be compared
-                t1 = Segment()
-                t1 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-                t2 = Segment()
-                t2 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-                t3 = Segment()
-                t3 = (triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-                # using python built-in 'intersection' function
-                if (t1.intersection(c1) or t2.intersection(c1) or t3.intersection(c1)) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Curve'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-                rows = [[vark + 1], ["Curve"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-    # Comparing triangle to Polygon
-    interResult = False
-    if len(polygonArray) > 0:
-        distances.clear
-        for j in range(0, len(polygonArray)):
-            for m in range(0, len(polygonArray[j] - 1)):
-
-                # for triangle we have to split triangle in segments to be compared
-                t1 = Segment()
-                t1 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-                t2 = Segment()
-                t2 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-                t3 = Segment()
-                t3 = (triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-                # using python built-in 'intersection' function
-                if (t1.intersection(polygonArray.get(j)) or t2.intersection(polygonArray.get(j)) or t3.intersection(polygonArray.get(j))) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Polygon'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-                rows = [[vark + 1], ["Polygon"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-
-    ########## Curve Comparison ##########
-    interResult = False
-    if objMode.get(focusObject - 1) == "Curve":
-        ins = 0
-        for i in range(0, len(focusObject)):
-            if objMode.get(i) == "Curve":
-                ins = ins + 1
-
-    # Comparing Curve to line
-    interResult = False
-    if len(lineArray) > 0:
-        distances.clear
-        for j in range(0, len(lineArray)):
-            for m in range(0, len(curveArray[ins-1])):
-                # points usage in curve
-                p1 = Point()
-                p1 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                p2 = Point()
-                p2 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                # Point p1 = new Point(curveObjects.get(j).p.get(m).p.x, curveObjects.get(j).p.get(m).p.y);
-                # Point p2 = new Point(curveObjects.get(j).p.get(m + 1).p.x, curveObjects.get(j).p.get(m + 1).p.x);
-
-                # segment c1 = new segment(p1, p2);
-                c1 = Segment()
-                c1 = (p1, p2)
-
-                # using python built-in 'intersection' function
-                if lineArray.get(ins - 1).intersection(c1) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Line'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-                rows = [[vark + 1], ["Line"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-    # Comparing Curve to segment
-    interResult = False
-    if len(segmentArray) > 0:
-        distances.clear
-        for j in range(0, len(segmentArray)):
-            for m in range(0, len(curveArray[ins-1])):
-                # points usage in curve
-                p1 = Point()
-                p1 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                p2 = Point()
-                p2 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                # Point p1 = new Point(curveObjects.get(j).p.get(m).p.x, curveObjects.get(j).p.get(m).p.y);
-                # Point p2 = new Point(curveObjects.get(j).p.get(m + 1).p.x, curveObjects.get(j).p.get(m + 1).p.x);
-
-                # segment c1 = new segment(p1, p2);
-                c1 = Segment()
-                c1 = (p1, p2)
-
-                # using python built-in 'intersection' function
-                if segmentArray.get(ins - 1).intersection(c1) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Segment'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-                rows = [[vark + 1], ["Segment"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-    # Comparing Curve to Triangle
-    interResult = False
-    if len(triangleArray) > 0:
-        distances.clear
-        for j in range(0, len(triangleArray)):
-            for m in range(0, len(curveArray[ins-1]) - 1):
-                # points usage in curve
-                p1 = Point()
-                p1 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                p2 = Point()
-                p2 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                # Point p1 = new Point(curveObjects.get(j).p.get(m).p.x, curveObjects.get(j).p.get(m).p.y);
-                # Point p2 = new Point(curveObjects.get(j).p.get(m + 1).p.x, curveObjects.get(j).p.get(m + 1).p.x);
-
-                # segment c1 = new segment(p1, p2);
-                c1 = Segment()
-                c1 = (p1, p2)
-
-                # for triangle we have to split triangle in segments to be compared
-                t1 = Segment()
-                t1 = (
-                triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-                t2 = Segment()
-                t2 = (
-                triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-                t3 = Segment()
-                t3 = (
-                triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-                # using python built-in 'intersection' function
-                if (t1.intersection(c1) or t2.intersection(c1) or t3.intersection(c1)) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Triangle'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-                rows = [[vark + 1], ["Triangle"], []]
-                if interResult == True:
-                    rows = [[], [], ["True"]]
-                if interResult == False:
-                    rows = [[], [], ["False"]]
-                # writing the rows
-                csvwriter.writerows(rows)
-    # Comparing Curve to Curve
-    interResult = False
-    if len(curveArray) > 0:
-        distances.clear
-        for p in range(0, len(curveArray)):
-            for j in range(0, len(polygonArray)):
-                for m in range(0, len(curveArray[ins - 1])):
-
-                    # points usage in curve
-                    p1 = Point()
-                    p1 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                    p2 = Point()
-                    p2 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                    # Point p1 = new Point(curveObjects.get(j).p.get(m).p.x, curveObjects.get(j).p.get(m).p.y);
-                    # Point p2 = new Point(curveObjects.get(j).p.get(m + 1).p.x, curveObjects.get(j).p.get(m + 1).p.x);
-
-                    # segment c1 = new segment(p1, p2);
-                    c1 = Segment()
-                    c1 = (p1, p2)
-
-                    # points usage in curve
-                    p3 = Point()
-                    p3 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                    p4 = Point()
-                    p4 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                    # segment c1 = new segment(p1, p2);
-                    c2 = Segment()
-                    c2 = (p3, p4)
-
-                    # using python built-in 'intersection' function
-                    if c1.intersection(c2) and interResult == False:
-                        interResult = True
-
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Curve'}":
-                            insAux += 1
-                            if insAux == j + 1:
-                                vark = k
-                                break
-                    rows = [[vark + 1], ["Curve"], []]
-                    if interResult == True:
-                        rows = [[], [], ["True"]]
-                    if interResult == False:
-                        rows = [[], [], ["False"]]
-                    # writing the rows
-                    csvwriter.writerows(rows)
-    # Comparing Curve to Polygon
-    interResult = False
-    if len(curveArray) > 0:
-        distances.clear
-        for p in range(0, len(curveArray)):
-            for j in range(0, len(polygonArray)):
-                for m in range(0, len(curveArray[ins - 1])):
-
-                    # points usage in curve
-                    p1 = Point()
-                    p1 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                    p2 = Point()
-                    p2 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                    # Point p1 = new Point(curveObjects.get(j).p.get(m).p.x, curveObjects.get(j).p.get(m).p.y);
-                    # Point p2 = new Point(curveObjects.get(j).p.get(m + 1).p.x, curveObjects.get(j).p.get(m + 1).p.x);
-
-                    # segment c1 = new segment(p1, p2);
-                    c1 = Segment()
-                    c1 = (p1, p2)
-
-                    # using python built-in 'intersection' function
-                    if c1.intersection(polygonArray.get(j)) and interResult == False:
-                        interResult = True
-
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Polygon'}":
-                            insAux += 1
-                            if insAux == j + 1:
-                                vark = k
-                                break
-                    rows = [[vark + 1], ["Polygon"], []]
-                    if interResult == True:
-                        rows = [[], [], ["True"]]
-                    if interResult == False:
-                        rows = [[], [], ["False"]]
-                    # writing the rows
-                    csvwriter.writerows(rows)
-
-    ########## Polygon Comparison ##########
-    interResult = False
-    if objMode.get(focusObject - 1) == "Polygon":
-        ins = 0
-        for i in range(0, len(focusObject)):
-            if objMode.get(i) == "Polygon":
-                ins = ins + 1
-
-    # Comparing Polygon to line
-    interResult = False
-    if len(lineArray) > 0:
-        distances.clear
-        for j in range(0, len(lineArray)):
-            for m in range(0, len(polygonArray[ins-1])):
-
-                # using python built-in 'intersection' function
-                if lineArray.get(ins - 1).intersection(polygonArray.get(j)) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Line'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-            rows = [[vark + 1], ["Line"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-    # Comparing Polygon to Segment
-    interResult = False
-    if len(segmentArray) > 0:
-        distances.clear
-        for j in range(0, len(segmentArray)):
-            for m in range(0, len(polygonArray[ins-1])):
-
-                # using python built-in 'intersection' function
-                if segmentArray.get(j).intersection(polygonArray.get(ins - 1)) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Segment'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-            rows = [[vark + 1], ["Segment"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-    # Comparing Polygon to Triangle
-    interResult = False
-    if len(triangleArray) > 0:
-        distances.clear
-        for j in range(0, len(triangleArray)):
-            for m in range(0, len(polygonArray[ins-1])):
-
-                # for triangle we have to split triangle in segments to be compared
-                t1 = Segment()
-                t1 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x2, triangleArray.get(j).y2)
-                t2 = Segment()
-                t2 = (triangleArray.get(j).x1, triangleArray.get(j).y1, triangleArray.get(j).x3, triangleArray.get(j).y3)
-                t3 = Segment()
-                t3 = (triangleArray.get(j).x2, triangleArray.get(j).y2, triangleArray.get(j).x3, triangleArray.get(j).y3)
-
-                # using python built-in 'intersection' function
-                if (t1.intersection(polygonArray.get(ins-1)) or t2.intersection(polygonArray.get(ins-1)) or t3.intersection(
-                        polygonArray.get(ins-1))) and interResult == False:
-                    interResult = True
-
-                insAux = 0
-                for k in range(0, len(objMode)):
-                    if objMode[k] == "{'Polygon'}":
-                        insAux += 1
-                        if insAux == j + 1:
-                            vark = k
-                            break
-            rows = [[vark + 1], ["Polygon"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-    # Comparing Polygon to Curve
-    interResult = False
-    if len(curveArray) > 0:
-        distances.clear
-        for p in range(0, len(curveArray)):
-            for j in range(0, len(polygonArray[ins - 1])):
-                for m in range(0, len(curveArray[m] - 1)):
-
-                    # points usage in curve
-                    p1 = Point()
-                    p1 = (curveArray.get(j).get(m).x1, curveArray.get(j).get(m).y1)
-                    p2 = Point()
-                    p2 = (curveArray.get(j).get(m + 1).x1, curveArray.get(j).get(m + 1).y1)
-
-                    # Point p1 = new Point(curveObjects.get(j).p.get(m).p.x, curveObjects.get(j).p.get(m).p.y);
-                    # Point p2 = new Point(curveObjects.get(j).p.get(m + 1).p.x, curveObjects.get(j).p.get(m + 1).p.x);
-
-                    # segment c1 = new segment(p1, p2);
-                    c1 = Segment()
-                    c1 = (p1, p2)
-
-                    # using python built-in 'intersection' function
-                    if c1.intersection(polygonArray.get(ins-1)) and interResult == False:
-                        interResult = True
-
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Curve'}":
-                            insAux += 1
-                            if insAux == j + 1:
-                                vark = k
-                                break
-            rows = [[vark + 1], ["Curve"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
-    # Comparing Polygon to Polygon
-    interResult = False
-    if len(curveArray) > 0:
-        distances.clear
-        for p in range(0, len(polygonArray)):
-            for j in range(0, len(polygonArray[ins - 1])):
-                for m in range(0, len(polygonArray[m])):
-
-                    # using python built-in 'intersection' function
-                    if polygonArray.get(p).get(m).intersection(polygonArray.get(ins - 1).get(m)) and interResult == False:
-                        interResult = True
-
-                    insAux = 0
-                    for k in range(0, len(objMode)):
-                        if objMode[k] == "{'Polygon'}":
-                            insAux += 1
-                            if insAux == j + 1:
-                                vark = k
-                                break
-            rows = [[vark + 1], ["Polygon"], []]
-            if interResult == True:
-                rows = [[], [], ["True"]]
-            if interResult == False:
-                rows = [[], [], ["False"]]
-            # writing the rows
-            csvwriter.writerows(rows)
+# def intersectionBetweenObjects():
+#     filename = "pIntersectionObjectFocus" + str(focusObject) + ".csv"
+#     fields = ['Id', 'Type', 'Intersect']
+#     # start timer position
+#     ins = 0
+#     insAux = 0
+#     vark = 0
+#     distance = 0.0
+#     minDistance = 0.0
+#     maxDistance = 0.0
+#     distances = [] #Same as the distances used before??
+#     interResult = False
+
+#     #save csv python
+#     with open(filename, 'w') as csvfile:
+#         # writer object
+#         csvwriter = csv.writer(csvfile)
+
+#         # write the fields
+#         csvwriter.writerow(fields)
+
+#     ########## Segment Comparison ##########
+
+#     interResult = False
+#     if objMode[focusObject - 1] == "Segment":
+#         print("it is segment")
+#         ins = 0
+#         for i in range(0, len(focusObject)):
+#             if objMode[i] == "Segment":
+#                 ins = ins + 1
+
+#         #Comparing segment to line
+#         if len(lineArray) > 0:
+#             for j in range(0, len(lineArray)):
+#                 #using python built-in 'intersection' function
+#                 #implement line extensions outside of segment
+#                 if segmentArray[ins - 1].intersection(lineArray[j]):
+#                     interResult = True
+#                 else:
+#                     interResult = False
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Line'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#             rows = [[vark + 1], ["Line"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#         # Comparing segment to segment
+#         interResult = False
+#         if len(segmentArray) > 0:
+#             for j in range(0, len(segmentArray)):
+#                 if j != ins - 1:
+#                     #using python built-in 'intersection' function
+#                     if segmentArray[ins - 1].intersection(segmentArray[j]):
+#                         interResult = True
+#                     else:
+#                         interResult = False
+
+#                     insAux = 0
+#                     for k in range(0, len(objMode)):
+#                         if objMode[k] == "{'Segment'}":
+#                             insAux += 1
+#                             if insAux == j + 1:
+#                                 vark = k
+#                                 break
+#                 rows = [[vark + 1], ["Segment"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+#         #Comparing segment to Triangle
+#         interResult = False
+#         if len(triangleArray) > 0:
+
+#             for j in range(0, len(triangleArray)):
+#                 # for triangle we have to split triangle in segments to be compared
+#                 #t1 = Segment()
+#                 t1 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#                 #t2 = Segment()
+#                 t2 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#                 #t3 = Segment()
+#                 t3 = (triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#                 # using python built-in 'intersection' function
+#                 if segmentArray[ins - 1].intersection(t1) or segmentArray[ins - 1].intersection(t2) or segmentArray[ins - 1].intersection(t3):
+#                     interResult = True
+#                 else:
+#                     interResult = False
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Triangle'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#                 rows = [[vark + 1], ["Triangle"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+#         #Comparing segment to Curve
+#         interResult = False
+#         if len(curveArray) > 0:
+#             distances.clear
+#             for j in range(0, len(curveArray)):
+#                 for m in range(0, len(curveArray[j] - 1)):
+#                     # points usage in curve
+#                     #p1 = Point()
+#                     p1 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                     #p2 = Point()
+#                     p2 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                     #Point p1 = new Point(curveObjects[j].p.get(m).p.x, curveObjects[j].p.get(m).p.y);
+#                     #Point p2 = new Point(curveObjects[j].p.get(m + 1).p.x, curveObjects[j].p.get(m + 1).p.x);
+
+#                     #segment c1 = new segment(p1, p2);
+#                     #c1 = Segment()
+#                     c1 = (p1, p2)
+
+#                     # using python built-in 'intersection' function
+#                     if segmentArray[ins-1].intersection(c1) and interResult == False:
+#                         interResult = True
+
+#                     insAux = 0
+#                     for k in range(0, len(objMode)):
+#                         if objMode[k] == "{'Curve'}":
+#                             insAux += 1
+#                             if insAux == j + 1:
+#                                 vark = k
+#                                 break
+#                 rows = [[vark + 1], ["Curve"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+
+#         #Comparing segment to Polygon
+#         interResult = False
+#         if len(polygonArray) > 0:
+#             distances.clear
+#             for j in range(0, len(polygonArray)):
+#                 for m in range(0, len(polygonArray[j] - 1)):
+
+#                     # using python built-in 'intersection' function
+#                     if segmentArray[ins-1].intersection(polygonArray[j]) and interResult == False:
+#                         interResult = True
+
+#                     insAux = 0
+#                     for k in range(0, len(objMode)):
+#                         if objMode[k] == "{'Polygon'}":
+#                             insAux += 1
+#                             if insAux == j + 1:
+#                                 vark = k
+#                                 break
+#                 rows = [[vark + 1], ["Polygon"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+
+#     ########## Line Comparison ##########
+#     interResult = False
+#     if objMode[focusObject - 1] == "Line":
+#         ins = 0
+#         for i in range(0, len(focusObject)):
+#             if objMode[i] == "Line":
+#                 ins = ins + 1
+
+#     # Comparing line to line
+#     if len(lineArray) > 0:
+#         distances.clear
+#         for j in range(0, len(lineArray)):
+#             if j != ins - 1:
+#                 # using python built-in 'intersection' function
+#                 # implement line extensions outside of segment
+#                 if lineArray[ins-1].intersection(lineArray[j]):
+#                     interResult = True
+#                 else:
+#                     interResult = False
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Line'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#             rows = [[vark + 1], ["Line"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#     # Comparing line to segment
+#     interResult = False
+#     if len(segmentArray) > 0:
+#         distances.clear
+#         for j in range(0, len(segmentArray)):
+#             # using python built-in 'intersection' function
+#             if lineArray[ins-1].intersection(segmentArray[j]):
+#                 interResult = True
+#             else:
+#                 interResult = False
+
+#             insAux = 0
+#             for k in range(0, len(objMode)):
+#                 if objMode[k] == "{'Segment'}":
+#                     insAux += 1
+#                     if insAux == j + 1:
+#                         vark = k
+#                         break
+#             rows = [[vark + 1], ["Segment"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#     # Comparing line to Triangle
+#     interResult = False
+#     if len(triangleArray) > 0:
+#         distances.clear
+#         for j in range(0, len(triangleArray)):
+#             # for triangle we have to split triangle in segments to be compared
+#             #t1 = Segment()
+#             t1 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#             #t2 = Segment()
+#             t2 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#             #t3 = Segment()
+#             t3 = (triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#             # using python built-in 'intersection' function
+#             if lineArray[ins-1].intersection(t1) or lineArray[ins-1].intersection(t2) or lineArray[ins-1].intersection(t3):
+#                 interResult = True
+#             else:
+#                 interResult = False
+
+#             insAux = 0
+#             for k in range(0, len(objMode)):
+#                 if objMode[k] == "{'Triangle'}":
+#                     insAux += 1
+#                     if insAux == j + 1:
+#                         vark = k
+#                         break
+#             rows = [[vark + 1], ["Triangle"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#     # Comparing line to Curve
+#     interResult = False
+#     if len(curveArray) > 0:
+#         distances.clear
+#         for j in range(0, len(curveArray)):
+#             for m in range(0, len(curveArray[j] - 1)):
+#                 # points usage in curve
+#                 #p1 = Point()
+#                 p1 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                 #p2 = Point()
+#                 p2 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                 # Point p1 = new Point(curveObjects[j].p.get(m).p.x, curveObjects[j].p.get(m).p.y);
+#                 # Point p2 = new Point(curveObjects[j].p.get(m + 1).p.x, curveObjects[j].p.get(m + 1).p.x);
+
+#                 # segment c1 = new segment(p1, p2);
+#                 #c1 = Segment()
+#                 c1 = (p1, p2)
+
+#                 # using python built-in 'intersection' function
+#                 if lineArray[ins-1].intersection(c1) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Curve'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#                 rows = [[vark + 1], ["Curve"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+#     # Comparing line to Polygon
+#     interResult = False
+#     if len(polygonArray) > 0:
+#         distances.clear
+#         for j in range(0, len(polygonArray)):
+#             for m in range(0, len(polygonArray[j] - 1)):
+
+#                 # using python built-in 'intersection' function
+#                 if lineArray[ins-1].intersection(polygonArray[j]) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Polygon'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#                 rows = [[vark + 1], ["Polygon"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+
+#     ########## Triangle Comparison ##########
+#     interResult = False
+#     if objMode[focusObject - 1] == "Triangle":
+#         ins = 0
+#         for i in range(0, len(focusObject)):
+#             if objMode[i] == "Tringle":
+#                 ins = ins + 1
+
+#     # Comparing triangle to line
+#     interResult = False
+#     if len(lineArray) > 0:
+#         for j in range(0, len(lineArray)):
+#             # for triangle we have to split triangle in segments to be compared
+#             #t1 = Segment()
+#             t1 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#             #t2 = Segment()
+#             t2 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#             #t3 = Segment()
+#             t3 = (triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#             # using python built-in 'intersection' function
+#             if lineArray[ins - 1].intersection(t1) or lineArray[ins - 1].intersection(t2) or lineArray[ins - 1].intersection(t3):
+#                 interResult = True
+#             else:
+#                 interResult = False
+
+#             insAux = 0
+#             for k in range(0, len(objMode)):
+#                 if objMode[k] == "{'Line'}":
+#                     insAux += 1
+#                     if insAux == j + 1:
+#                         vark = k
+#                         break
+#             rows = [[vark + 1], ["Line"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#     # Comparing triangle to segment
+#     interResult = False
+#     if len(segmentArray) > 0:
+#         distances.clear
+#         for j in range(0, len(segmentArray)):
+#             # for triangle we have to split triangle in segments to be compared
+#             #t1 = Segment()
+#             t1 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#             #t2 = Segment()
+#             t2 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#             #t3 = Segment()
+#             t3 = (triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#             # using python built-in 'intersection' function
+#             if segmentArray[ins - 1].intersection(t1) or segmentArray[ins - 1].intersection(t2) or segmentArray[ins - 1].intersection(t3):
+#                 interResult = True
+#             else:
+#                 interResult = False
+
+#             insAux = 0
+#             for k in range(0, len(objMode)):
+#                 if objMode[k] == "{'Segment'}":
+#                     insAux += 1
+#                     if insAux == j + 1:
+#                         vark = k
+#                         break
+#             rows = [[vark + 1], ["Segment"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#     # Comparing triangle to Triangle
+#     interResult = False
+#     if len(segmentArray) > 0:
+#         distances.clear
+#         for j in range(0, len(segmentArray)):
+#             if j!= ins - 1:
+#                 # for triangle we have to split triangle in segments to be compared
+#                 #t1 = Segment()
+#                 t1 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#                 #t2 = Segment()
+#                 t2 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#                 #t3 = Segment()
+#                 t3 = (triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#                 #t4 = Segment()
+#                 t4 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#                 #t5 = Segment()
+#                 t5 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#                 #t6 = Segment()
+#                 t6 = (triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#                 # using python built-in 'intersection' function
+#                 if t1.intersection(t4) or t1.intersection(t5) or t1.intersection(t6) or t2.intersection(t4) or t2.intersection(t5) or t2.intersection(t6) or t3.intersection(t4) or t3.intersection(t5) or t3.intersection(t6):
+#                     interResult = True
+#                 else:
+#                     interResult = False
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Triangle'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#                 rows = [[vark + 1], ["Triangle"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+#     # Comparing triangle to Curve
+#     interResult = False
+#     if len(curveArray) > 0:
+#         distances.clear
+#         for j in range(0, len(curveArray)):
+#             for m in range(0, len(curveArray[j] - 1)):
+#                 # points usage in curve
+#                 #p1 = Point()
+#                 p1 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                 #p2 = Point()
+#                 p2 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                 # Point p1 = new Point(curveObjects[j].p.get(m).p.x, curveObjects[j].p.get(m).p.y);
+#                 # Point p2 = new Point(curveObjects[j].p.get(m + 1).p.x, curveObjects[j].p.get(m + 1).p.x);
+
+#                 # segment c1 = new segment(p1, p2);
+#                 #c1 = Segment()
+#                 c1 = (p1, p2)
+
+#                 # for triangle we have to split triangle in segments to be compared
+#                # t1 = Segment()
+#                 t1 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#                 #t2 = Segment()
+#                 t2 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#                 #t3 = Segment()
+#                 t3 = (triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#                 # using python built-in 'intersection' function
+#                 if (t1.intersection(c1) or t2.intersection(c1) or t3.intersection(c1)) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Curve'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#                 rows = [[vark + 1], ["Curve"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+#     # Comparing triangle to Polygon
+#     interResult = False
+#     if len(polygonArray) > 0:
+#         distances.clear
+#         for j in range(0, len(polygonArray)):
+#             for m in range(0, len(polygonArray[j] - 1)):
+
+#                 # for triangle we have to split triangle in segments to be compared
+#                 #t1 = Segment()
+#                 t1 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#                 #t2 = Segment()
+#                 t2 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#                # t3 = Segment()
+#                 t3 = (triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#                 # using python built-in 'intersection' function
+#                 if (t1.intersection(polygonArray[j]) or t2.intersection(polygonArray[j]) or t3.intersection(polygonArray[j])) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Polygon'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#                 rows = [[vark + 1], ["Polygon"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+
+#     ########## Curve Comparison ##########
+#     interResult = False
+#     if objMode[focusObject - 1] == "Curve":
+#         ins = 0
+#         for i in range(0, len(focusObject)):
+#             if objMode[i] == "Curve":
+#                 ins = ins + 1
+
+#     # Comparing Curve to line
+#     interResult = False
+#     if len(lineArray) > 0:
+#         distances.clear
+#         for j in range(0, len(lineArray)):
+#             for m in range(0, len(curveArray[ins-1])):
+#                 # points usage in curve
+#                 #p1 = Point()
+#                 p1 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                 #p2 = Point()
+#                 p2 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                 # Point p1 = new Point(curveObjects[j].p.get(m).p.x, curveObjects[j].p.get(m).p.y);
+#                 # Point p2 = new Point(curveObjects[j].p.get(m + 1).p.x, curveObjects[j].p.get(m + 1).p.x);
+
+#                 # segment c1 = new segment(p1, p2);
+#                 #c1 = Segment()
+#                 c1 = (p1, p2)
+
+#                 # using python built-in 'intersection' function
+#                 if lineArray[ins-1].intersection(c1) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Line'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#                 rows = [[vark + 1], ["Line"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+#     # Comparing Curve to segment
+#     interResult = False
+#     if len(segmentArray) > 0:
+#         distances.clear
+#         for j in range(0, len(segmentArray)):
+#             for m in range(0, len(curveArray[ins-1])):
+#                 # points usage in curve
+#                 #p1 = Point()
+#                 p1 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                 #p2 = Point()
+#                 p2 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                 # Point p1 = new Point(curveObjects[j].p.get(m).p.x, curveObjects[j].p.get(m).p.y);
+#                 # Point p2 = new Point(curveObjects[j].p.get(m + 1).p.x, curveObjects[j].p.get(m + 1).p.x);
+
+#                 # segment c1 = new segment(p1, p2);
+#                 #c1 = Segment()
+#                 c1 = (p1, p2)
+
+#                 # using python built-in 'intersection' function
+#                 if segmentArray[ins-1].intersection(c1) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Segment'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#                 rows = [[vark + 1], ["Segment"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+#     # Comparing Curve to Triangle
+#     interResult = False
+#     if len(triangleArray) > 0:
+#         distances.clear
+#         for j in range(0, len(triangleArray)):
+#             for m in range(0, len(curveArray[ins-1]) - 1):
+#                 # points usage in curve
+#                 #p1 = Point()
+#                 p1 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                 #p2 = Point()
+#                 p2 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                 # Point p1 = new Point(curveObjects[j].p.get(m).p.x, curveObjects[j].p.get(m).p.y);
+#                 # Point p2 = new Point(curveObjects[j].p.get(m + 1).p.x, curveObjects[j].p.get(m + 1).p.x);
+
+#                 # segment c1 = new segment(p1, p2);
+#                 #c1 = Segment()
+#                 c1 = (p1, p2)
+
+#                 # for triangle we have to split triangle in segments to be compared
+#                 #t1 = Segment()
+#                 t1 = (
+#                 triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#                 #t2 = Segment()
+#                 t2 = (
+#                 triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#                 #t3 = Segment()
+#                 t3 = (
+#                 triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#                 # using python built-in 'intersection' function
+#                 if (t1.intersection(c1) or t2.intersection(c1) or t3.intersection(c1)) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Triangle'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#                 rows = [[vark + 1], ["Triangle"], []]
+#                 if interResult == True:
+#                     rows = [[], [], ["True"]]
+#                 if interResult == False:
+#                     rows = [[], [], ["False"]]
+#                 # writing the rows
+#                 csvwriter.writerow(rows)
+#     # Comparing Curve to Curve
+#     interResult = False
+#     if len(curveArray) > 0:
+#         distances.clear
+#         for p in range(0, len(curveArray)):
+#             for j in range(0, len(polygonArray)):
+#                 for m in range(0, len(curveArray[ins - 1])):
+
+#                     # points usage in curve
+#                     #p1 = Point()
+#                     p1 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                     #p2 = Point()
+#                     p2 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                     # Point p1 = new Point(curveObjects[j].p.get(m).p.x, curveObjects[j].p.get(m).p.y);
+#                     # Point p2 = new Point(curveObjects[j].p.get(m + 1).p.x, curveObjects[j].p.get(m + 1).p.x);
+
+#                     # segment c1 = new segment(p1, p2);
+#                     #c1 = Segment()
+#                     c1 = (p1, p2)
+
+#                     # points usage in curve
+#                    # p3 = Point()
+#                     p3 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                     #p4 = Point()
+#                     p4 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                     # segment c1 = new segment(p1, p2);
+#                     #c2 = Segment()
+#                     c2 = (p3, p4)
+
+#                     # using python built-in 'intersection' function
+#                     if c1.intersection(c2) and interResult == False:
+#                         interResult = True
+
+#                     insAux = 0
+#                     for k in range(0, len(objMode)):
+#                         if objMode[k] == "{'Curve'}":
+#                             insAux += 1
+#                             if insAux == j + 1:
+#                                 vark = k
+#                                 break
+#                     rows = [[vark + 1], ["Curve"], []]
+#                     if interResult == True:
+#                         rows = [[], [], ["True"]]
+#                     if interResult == False:
+#                         rows = [[], [], ["False"]]
+#                     # writing the rows
+#                     csvwriter.writerow(rows)
+#     # Comparing Curve to Polygon
+#     interResult = False
+#     if len(curveArray) > 0:
+#         distances.clear
+#         for p in range(0, len(curveArray)):
+#             for j in range(0, len(polygonArray)):
+#                 for m in range(0, len(curveArray[ins - 1])):
+
+#                     # points usage in curve
+#                     #p1 = Point()
+#                     p1 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                     #p2 = Point()
+#                     p2 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                     # Point p1 = new Point(curveObjects[j].p.get(m).p.x, curveObjects[j].p.get(m).p.y);
+#                     # Point p2 = new Point(curveObjects[j].p.get(m + 1).p.x, curveObjects[j].p.get(m + 1).p.x);
+
+#                     # segment c1 = new segment(p1, p2);
+#                     #c1 = Segment()
+#                     c1 = (p1, p2)
+
+#                     # using python built-in 'intersection' function
+#                     if c1.intersection(polygonArray[j]) and interResult == False:
+#                         interResult = True
+
+#                     insAux = 0
+#                     for k in range(0, len(objMode)):
+#                         if objMode[k] == "{'Polygon'}":
+#                             insAux += 1
+#                             if insAux == j + 1:
+#                                 vark = k
+#                                 break
+#                     rows = [[vark + 1], ["Polygon"], []]
+#                     if interResult == True:
+#                         rows = [[], [], ["True"]]
+#                     if interResult == False:
+#                         rows = [[], [], ["False"]]
+#                     # writing the rows
+#                     csvwriter.writerow(rows)
+
+#     ########## Polygon Comparison ##########
+#     interResult = False
+#     if objMode[focusObject - 1] == "Polygon":
+#         ins = 0
+#         for i in range(0, len(focusObject)):
+#             if objMode[i] == "Polygon":
+#                 ins = ins + 1
+
+#     # Comparing Polygon to line
+#     interResult = False
+#     if len(lineArray) > 0:
+#         distances.clear
+#         for j in range(0, len(lineArray)):
+#             for m in range(0, len(polygonArray[ins-1])):
+
+#                 # using python built-in 'intersection' function
+#                 if lineArray[ins-1].intersection(polygonArray[j]) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Line'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#             rows = [[vark + 1], ["Line"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#     # Comparing Polygon to Segment
+#     interResult = False
+#     if len(segmentArray) > 0:
+#         distances.clear
+#         for j in range(0, len(segmentArray)):
+#             for m in range(0, len(polygonArray[ins-1])):
+
+#                 # using python built-in 'intersection' function
+#                 if segmentArray[j].intersection(polygonArray[ins-1]) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Segment'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#             rows = [[vark + 1], ["Segment"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#     # Comparing Polygon to Triangle
+#     interResult = False
+#     if len(triangleArray) > 0:
+#         distances.clear
+#         for j in range(0, len(triangleArray)):
+#             for m in range(0, len(polygonArray[ins-1])):
+
+#                 # for triangle we have to split triangle in segments to be compared
+#                 #t1 = Segment()
+#                 t1 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x2, triangleArray[j].y2)
+#                 #t2 = Segment()
+#                 t2 = (triangleArray[j].x1, triangleArray[j].y1, triangleArray[j].x3, triangleArray[j].y3)
+#                 #t3 = Segment()
+#                 t3 = (triangleArray[j].x2, triangleArray[j].y2, triangleArray[j].x3, triangleArray[j].y3)
+
+#                 # using python built-in 'intersection' function
+#                 if (t1.intersection(polygonArray[ins-1]) or t2.intersection(polygonArray[ins-1]) or t3.intersection(
+#                         polygonArray[ins-1])) and interResult == False:
+#                     interResult = True
+
+#                 insAux = 0
+#                 for k in range(0, len(objMode)):
+#                     if objMode[k] == "{'Polygon'}":
+#                         insAux += 1
+#                         if insAux == j + 1:
+#                             vark = k
+#                             break
+#             rows = [[vark + 1], ["Polygon"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#     # Comparing Polygon to Curve
+#     interResult = False
+#     if len(curveArray) > 0:
+#         distances.clear
+#         for p in range(0, len(curveArray)):
+#             for j in range(0, len(polygonArray[ins - 1])):
+#                 for m in range(0, len(curveArray[m] - 1)):
+
+#                     # points usage in curve
+#                     #p1 = Point()
+#                     p1 = (curveArray[j].get(m).x1, curveArray[j].get(m).y1)
+#                     #p2 = Point()
+#                     p2 = (curveArray[j].get(m + 1).x1, curveArray[j].get(m + 1).y1)
+
+#                     # Point p1 = new Point(curveObjects[j].p.get(m).p.x, curveObjects[j].p.get(m).p.y);
+#                     # Point p2 = new Point(curveObjects[j].p.get(m + 1).p.x, curveObjects[j].p.get(m + 1).p.x);
+
+#                     # segment c1 = new segment(p1, p2);
+#                     #c1 = Segment()
+#                     c1 = (p1, p2)
+
+#                     # using python built-in 'intersection' function
+#                     if c1.intersection(polygonArray[ins-1]) and interResult == False:
+#                         interResult = True
+
+#                     insAux = 0
+#                     for k in range(0, len(objMode)):
+#                         if objMode[k] == "{'Curve'}":
+#                             insAux += 1
+#                             if insAux == j + 1:
+#                                 vark = k
+#                                 break
+#             rows = [[vark + 1], ["Curve"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
+#     # Comparing Polygon to Polygon
+#     interResult = False
+#     if len(curveArray) > 0:
+#         distances.clear
+#         for p in range(0, len(polygonArray)):
+#             for j in range(0, len(polygonArray[ins - 1])):
+#                 for m in range(0, len(polygonArray[m])):
+
+#                     # using python built-in 'intersection' function
+#                     if polygonArray[p][m].intersection(polygonArray[ins-1][m]) and interResult == False:
+#                         interResult = True
+
+#                     insAux = 0
+#                     for k in range(0, len(objMode)):
+#                         if objMode[k] == "{'Polygon'}":
+#                             insAux += 1
+#                             if insAux == j + 1:
+#                                 vark = k
+#                                 break
+#             rows = [[vark + 1], ["Polygon"], []]
+#             if interResult == True:
+#                 rows = [[], [], ["True"]]
+#             if interResult == False:
+#                 rows = [[], [], ["False"]]
+#             # writing the rows
+#             csvwriter.writerow(rows)
 
 
 #########################################################################
@@ -3003,8 +3138,13 @@ print("JSON FILE CLOSED.")
 # test the time of python calculation
 test_time = time.time()
 distanceBetweenObjects()
+<<<<<<< HEAD
 #pointInsideObjects()
 #intersectionBetweenObjects()
+=======
+# pointInsideObjects()
+# intersectionBetweenObjects()
+>>>>>>> 098683c5584a19bf1fc308d724959b0d739173ec
 print("--- %s seconds ---"%(time.time() - test_time))
 
 

@@ -1,0 +1,9 @@
+id,type,intersection
+2,Line,false
+3,Segment,false
+6,Triangle,false
+13,Triangle,false
+4,Curve,false
+11,Curve,true
+7,Polygon,false
+14,Polygon,false
